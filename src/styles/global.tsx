@@ -9,6 +9,7 @@ const style = css`
   html {
     font-size: 62.5%; // 1rem = 10px; 10px/16px = 62.5%
     height: 100vh;
+    font-family: 'Noto Sans KR', 'Roboto', sans-serif;
     @media only screen and (max-width: ${size.smallest}) {
       font-size: 50%;
     }

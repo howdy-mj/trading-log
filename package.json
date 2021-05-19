@@ -6,6 +6,7 @@
     "@craco/craco": "^6.1.2",
     "@emotion/babel-preset-css-prop": "^11.2.0",
     "@emotion/react": "^11.4.0",
+    "@emotion/styled": "^11.3.0",
     "@reduxjs/toolkit": "^1.5.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",

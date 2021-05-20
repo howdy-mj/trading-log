@@ -1,5 +1,19 @@
 import { useEffect } from 'react';
 import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import * as Sentry from '@sentry/react';
+import { Integrations } from '@sentry/tracing';
+
+const history = createBrowserHistory();
+
+Sentry.init({
+  integrations: [
+    new Integrations.BrowserTracing({
+      routingInstrumentation: Sentry.reactRouterV5Instrumentation(history),
+    }),
+  ],
+});
+
 import Main from '@pages/Main';
 
 interface PathItem {

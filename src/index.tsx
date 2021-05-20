@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import * as Sentry from '@sentry/react';
+import { Integrations } from '@sentry/tracing';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@emotion/react';
 
@@ -9,14 +10,19 @@ import GlobalStyle from '@styles/global';
 
 import App from './App';
 
+Sentry.init({
+  dsn: process.env.REACT_APP_SENTRY_DSN,
+  integrations: [new Integrations.BrowserTracing()],
+});
+
 ReactDOM.render(
-  <BrowserRouter>
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Sentry.ErrorBoundary fallback={'An error has occurred'}>
         <App />
-      </ThemeProvider>
-    </Provider>
-  </BrowserRouter>,
-  document.getElementById('root')
+      </Sentry.ErrorBoundary>
+    </ThemeProvider>
+  </Provider>,
+  document.getElementById('root'),
 );

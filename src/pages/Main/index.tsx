@@ -1,15 +1,11 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
+import Layout from '@components/Layout';
+import List from './components/List';
 
 const Main = () => {
   return (
-    <div
-      css={css`
-        text-align: center;
-      `}
-    >
-      매매일지 '티록'
-    </div>
+    <Layout>
+      <List />
+    </Layout>
   );
 };
 

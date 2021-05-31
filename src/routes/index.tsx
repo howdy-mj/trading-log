@@ -15,6 +15,7 @@ Sentry.init({
 });
 
 import Main from '@pages/Main';
+import Login from '@pages/Login';
 
 interface PathItem {
   path: string;
@@ -28,6 +29,7 @@ const routesPath: PathItem[] = [
     component: Main,
     exact: true,
   },
+  { path: '/login', component: Login, exact: true },
 ];
 
 export const Router = () => {

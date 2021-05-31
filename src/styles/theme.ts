@@ -17,9 +17,9 @@ const color = {
 const theme = {
   mainColor: '#0000ff',
   mq: {
-    laptop: `@media only screen and (min-width: ${size.largest})`,
-    tablet: `@media only screen and (min-width: ${size.large})`,
-    mobile: `@media only screen and (min-width: ${size.small})`,
+    laptop: `@media only screen and (max-width: ${size.largest})`,
+    tablet: `@media only screen and (max-width: ${size.large})`,
+    mobile: `@media only screen and (max-width: ${size.small})`,
   },
 };
 

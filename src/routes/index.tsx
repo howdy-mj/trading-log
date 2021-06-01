@@ -4,6 +4,8 @@ import { createBrowserHistory } from 'history';
 import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
 
+import { Main, Login } from '@pages/index';
+
 const history = createBrowserHistory();
 
 Sentry.init({
@@ -14,9 +16,6 @@ Sentry.init({
   ],
 });
 
-import Main from '@pages/Main';
-import Login from '@pages/Login';
-
 interface PathItem {
   path: string;
   component: React.ReactNode;
@@ -26,10 +25,10 @@ interface PathItem {
 const routesPath: PathItem[] = [
   {
     path: '/',
-    component: Main,
+    component: <Main />,
     exact: true,
   },
-  { path: '/login', component: Login, exact: true },
+  { path: '/login', component: <Login /> },
 ];
 
 export const Router = () => {

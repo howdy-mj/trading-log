@@ -1,13 +1,10 @@
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
-import { Provider } from 'react-redux';
-import { ThemeProvider } from '@emotion/react';
 
 import store from './store/configureStore';
-import theme from '@styles/theme';
-import GlobalStyle from '@styles/global';
-
 import App from './App';
 
 Sentry.init({
@@ -16,13 +13,12 @@ Sentry.init({
 });
 
 ReactDOM.render(
-  <Provider store={store}>
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
+  <BrowserRouter>
+    <Provider store={store}>
       <Sentry.ErrorBoundary fallback={'An error has occurred'}>
         <App />
       </Sentry.ErrorBoundary>
-    </ThemeProvider>
-  </Provider>,
+    </Provider>
+  </BrowserRouter>,
   document.getElementById('root'),
 );

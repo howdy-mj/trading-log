@@ -1,7 +1,10 @@
-/** @jsxImportSource @emotion/react */
+import useLogin from '@utils/useLogin';
+import { useState } from 'react';
 
 const Login = () => {
-  return <div css={(theme) => ({ color: theme.mainColor })}>Login</div>;
+  const { isLogin } = useLogin();
+
+  return <div>Login</div>;
 };
 
 export default Login;

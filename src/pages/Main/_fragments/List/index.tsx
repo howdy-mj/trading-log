@@ -42,7 +42,7 @@ const List = () => {
 export default List;
 
 const ListWrap = styled.div`
-  padding-top: 70px;
+  width: 100%;
 `;
 
 const ListStyle = styled.div`

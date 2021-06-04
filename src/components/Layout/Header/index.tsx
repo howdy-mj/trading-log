@@ -6,18 +6,11 @@ import { TiThMenu } from 'react-icons/ti';
 
 import { Title } from '@components/Title';
 
-const Header = () => {
-  const { pathname } = useLocation();
-  const [isLogin, setIsLogin] = useState(false);
+interface HeaderProps {
+  isLogin: boolean;
+}
 
-  useEffect(() => {
-    if (pathname === '/login') {
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-    }
-  }, [pathname]);
-
+const Header = ({ isLogin }: HeaderProps) => {
   return (
     <HeaderWrap>
       <Title />

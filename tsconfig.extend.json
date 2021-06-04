@@ -8,7 +8,7 @@
       "@styles/*": ["./styles/*"],
       "@models/*": ["./models/*"],
       "@utils/*": ["./utils/*"],
-      "@routes/*": ["./routes/*"],
+      "@hooks/*": ["./hooks/*"],
       "@service/*": ["./service/*"]
     }
   }

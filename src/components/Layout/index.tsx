@@ -1,5 +1,8 @@
 import styled from '@emotion/styled';
-import useHeight from '@utils/useHeight';
+import useHeight from '@hooks/useHeight';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import Footer from './Footer';
 
 import Header from './Header';
@@ -10,10 +13,20 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const height = useHeight();
+  const { pathname } = useLocation();
+  const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    if (pathname === '/login') {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+  }, [pathname]);
 
   return (
     <LayoutWrap>
-      <Header />
+      {!isLogin && <Header isLogin={isLogin} />}
       <Body height={height}>{children}</Body>
       <Footer />
     </LayoutWrap>
@@ -23,24 +36,27 @@ const Layout = ({ children }: LayoutProps) => {
 const LayoutWrap = styled.div`
   position: relative;
   margin: 0 auto;
-  padding: 0 20px;
-  max-width: 1200px;
+  padding: 0 2rem;
+  max-width: 120rem;
 
   > header {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 3rem;
   }
 
   ${(props) => props.theme.mq.tablet} {
-    max-width: 800px;
+    max-width: 80rem;
   }
   ${(props) => props.theme.mq.mobile} {
-    max-width: 500px;
+    max-width: 50rem;
   }
 `;
 
 const Body = styled.div<{ height: number }>`
-  min-height: ${(props) => props.height - 220}px;
+  display: flex;
+  justify-content: center;
+  padding-top: 7rem;
+  min-height: ${(props) => props.height - 250}px;
 `;
 
 export default Layout;

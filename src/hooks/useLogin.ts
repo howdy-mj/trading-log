@@ -1,5 +1,6 @@
-import { auth } from '@service/firebase';
 import { useEffect, useState } from 'react';
+
+import { auth } from '~service/firebase';
 
 function useLogin() {
   const [isLogin, setIsLogin] = useState(false);

@@ -1,13 +1,13 @@
 import styled from '@emotion/styled';
 import { FcGoogle } from 'react-icons/fc';
 
-import useLogin from '@hooks/useLogin';
-import { Title } from '@components/Title';
-import { googleSignInPopup } from '@service/firebase';
+import useLogin from '~hooks/useLogin';
+import { Title } from '~components/Title';
+import { googleSignInPopup } from '~service/firebase';
 import { useHistory } from 'react-router';
 import { useEffect } from 'react';
 
-const Login = () => {
+const LoginPage = () => {
   const history = useHistory();
   const { isLogin } = useLogin();
 
@@ -36,7 +36,7 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;
 
 const Wrap = styled.div`
   display: flex;

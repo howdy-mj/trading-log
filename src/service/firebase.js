@@ -49,3 +49,12 @@ export const googleSignInPopup = async () => {
       const credential = error.credential;
     });
 };
+
+export const googleSignOut = async () => {
+  await auth
+    .signOut()
+    .then(() => {})
+    .catch((error) => {
+      console.log('error', error);
+    });
+};

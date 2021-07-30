@@ -3,9 +3,10 @@ import useHeight from '~hooks/useHeight';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import Footer from './Footer';
+// import useLogin from '~hooks/useLogin';
 
 import Header from './Header';
+import Footer from './Footer';
 
 interface LayoutProps {
   children: React.ReactChild;
@@ -13,22 +14,23 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const height = useHeight();
+  // const { isLogin } = useLogin();
   const { pathname } = useLocation();
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLoginPage, setIsLoginPage] = useState(false);
 
   useEffect(() => {
     if (pathname === '/login') {
-      setIsLogin(true);
+      setIsLoginPage(true);
     } else {
-      setIsLogin(false);
+      setIsLoginPage(false);
     }
   }, [pathname]);
 
   return (
     <LayoutWrap>
-      {!isLogin && <Header />}
+      {!isLoginPage && <Header />}
       <Body height={height}>{children}</Body>
-      <Footer />
+      {!isLoginPage && <Footer />}
     </LayoutWrap>
   );
 };

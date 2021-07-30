@@ -8,7 +8,11 @@ const Main = () => {
   return (
     <MainWrap>
       <ButtonWrap>
-        <ButtonComponent label="글쓰기" onClick={() => console.log('hi')} />
+        <ButtonComponent
+          label="글쓰기"
+          status="active"
+          onClick={() => console.log('hi')}
+        />
       </ButtonWrap>
       <List />
     </MainWrap>

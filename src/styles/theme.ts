@@ -1,3 +1,5 @@
+import { Theme } from '@emotion/react';
+
 export const size = {
   largest: '75em', // 1200px
   large: '56.25em', // 900px
@@ -14,8 +16,11 @@ const color = {
   five: '#FE8C03',
 };
 
-const theme = {
-  mainColor: '#0000ff',
+const theme: Theme = {
+  color: {
+    danger: '#e84549',
+    active: '#0ca678',
+  },
   mq: {
     laptop: `@media only screen and (max-width: ${size.largest})`,
     tablet: `@media only screen and (max-width: ${size.large})`,

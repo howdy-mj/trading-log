@@ -2,7 +2,10 @@ import '@emotion/react';
 
 declare module '@emotion/react' {
   export interface Theme {
-    mainColor: string;
+    color: {
+      danger: string;
+      active: string;
+    };
     mq: {
       laptop: string;
       tablet: string;

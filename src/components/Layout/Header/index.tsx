@@ -1,43 +1,54 @@
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { useLocation } from 'react-router';
-import { Button } from '@blueprintjs/core';
 
 import { Title } from '~components/Title';
 import useLogin from '~hooks/useLogin';
+import ButtonComponent from '~components/Button';
+import { googleSignOut } from '~service/firebase';
+import { useHistory } from 'react-router-dom';
 
-const Header = () => {
+const HeaderComponent = () => {
   const { isLogin } = useLogin();
-  const location = useLocation();
+  const { pathname } = useLocation();
+  const history = useHistory();
 
-  const [isDetail, setIsDetail] = useState(false);
+  const [isDetailPage, setIsDetailPage] = useState(false);
 
   useEffect(() => {
-    if (location.pathname.includes('detail')) {
-      setIsDetail(true);
+    if (pathname.includes('detail')) {
+      setIsDetailPage(true);
       return;
     }
-    setIsDetail(false);
-  }, [location.pathname]);
+    setIsDetailPage(false);
+  }, [pathname]);
 
-  console.log('isDetail', isDetail);
+  const logOut = async () => {
+    await googleSignOut().then(() => {
+      history.push('/login');
+    });
+  };
 
   return (
     <HeaderWrap>
       <Title />
-      {isDetail && (
-        <GoBackArrow onClick={() => history.back()}>뒤로가기</GoBackArrow>
+      {isDetailPage && (
+        <GoBackArrow onClick={() => history.goBack()}>뒤로가기</GoBackArrow>
       )}
       {isLogin && (
         <LoginButton>
-          <Button>로그아웃</Button>
+          <ButtonComponent
+            label="로그아웃"
+            status="info"
+            onClick={() => logOut()}
+          />
         </LoginButton>
       )}
     </HeaderWrap>
   );
 };
 
-export default Header;
+export default HeaderComponent;
 
 const HeaderWrap = styled.header`
   position: relative;

@@ -1,11 +1,12 @@
+import { useEffect } from 'react';
+import { useHistory } from 'react-router';
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { FcGoogle } from 'react-icons/fc';
 
 import useLogin from '~hooks/useLogin';
-import { Title } from '~components/Title';
 import { googleSignInPopup } from '~service/firebase';
-import { useHistory } from 'react-router';
-import { useEffect } from 'react';
+import { Title } from '~components/Title';
 
 const LoginPage = () => {
   const history = useHistory();
@@ -46,8 +47,8 @@ const Wrap = styled.div`
   width: 50rem;
   min-width: 30rem;
   height: 50rem;
-  /* box-shadow: 1px 1px 6px 0 rgba(0, 0, 0, 0.1); */
-  box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.16);
+
+  /* box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.16); */
   border-radius: 1rem;
 
   > h1 {
@@ -55,12 +56,18 @@ const Wrap = styled.div`
     align-items: center;
     height: 30rem;
   }
+
+  ${(props) =>
+    props.theme.mq.mobile &&
+    css`
+      height: 100%;
+    `}
 `;
 
 const Container = styled.div`
   display: flex;
   align-items: center;
-  height: 100%;
+  /* height: 100%; */
   max-width: 500px;
   width: 50%;
 `;

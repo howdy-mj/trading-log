@@ -4,7 +4,7 @@ import { createBrowserHistory } from 'history';
 import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
 
-import { Main, Login } from '@pages/index';
+import { Main, Login, Detail } from '~pages/index';
 
 const history = createBrowserHistory();
 
@@ -29,6 +29,7 @@ const routesPath: PathItem[] = [
     exact: true,
   },
   { path: '/login', component: <Login /> },
+  { path: '/detail/:id', component: <Detail /> },
 ];
 
 export const Router = () => {

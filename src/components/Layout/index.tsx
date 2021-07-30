@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import useHeight from '@hooks/useHeight';
+import useHeight from '~hooks/useHeight';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -26,7 +26,7 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <LayoutWrap>
-      {!isLogin && <Header isLogin={isLogin} />}
+      {!isLogin && <Header />}
       <Body height={height}>{children}</Body>
       <Footer />
     </LayoutWrap>

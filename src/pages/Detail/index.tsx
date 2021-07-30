@@ -2,20 +2,19 @@ import styled from '@emotion/styled';
 
 import ButtonComponent from '~components/Button';
 
-import List from './List';
-
-const Main = () => {
+const DetailPage = () => {
   return (
     <MainWrap>
       <ButtonWrap>
-        <ButtonComponent label="글쓰기" onClick={() => console.log('hi')} />
+        <ButtonComponent label="수정" onClick={() => console.log('hi')} />
+        <ButtonComponent label="삭제" onClick={() => console.log('hi')} />
       </ButtonWrap>
-      <List />
+      <div>Detail Page</div>
     </MainWrap>
   );
 };
 
-export default Main;
+export default DetailPage;
 
 const MainWrap = styled.div`
   display: flex;
@@ -25,5 +24,13 @@ const MainWrap = styled.div`
 `;
 
 const ButtonWrap = styled.div`
+  display: flex;
+
   margin-bottom: 20px;
+
+  > button {
+    :first-of-type {
+      margin-right: 10px;
+    }
+  }
 `;

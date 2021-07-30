@@ -1,34 +1,49 @@
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { useLocation } from 'react-router';
+import { Button } from '@blueprintjs/core';
 
-import { TiThMenu } from 'react-icons/ti';
+import { Title } from '~components/Title';
+import useLogin from '~hooks/useLogin';
 
-import { Title } from '@components/Title';
+const Header = () => {
+  const { isLogin } = useLogin();
+  const location = useLocation();
 
-interface HeaderProps {
-  isLogin: boolean;
-}
+  const [isDetail, setIsDetail] = useState(false);
 
-const Header = ({ isLogin }: HeaderProps) => {
+  useEffect(() => {
+    if (location.pathname.includes('detail')) {
+      setIsDetail(true);
+      return;
+    }
+    setIsDetail(false);
+  }, [location.pathname]);
+
+  console.log('isDetail', isDetail);
+
   return (
     <HeaderWrap>
       <Title />
-      {/* TODO: 메뉴 필요 유무 결정 */}
-      {!isLogin && (
-        <MenuIcon>
-          <TiThMenu />
-        </MenuIcon>
+      {isDetail && (
+        <GoBackArrow onClick={() => history.back()}>뒤로가기</GoBackArrow>
+      )}
+      {isLogin && (
+        <LoginButton>
+          <Button>로그아웃</Button>
+        </LoginButton>
       )}
     </HeaderWrap>
   );
 };
 
+export default Header;
+
 const HeaderWrap = styled.header`
   position: relative;
 `;
 
-const MenuIcon = styled.div`
+const LoginButton = styled.div`
   position: absolute;
   top: 50%;
   right: 0;
@@ -40,4 +55,9 @@ const MenuIcon = styled.div`
   }
 `;
 
-export default Header;
+const GoBackArrow = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+`;

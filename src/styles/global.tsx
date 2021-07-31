@@ -30,7 +30,7 @@ const style = css`
   input,
   select,
   button {
-    -webkit-appearance: none;
+    /* -webkit-appearance: none; */
     background: none;
     border: none;
     font-size: inherit;

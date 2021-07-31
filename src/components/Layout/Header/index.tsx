@@ -1,26 +1,28 @@
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { useLocation } from 'react-router';
-
-import { Title } from '~components/Title';
-import useLogin from '~hooks/useLogin';
-import ButtonComponent from '~components/Button';
-import { googleSignOut } from '~service/firebase';
 import { useHistory } from 'react-router-dom';
+import { FaArrowLeft } from 'react-icons/fa';
+
+import { googleSignOut } from '~service/firebase';
+import useLogin from '~hooks/useLogin';
+import { Title } from '~components/Title';
+import ButtonComponent from '~components/Button';
 
 const HeaderComponent = () => {
   const { isLogin } = useLogin();
   const { pathname } = useLocation();
   const history = useHistory();
 
-  const [isDetailPage, setIsDetailPage] = useState(false);
+  const [hasGoBack, setHasGoBack] = useState(false);
 
   useEffect(() => {
-    if (pathname.includes('detail')) {
-      setIsDetailPage(true);
+    const condition = pathname.includes('detail') || pathname.includes('write');
+    if (condition) {
+      setHasGoBack(true);
       return;
     }
-    setIsDetailPage(false);
+    setHasGoBack(false);
   }, [pathname]);
 
   const logOut = async () => {
@@ -32,8 +34,10 @@ const HeaderComponent = () => {
   return (
     <HeaderWrap>
       <Title />
-      {isDetailPage && (
-        <GoBackArrow onClick={() => history.goBack()}>뒤로가기</GoBackArrow>
+      {hasGoBack && (
+        <GoBackArrow onClick={() => history.goBack()}>
+          <FaArrowLeft />
+        </GoBackArrow>
       )}
       {isLogin && (
         <LoginButton>
@@ -71,4 +75,6 @@ const GoBackArrow = styled.div`
   top: 50%;
   left: 0;
   transform: translateY(-50%);
+
+  cursor: pointer;
 `;

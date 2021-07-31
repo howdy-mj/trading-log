@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
-import input, { InputState } from './input/reducer';
+
+import write, { WriteState } from './write/reducer';
 
 export type RootState = {
-  input: InputState;
+  write: WriteState;
 };
 
 export const rootReducer = combineReducers({
-  input,
+  write,
 });

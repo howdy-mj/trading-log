@@ -1,3 +1,4 @@
+import { useHistory } from 'react-router-dom';
 import styled from '@emotion/styled';
 
 import ButtonComponent from '~components/Button';
@@ -5,13 +6,14 @@ import ButtonComponent from '~components/Button';
 import List from './List';
 
 const Main = () => {
+  const history = useHistory();
   return (
     <MainWrap>
       <ButtonWrap>
         <ButtonComponent
           label="글쓰기"
           status="active"
-          onClick={() => console.log('hi')}
+          onClick={() => history.push('/write')}
         />
       </ButtonWrap>
       <List />

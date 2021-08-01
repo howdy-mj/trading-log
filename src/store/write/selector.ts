@@ -18,7 +18,12 @@ export const selectPredictValue = createSelector(
   ({ predict }) => predict,
 );
 
-export const selectTargarValue = createSelector(
+export const selectTargetValue = createSelector(
   selectWriteState,
   ({ target }) => target,
+);
+
+export const selectContentValue = createSelector(
+  selectWriteState,
+  ({ content }) => content,
 );

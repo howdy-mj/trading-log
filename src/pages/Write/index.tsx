@@ -1,17 +1,24 @@
-import styled from '@emotion/styled';
-import { useState } from 'react';
+import { LegacyRef, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ButtonComponent from '~components/Button';
+import { Editor } from '@toast-ui/react-editor';
+import '@toast-ui/editor/dist/toastui-editor.css';
+import styled from '@emotion/styled';
 
-import InputComponent from '~components/Input';
+import ButtonComponent from '~components/Button';
+import InputComponent, { LabelWrap } from '~components/Input';
 import { MarketInfo, Predict } from '~models/write.model';
 import {
+  updateContent,
   updateMarket,
   updatePredict,
   updateTarget,
   updateTitle,
 } from '~store/write/reducer';
-import { selectMarketValue, selectPredictValue } from '~store/write/selector';
+import {
+  selectContentValue,
+  selectMarketValue,
+  selectPredictValue,
+} from '~store/write/selector';
 
 const marketInfo = [
   { name: MarketInfo.KRW },
@@ -24,9 +31,17 @@ const WritePage = () => {
   const dispatch = useDispatch();
   const marketValue = useSelector(selectMarketValue);
   const predictValue = useSelector(selectPredictValue);
+  const contentValue = useSelector(selectContentValue);
+  const editorRef: LegacyRef<Editor> = useRef(null);
 
   const handleSubmit = () => {
     // TODO: 제출 후 액션 지정
+  };
+
+  const editorEvent = (event: any, editorRef: LegacyRef<Editor>) => {
+    console.log('ediRef', editorRef);
+    // console.log('value', editorRef.getInstance())
+    // console.log(editorRef?.current);
   };
 
   return (
@@ -53,15 +68,29 @@ const WritePage = () => {
         title="타겟가"
         onChange={(e) => dispatch(updateTarget(e.target.value))}
       />
-      <InputComponent title="근거" type="textarea" />
+
+      <LabelWrap>
+        <span>근거</span>
+        <Editor
+          initialValue={contentValue}
+          initialEditType="wysiwyg"
+          useCommandShortcut={true}
+          usageStatistics={false}
+          ref={editorRef}
+          language="ko"
+          height="500px"
+          onChange={(e) => {
+            editorEvent(e, editorRef);
+          }}
+        />
+      </LabelWrap>
 
       <ActionWrap>
-        {/* <ButtonComponent
+        <ButtonComponent
           label="작성하기"
           status="active"
           onClick={() => handleSubmit()}
-        /> */}
-        <input type="submit" />
+        />
       </ActionWrap>
     </Form>
   );

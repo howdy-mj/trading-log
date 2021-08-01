@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { MarketInfo } from '~models/write.model';
 
 interface InputProps {
   type?: 'text' | 'textarea' | 'radio';
@@ -54,7 +53,7 @@ const InputComponent = ({
 
 export default InputComponent;
 
-const LabelWrap = styled.label`
+export const LabelWrap = styled.label`
   display: flex;
   width: 100%;
   margin: 10px 0;

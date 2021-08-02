@@ -1,11 +1,13 @@
-import { LegacyRef, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 import { Editor } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 import ButtonComponent from '~components/Button';
-import InputComponent, { LabelWrap } from '~components/Input';
+import InputComponent from '~components/Input';
 import { MarketInfo, Predict } from '~models/write.model';
 import {
   updateContent,
@@ -32,17 +34,40 @@ const WritePage = () => {
   const marketValue = useSelector(selectMarketValue);
   const predictValue = useSelector(selectPredictValue);
   const contentValue = useSelector(selectContentValue);
-  const editorRef: LegacyRef<Editor> = useRef(null);
+
+  const editorRef = useRef<Editor>(null);
 
   const handleSubmit = () => {
     // TODO: 제출 후 액션 지정
   };
 
-  const editorEvent = (event: any, editorRef: LegacyRef<Editor>) => {
-    console.log('ediRef', editorRef);
-    // console.log('value', editorRef.getInstance())
-    // console.log(editorRef?.current);
-  };
+  useEffect(() => {
+    if (editorRef.current) {
+      editorRef.current.getInstance().removeHook('addImageBlobHook');
+      editorRef.current
+        .getInstance()
+        .addHook('addImageBlobHook', (blob, callback) => {
+          console.log('blob', blob);
+          (async () => {
+            const formData = new FormData();
+            formData.append('file', blob);
+            console.log('formDat', formData);
+            axios.defaults.withCredentials = true;
+            // const { data: url } = await axios.post(
+            //   `${backUrl}image.do`,
+            //   formData,
+            //   {
+            //     header: { 'content-type': 'multipart/formdata' },
+            //   },
+            // );
+            // callback(url, 'alt text');
+          })();
+
+          return false;
+        });
+    }
+    return () => {};
+  }, [editorRef]);
 
   return (
     <Form onSubmit={() => handleSubmit()}>
@@ -68,8 +93,7 @@ const WritePage = () => {
         title="타겟가"
         onChange={(e) => dispatch(updateTarget(e.target.value))}
       />
-
-      <LabelWrap>
+      <EditorWrap>
         <span>근거</span>
         <Editor
           initialValue={contentValue}
@@ -79,11 +103,12 @@ const WritePage = () => {
           ref={editorRef}
           language="ko"
           height="500px"
-          onChange={(e) => {
-            editorEvent(e, editorRef);
+          onChange={() => {
+            const content = editorRef.current?.getInstance().getMarkdown();
+            dispatch(updateContent(content));
           }}
         />
-      </LabelWrap>
+      </EditorWrap>
 
       <ActionWrap>
         <ButtonComponent
@@ -103,6 +128,30 @@ const Form = styled.form`
   flex-direction: column;
 
   width: 100%;
+`;
+
+const EditorWrap = styled.div`
+  display: flex;
+  width: 100%;
+  margin: 10px 0;
+  > span {
+    display: inline-block;
+    width: 70px;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  > div {
+    width: calc(100% - 300px);
+  }
+
+  ${(props) =>
+    props.theme.mq.tablet &&
+    css`
+      > div {
+        width: 100%;
+      }
+    `}
 `;
 
 const ActionWrap = styled.div`

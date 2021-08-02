@@ -55,19 +55,9 @@ const HeaderComponent = () => {
 export default HeaderComponent;
 
 const HeaderWrap = styled.header`
+  display: flex;
+  justify-content: center;
   position: relative;
-`;
-
-const LoginButton = styled.div`
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translate(-50%, -50%);
-  cursor: pointer;
-
-  > svg {
-    font-size: 25px;
-  }
 `;
 
 const GoBackArrow = styled.div`
@@ -77,4 +67,16 @@ const GoBackArrow = styled.div`
   transform: translateY(-50%);
 
   cursor: pointer;
+`;
+
+const LoginButton = styled.div`
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  cursor: pointer;
+
+  > svg {
+    font-size: 25px;
+  }
 `;

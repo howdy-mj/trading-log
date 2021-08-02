@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 interface InputProps {
@@ -53,7 +54,7 @@ const InputComponent = ({
 
 export default InputComponent;
 
-export const LabelWrap = styled.label`
+const LabelWrap = styled.label`
   display: flex;
   width: 100%;
   margin: 10px 0;
@@ -67,13 +68,18 @@ export const LabelWrap = styled.label`
 `;
 
 const InputWrap = styled.input`
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid gainsboro;
   width: calc(100% - 300px);
-
   :focus {
     border-color: ${(props) => props.theme.color.active};
     border-width: 2px;
   }
+
+  ${(props) =>
+    props.theme.mq.tablet &&
+    css`
+      width: 100%;
+    `}
 `;
 
 const RadioWrap = styled.div`

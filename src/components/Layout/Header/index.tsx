@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
-import styled from '@emotion/styled';
 import { useLocation } from 'react-router';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
+import styled from '@emotion/styled';
 
 import { googleSignOut } from '~service/firebase';
+import { updateUser } from '~store/user/reducer';
 import useLogin from '~hooks/useLogin';
 import { Title } from '~components/Title';
 import ButtonComponent from '~components/Button';
@@ -13,6 +15,7 @@ const HeaderComponent = () => {
   const { isLogin } = useLogin();
   const { pathname } = useLocation();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const [hasGoBack, setHasGoBack] = useState(false);
 
@@ -27,6 +30,7 @@ const HeaderComponent = () => {
 
   const logOut = async () => {
     await googleSignOut().then(() => {
+      dispatch(updateUser(''));
       history.push('/login');
     });
   };

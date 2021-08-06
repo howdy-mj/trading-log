@@ -8,18 +8,21 @@ import { css } from '@emotion/react';
 
 import ButtonComponent from '~components/Button';
 import InputComponent from '~components/Input';
+import { createPost } from '~api/write';
 import { MarketInfo, Predict } from '~models/write.model';
 import {
-  updateContent,
-  updateMarket,
-  updatePredict,
-  updateTarget,
-  updateTitle,
+  changeContent,
+  changeMarket,
+  changePredict,
+  changeTarget,
+  changeTitle,
 } from '~store/write/reducer';
 import {
   selectContentValue,
   selectMarketValue,
   selectPredictValue,
+  selectTargetValue,
+  selectTitleValue,
 } from '~store/write/selector';
 
 const marketInfo = [
@@ -31,14 +34,27 @@ const predictInfo = [{ name: Predict.UP }, { name: Predict.DOWN }];
 
 const WritePage = () => {
   const dispatch = useDispatch();
+  const titleValue = useSelector(selectTitleValue);
   const marketValue = useSelector(selectMarketValue);
   const predictValue = useSelector(selectPredictValue);
+  const targetValue = useSelector(selectTargetValue);
   const contentValue = useSelector(selectContentValue);
 
   const editorRef = useRef<Editor>(null);
 
-  const handleSubmit = () => {
-    // TODO: 제출 후 액션 지정
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    const data = {
+      title: titleValue,
+      market: marketValue,
+      predict: predictValue,
+      target: targetValue,
+      content: contentValue,
+      createdAt: new Date(),
+    };
+    console.log('data', data);
+    // TODO: CORS
+    // createPost(data);
   };
 
   useEffect(() => {
@@ -70,28 +86,28 @@ const WritePage = () => {
   }, [editorRef]);
 
   return (
-    <Form onSubmit={() => handleSubmit()}>
+    <Form onSubmit={(e) => handleSubmit(e)}>
       <InputComponent
         title="제목"
-        onChange={(e) => dispatch(updateTitle(e.target.value))}
+        onChange={(e) => dispatch(changeTitle(e.target.value))}
       />
       <InputComponent
         title="마켓"
         type="radio"
         radioInfo={marketInfo}
         value={marketValue}
-        onChange={(e) => dispatch(updateMarket(e.target.id))}
+        onChange={(e) => dispatch(changeMarket(e.target.id))}
       />
       <InputComponent
         title="예상"
         type="radio"
         radioInfo={predictInfo}
         value={predictValue}
-        onChange={(e) => dispatch(updatePredict(e.target.id))}
+        onChange={(e) => dispatch(changePredict(e.target.id))}
       />
       <InputComponent
         title="타겟가"
-        onChange={(e) => dispatch(updateTarget(e.target.value))}
+        onChange={(e) => dispatch(changeTarget(e.target.value))}
       />
       <EditorWrap>
         <span>근거</span>
@@ -105,7 +121,7 @@ const WritePage = () => {
           height="500px"
           onChange={() => {
             const content = editorRef.current?.getInstance().getMarkdown();
-            dispatch(updateContent(content));
+            dispatch(changeContent(content));
           }}
         />
       </EditorWrap>
@@ -114,7 +130,7 @@ const WritePage = () => {
         <ButtonComponent
           label="작성하기"
           status="active"
-          onClick={() => handleSubmit()}
+          onClick={(e) => handleSubmit(e)}
         />
       </ActionWrap>
     </Form>

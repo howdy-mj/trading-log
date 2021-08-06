@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 interface ButtonProps {
   label: string;
   status?: 'info' | 'active' | 'danger';
-  onClick?: () => void;
+  onClick?: (e?: any) => void;
 }
 
 const ButtonComponent = ({ label, status = 'info', onClick }: ButtonProps) => {

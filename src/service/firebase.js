@@ -32,7 +32,6 @@ export const googleSignInPopup = async () => {
   await auth
     .signInWithPopup(provider)
     .then((result) => {
-      console.log('result', result);
       /** @type {firebase.auth.OAuthCredential} */
       const credential = result.credential;
 
@@ -58,3 +57,6 @@ export const googleSignOut = async () => {
       console.log('error', error);
     });
 };
+
+/** database */
+export const database = firebase.database;

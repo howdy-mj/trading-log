@@ -54,7 +54,7 @@ const WritePage = () => {
     };
     console.log('data', data);
     // TODO: CORS
-    // createPost(data);
+    createPost(data);
   };
 
   useEffect(() => {

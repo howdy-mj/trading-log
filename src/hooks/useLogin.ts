@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { auth } from '~service/firebase';
 import { useDispatch } from 'react-redux';
-import { updateUser } from '~store/user/reducer';
+import { updateUid } from '~store/user/reducer';
 
 function useLogin() {
   const dispatch = useDispatch();
@@ -16,8 +16,8 @@ function useLogin() {
         // const email = user.email;
         // const photoURL = user.photoURL;
         // const emailVerified = user.emailVerified;
-        const token = user.uid;
-        dispatch(updateUser(token));
+        const uid = user.uid;
+        dispatch(updateUid(uid));
 
         setIsLogin(true);
       } else {

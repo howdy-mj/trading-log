@@ -6,7 +6,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 import styled from '@emotion/styled';
 
 import { googleSignOut } from '~service/firebase';
-import { updateUser } from '~store/user/reducer';
+import { initUserData } from '~store/user/reducer';
 import useLogin from '~hooks/useLogin';
 import { Title } from '~components/Title';
 import ButtonComponent from '~components/Button';
@@ -30,7 +30,7 @@ const HeaderComponent = () => {
 
   const logOut = async () => {
     await googleSignOut().then(() => {
-      dispatch(updateUser(''));
+      dispatch(initUserData());
       history.push('/login');
     });
   };

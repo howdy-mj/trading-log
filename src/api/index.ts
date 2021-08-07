@@ -5,4 +5,8 @@ const baseApi = process.env.REACT_APP_FIREBASE_DATABASE_URL;
 export const api = axios.create({
   baseURL: baseApi,
   timeout: 100000,
+  headers: {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+  },
 });

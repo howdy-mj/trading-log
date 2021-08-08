@@ -8,7 +8,7 @@ import { css } from '@emotion/react';
 
 import ButtonComponent from '~components/Button';
 import InputComponent from '~components/Input';
-import { createPost } from '~api/write';
+import { createPost } from '~api/post';
 import { MarketInfo, Predict } from '~models/write.model';
 import {
   changeContent,
@@ -52,8 +52,6 @@ const WritePage = () => {
       content: contentValue,
       createdAt: new Date(),
     };
-    console.log('data', data);
-    // TODO: CORS
     createPost(data);
   };
 

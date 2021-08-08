@@ -1,7 +1,11 @@
-import styled from '@emotion/styled';
-import dayjs from 'dayjs';
-import { HTMLTable } from '@blueprintjs/core';
+import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import styled from '@emotion/styled';
+import { HTMLTable } from '@blueprintjs/core';
+import dayjs from 'dayjs';
+
+import { getPost } from '~api/post';
+import { useState } from 'react';
 
 const mockData = [
   {
@@ -20,6 +24,14 @@ const mockData = [
 
 const ListComponent = () => {
   const history = useHistory();
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    getPost().then((res) => {
+      console.log('res', res.data);
+      setData(res.data);
+    });
+  }, []);
 
   const linkToDetail = (id: number) => {
     history.push(`/detail/${id}`);

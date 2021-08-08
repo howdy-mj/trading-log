@@ -15,9 +15,9 @@ Sentry.init({
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
-      <Sentry.ErrorBoundary fallback={'An error has occurred'}>
-        <App />
-      </Sentry.ErrorBoundary>
+      {/* <Sentry.ErrorBoundary fallback={'An error has occurred'}> */}
+      <App />
+      {/* </Sentry.ErrorBoundary> */}
     </Provider>
   </BrowserRouter>,
   document.getElementById('root'),

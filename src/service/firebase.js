@@ -18,6 +18,11 @@ const firebaseStore = () => {
   firebase.analytics();
 };
 
+/**
+ * 인증
+ * https://github.com/firebase/firebaseui-web
+ */
+
 export default firebaseStore;
 
 /**

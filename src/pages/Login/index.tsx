@@ -14,9 +14,13 @@ const LoginPage = () => {
   const { isLogin } = useLogin();
 
   useEffect(() => {
+    const abortController = new AbortController();
     if (isLogin) {
       history.push('/');
     }
+    return () => {
+      abortController.abort();
+    };
   }, [isLogin]);
 
   const googleLogin = () => {

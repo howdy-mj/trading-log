@@ -10,6 +10,7 @@ import { initUserData } from '~store/auth/reducer';
 import useLogin from '~hooks/useLogin';
 import { Title } from '~components/Title';
 import ButtonComponent from '~components/Button';
+import { removeItem } from '~utils/storage';
 
 const HeaderComponent = () => {
   const { isLogin } = useLogin();
@@ -20,17 +21,23 @@ const HeaderComponent = () => {
   const [hasGoBack, setHasGoBack] = useState(false);
 
   useEffect(() => {
+    const abortController = new AbortController();
     const condition = pathname.includes('detail') || pathname.includes('write');
     if (condition) {
       setHasGoBack(true);
       return;
     }
     setHasGoBack(false);
+    return () => {
+      abortController.abort();
+    };
   }, [pathname]);
 
   const logOut = async () => {
     await googleSignOut().then(() => {
       dispatch(initUserData());
+      removeItem('access_token');
+      removeItem('refresh_token');
       history.push('/login');
     });
   };

@@ -12,10 +12,24 @@ export const api = axios.create({
   },
 });
 
-api.interceptors.request.use((config) => {
-  const token = getItem('access_token');
-  if (token) {
-    config.headers['Authorization'] = `Bearer ${token}`;
-  }
-  return config;
-});
+api.interceptors.request.use(
+  (config) => {
+    const token = getItem('access_token');
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    alert(error);
+  },
+);
+
+api.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    console.log('error', error);
+  },
+);

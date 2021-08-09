@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+
 import { setItem } from '~utils/storage';
 
 const firebaseConfig = {
@@ -46,6 +47,7 @@ export const googleSignIn = async () => {
       // console.log('result', result);
       const credential = result.credential;
       const accessToken = credential.accessToken;
+      setItem('access_token', accessToken);
 
       const user = result.user;
       return user;
@@ -57,15 +59,6 @@ export const googleSignIn = async () => {
       const credential = error.credential;
     });
 };
-
-// export const getCredential = (token) => {
-//   console.log('token', token);
-//   if (token !== undefined) {
-//     firebaseAuth.signInWithCredential(token).then((user) => {
-//       console.log('user', user);
-//     });
-//   }
-// };
 
 export const googleSignOut = async () => {
   await firebaseAuth

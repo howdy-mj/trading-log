@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { HTMLTable } from '@blueprintjs/core';
 import dayjs from 'dayjs';
 
 import { getPost } from '~api/post';
-import { useState } from 'react';
+import { Post } from '~models/post.model';
 
 const mockData = [
   {
@@ -24,17 +24,31 @@ const mockData = [
 
 const ListComponent = () => {
   const history = useHistory();
-  const [data, setData] = useState(null);
+
+  const [data, setData] = useState<Post[] | null>(null);
 
   useEffect(() => {
+    let isComponentMounted = true;
     getPost().then((res) => {
-      // console.log('res', res.data);
-      setData(res.data);
+      if (isComponentMounted) {
+        // console.log('res', res.data);
+        setData([res.data]);
+      }
     });
+
+    return () => {
+      isComponentMounted = false;
+    };
   }, []);
 
   const linkToDetail = (id: number) => {
     history.push(`/detail/${id}`);
+  };
+
+  const test = () => {
+    data?.map((list) => {
+      console.log('lis', list);
+    });
   };
 
   return (
@@ -57,6 +71,7 @@ const ListComponent = () => {
     //   ))}
     // </ListWrap>
     <HTMLTable interactive>
+      {test()}
       <thead>
         <tr>
           <th>No.</th>

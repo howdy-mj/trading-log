@@ -16,7 +16,14 @@ const userReducer = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    updateUserInfo(state, action) {
+    updateUserInfo(
+      state,
+      action: PayloadAction<{
+        displayName: string;
+        email: string;
+        photoURL: string;
+      }>,
+    ) {
       const { displayName, email, photoURL } = action.payload;
       return { ...state, name: displayName, email, photoUrl: photoURL };
     },

@@ -3,8 +3,6 @@ import useHeight from '~hooks/useHeight';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-// import useLogin from '~hooks/useLogin';
-
 import Header from './Header';
 import Footer from './Footer';
 
@@ -14,7 +12,6 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const height = useHeight();
-  // const { isLogin } = useLogin();
   const { pathname } = useLocation();
   const [isLoginPage, setIsLoginPage] = useState(false);
 

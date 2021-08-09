@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { MarketInfo, Predict } from '~models/write.model';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { MarketInfo, Predict } from '~models/post.model';
 
 export interface WriteState {
   title: string;
@@ -21,17 +21,17 @@ const writeReducer = createSlice({
   name: 'write',
   initialState,
   reducers: {
-    changeTitle(state, action) {
+    changeTitle(state, action: PayloadAction<string>) {
       return { ...state, title: action.payload };
     },
-    changeMarket(state, action) {
+    changeMarket(state, action: PayloadAction<MarketInfo>) {
       return { ...state, market: action.payload };
     },
-    changePredict(state, action) {
+    changePredict(state, action: PayloadAction<Predict>) {
       return { ...state, predict: action.payload };
     },
-    changeTarget(state, action) {
-      return { ...state, predict: action.payload };
+    changeTarget(state, action: PayloadAction<number>) {
+      return { ...state, target: action.payload };
     },
     changeContent(state, action) {
       return { ...state, content: action.payload };

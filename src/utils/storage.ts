@@ -5,3 +5,7 @@ export const getItem = (name: string) => {
 export const setItem = (name: string, value: string) => {
   sessionStorage.setItem(name, value);
 };
+
+export const removeItem = (name: string) => {
+  sessionStorage.removeItem(name);
+};

@@ -9,7 +9,7 @@ import { css } from '@emotion/react';
 import ButtonComponent from '~components/Button';
 import InputComponent from '~components/Input';
 import { createPost } from '~api/post';
-import { MarketInfo, Predict } from '~models/write.model';
+import { MarketInfo, Predict } from '~models/post.model';
 import {
   changeContent,
   changeMarket,

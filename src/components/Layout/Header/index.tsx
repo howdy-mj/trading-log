@@ -6,7 +6,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 import styled from '@emotion/styled';
 
 import { googleSignOut } from '~service/firebase';
-import { initUserData } from '~store/user/reducer';
+import { initUserData } from '~store/auth/reducer';
 import useLogin from '~hooks/useLogin';
 import { Title } from '~components/Title';
 import ButtonComponent from '~components/Button';

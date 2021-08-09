@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+import { setItem } from '~utils/storage';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API,
@@ -14,35 +15,38 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-const firebaseStore = () => {
-  firebase.analytics();
-};
+// const firebaseStore = () => {
+//   firebase.analytics();
+// };
+// export default firebaseStore;
+
+/** database */
+export const firebaseDatabase = firebase.database;
 
 /**
  * 인증
  * https://github.com/firebase/firebaseui-web
+ * // https://firebase.google.com/docs/database/rest/auth
  */
-
-export default firebaseStore;
 
 /**
  * 구글 로그인
  * https://firebase.google.com/docs/auth/web/google-signin?hl=ko
  */
 
-export const auth = firebase.auth();
+export const firebaseAuth = firebase.auth();
 export const provider = new firebase.auth.GoogleAuthProvider();
 
-export const googleSignInPopup = async () => {
-  await auth
+export const googleSignIn = async () => {
+  await firebaseAuth
     .signInWithPopup(provider)
+    // .signInWithRedirect(provider)
     .then((result) => {
       /** @type {firebase.auth.OAuthCredential} */
+      // console.log('result', result);
       const credential = result.credential;
+      const accessToken = credential.accessToken;
 
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const token = credential.accessToken;
-      // The signed-in user info.
       const user = result.user;
       return user;
     })
@@ -54,8 +58,17 @@ export const googleSignInPopup = async () => {
     });
 };
 
+// export const getCredential = (token) => {
+//   console.log('token', token);
+//   if (token !== undefined) {
+//     firebaseAuth.signInWithCredential(token).then((user) => {
+//       console.log('user', user);
+//     });
+//   }
+// };
+
 export const googleSignOut = async () => {
-  await auth
+  await firebaseAuth
     .signOut()
     .then(() => {})
     .catch((error) => {
@@ -63,5 +76,7 @@ export const googleSignOut = async () => {
     });
 };
 
-/** database */
-export const database = firebase.database;
+/**
+ * 계정 관리
+ * https://firebase.google.com/docs/auth/web/manage-users
+ */

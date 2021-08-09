@@ -1,14 +1,17 @@
 import { combineReducers } from 'redux';
 
-import write, { WriteState } from './write/reducer';
+import auth, { AuthState } from './auth/reducer';
 import user, { UserState } from './user/reducer';
+import write, { WriteState } from './write/reducer';
 
 export type RootState = {
-  write: WriteState;
+  auth: AuthState;
   user: UserState;
+  write: WriteState;
 };
 
 export const rootReducer = combineReducers({
-  write,
+  auth,
   user,
+  write,
 });

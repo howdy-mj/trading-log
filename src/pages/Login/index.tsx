@@ -5,7 +5,7 @@ import { css } from '@emotion/react';
 import { FcGoogle } from 'react-icons/fc';
 
 import useLogin from '~hooks/useLogin';
-import { googleSignInPopup } from '~service/firebase';
+import { googleSignIn } from '~service/firebase';
 
 import { Title } from '~components/Title';
 
@@ -20,7 +20,7 @@ const LoginPage = () => {
   }, [isLogin]);
 
   const googleLogin = () => {
-    googleSignInPopup().then(() => {
+    googleSignIn().then(() => {
       history.push('/');
     });
   };

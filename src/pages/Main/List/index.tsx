@@ -28,7 +28,7 @@ const ListComponent = () => {
 
   useEffect(() => {
     getPost().then((res) => {
-      console.log('res', res.data);
+      // console.log('res', res.data);
       setData(res.data);
     });
   }, []);
@@ -36,6 +36,7 @@ const ListComponent = () => {
   const linkToDetail = (id: number) => {
     history.push(`/detail/${id}`);
   };
+
   return (
     // <ListWrap>
     //   <ListHeader>

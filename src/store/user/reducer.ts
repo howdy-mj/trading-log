@@ -1,31 +1,32 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface UserState {
-  uid: string;
-  token: string;
+  email: string;
+  name: string;
+  photoUrl: string;
 }
 
 const initialState: UserState = {
-  uid: '',
-  token: '',
+  email: '',
+  name: '',
+  photoUrl: '',
 };
 
 const userReducer = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    updateUid(state, action) {
-      return { ...state, uid: action.payload };
+    updateUserInfo(state, action) {
+      const { displayName, email, photoURL } = action.payload;
+      return { ...state, name: displayName, email, photoUrl: photoURL };
     },
-    updateToken(state, action: PayloadAction<string>) {
-      return { ...state, token: action.payload };
-    },
+
     initUserData() {
       return initialState;
     },
   },
 });
 
-export const { updateUid, updateToken, initUserData } = userReducer.actions;
+export const { updateUserInfo, initUserData } = userReducer.actions;
 
 export default userReducer.reducer;

@@ -1,23 +1,34 @@
 import { useEffect, useState } from 'react';
 
-import { auth } from '~service/firebase';
+import { firebaseAuth } from '~service/firebase';
 import { useDispatch } from 'react-redux';
-import { updateUid } from '~store/user/reducer';
+import {
+  updateFirebaseIdToken,
+  updateRefreshToken,
+  updateUid,
+} from '~store/auth/reducer';
+import { updateUserInfo } from '~store/user/reducer';
 
 function useLogin() {
   const dispatch = useDispatch();
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
-    auth.onAuthStateChanged((user: any) => {
-      // console.log('user', user);
+    firebaseAuth.onAuthStateChanged((user: any) => {
       if (user) {
-        // const displayName = user.displayName;
-        // const email = user.email;
-        // const photoURL = user.photoURL;
+        // console.log('user', user);
+        const displayName = user.displayName;
+        const email = user.email;
+        const photoURL = user.photoURL;
         // const emailVerified = user.emailVerified;
-        const uid = user.uid;
-        dispatch(updateUid(uid));
+        dispatch(updateUserInfo({ displayName, email, photoURL }));
+
+        user.getIdToken().then((token: string) => {
+          // console.log('token', token);
+          dispatch(updateFirebaseIdToken(token));
+        });
+        dispatch(updateUid(user.id));
+        dispatch(updateRefreshToken(user.refreshToken));
 
         setIsLogin(true);
       } else {

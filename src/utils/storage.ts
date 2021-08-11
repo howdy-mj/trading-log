@@ -9,3 +9,8 @@ export const setItem = (name: string, value: string) => {
 export const removeItem = (name: string) => {
   sessionStorage.removeItem(name);
 };
+
+export const clearAllToken = () => {
+  sessionStorage.removeItem('access_token');
+  sessionStorage.removeItem('refresh_token');
+};

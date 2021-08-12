@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
 
-import store from './store/configureStore';
+import store from './store';
 import App from './App';
 
 Sentry.init({

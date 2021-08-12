@@ -1,43 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { HTMLTable } from '@blueprintjs/core';
-import dayjs from 'dayjs';
 
-import { getPost } from '~api/post';
-import { Post, PostWithId } from '~models/post.model';
+import { selectPostList } from '~store/post/selector';
 
 const ListComponent = () => {
   const history = useHistory();
-
-  const [contentInfo, setContentInfo] = useState<PostWithId[] | null>(null);
-
-  useEffect(() => {
-    let isComponentMounted = true;
-    getPost().then((res) => {
-      if (isComponentMounted) {
-        const { data } = res;
-        const values: Post[] = Object.values(data);
-        const keys = Object.keys(data);
-
-        const result: PostWithId[] = values.map((value: Post, idx: number) => {
-          return {
-            id: keys[idx],
-            title: value.title,
-            market: value.market,
-            predict: value.predict,
-            target: value.target,
-            content: value.content,
-            createdAt: value.createdAt,
-          };
-        });
-        setContentInfo(result);
-      }
-    });
-    return () => {
-      isComponentMounted = false;
-    };
-  }, []);
+  const postsInfo = useSelector(selectPostList);
 
   const linkToDetail = (id: string) => {
     history.push(`/detail/${id}`);
@@ -55,7 +25,7 @@ const ListComponent = () => {
         </tr>
       </thead>
       <tbody>
-        {contentInfo?.map((info, idx) => (
+        {postsInfo?.map((info, idx) => (
           <TR key={info.id} onClick={() => linkToDetail(info.id)}>
             <td>{idx + 1}</td>
             <td>{info.title}</td>
@@ -78,42 +48,6 @@ const ListComponent = () => {
 };
 
 export default ListComponent;
-
-const ListWrap = styled.div`
-  width: 100%;
-`;
-
-const ListStyle = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  > div {
-    text-align: center;
-    :first-of-type {
-      width: 100px;
-    }
-    :nth-of-type(2) {
-      width: 100%;
-    }
-    :nth-of-type(3) {
-      width: 200px;
-    }
-    :last-child {
-      width: 200px;
-    }
-  }
-`;
-
-const ListHeader = styled(ListStyle)`
-  border: 2px solid black;
-  height: 30px;
-`;
-
-const ListBody = styled(ListStyle)`
-  border: 1px solid gray;
-  margin-bottom: 0;
-  padding: 5px 0;
-`;
 
 const TR = styled.tr`
   > td {

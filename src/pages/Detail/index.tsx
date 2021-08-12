@@ -1,13 +1,35 @@
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import styled from '@emotion/styled';
+
+import { fetchPosts } from '~store/post/reducer';
+import { selectPostList } from '~store/post/selector';
+import { PostWithId } from '~models/post.model';
 
 import ButtonComponent from '~components/Button';
 
+interface Params {
+  id: string;
+}
+
 const DetailPage = () => {
+  const params: Params = useParams();
+  const dispatch = useDispatch();
+  const postsInfo = useSelector(selectPostList);
+  const [currentPost, setCurrentPost] = useState<PostWithId>();
+
+  useEffect(() => {
+    dispatch(fetchPosts());
+    const result = postsInfo.filter((info) => info.id === params.id)[0];
+    setCurrentPost(result);
+  }, []);
+
   return (
     <MainWrap>
       <ButtonWrap>
-        <ButtonComponent label="수정" onClick={() => console.log('hi')} />
-        <ButtonComponent label="삭제" onClick={() => console.log('hi')} />
+        <ButtonComponent label="수정" onClick={() => console.log('amend')} />
+        <ButtonComponent label="삭제" onClick={() => console.log('delete')} />
       </ButtonWrap>
       <div>Detail Page</div>
     </MainWrap>

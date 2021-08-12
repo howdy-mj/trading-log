@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { Editor } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
+import dayjs from 'dayjs';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
@@ -50,7 +51,7 @@ const WritePage = () => {
       predict: predictValue,
       target: targetValue,
       content: contentValue,
-      createdAt: new Date(),
+      createdAt: dayjs(),
     };
     createPost(data);
   };

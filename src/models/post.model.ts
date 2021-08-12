@@ -17,3 +17,7 @@ export interface Post {
   content: string;
   createdAt: string;
 }
+
+export interface PostWithId extends Post {
+  id: string;
+}

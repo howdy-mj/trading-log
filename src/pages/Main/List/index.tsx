@@ -5,90 +5,65 @@ import { HTMLTable } from '@blueprintjs/core';
 import dayjs from 'dayjs';
 
 import { getPost } from '~api/post';
-import { Post } from '~models/post.model';
-
-const mockData = [
-  {
-    id: 1,
-    title: '비트코인',
-    prediction: true,
-    date: dayjs(),
-  },
-  {
-    id: 2,
-    title: '이더리움',
-    prediction: false,
-    date: dayjs(),
-  },
-];
+import { Post, PostWithId } from '~models/post.model';
 
 const ListComponent = () => {
   const history = useHistory();
 
-  const [data, setData] = useState<Post[] | null>(null);
+  const [contentInfo, setContentInfo] = useState<PostWithId[] | null>(null);
 
   useEffect(() => {
     let isComponentMounted = true;
     getPost().then((res) => {
       if (isComponentMounted) {
-        // console.log('res', res.data);
-        setData([res.data]);
+        const { data } = res;
+        const values: Post[] = Object.values(data);
+        const keys = Object.keys(data);
+
+        const result: PostWithId[] = values.map((value: Post, idx: number) => {
+          return {
+            id: keys[idx],
+            title: value.title,
+            market: value.market,
+            predict: value.predict,
+            target: value.target,
+            content: value.content,
+            createdAt: value.createdAt,
+          };
+        });
+        setContentInfo(result);
       }
     });
-
     return () => {
       isComponentMounted = false;
     };
   }, []);
 
-  const linkToDetail = (id: number) => {
+  const linkToDetail = (id: string) => {
     history.push(`/detail/${id}`);
   };
 
-  const test = () => {
-    data?.map((list) => {
-      console.log('lis', list);
-    });
-  };
-
   return (
-    // <ListWrap>
-    //   <ListHeader>
-    //     <div>No.</div>
-    //     <div>제목</div>
-    //     <div>예상</div>
-    //     <div>날짜</div>
-    //   </ListHeader>
-    //   {mockData.map((list) => (
-    //     <ListBody key={list.id} onClick={() => linkToDetail()}>
-    //       <div>{list.id}</div>
-    //       <div>{list.title}</div>
-    //       <div>
-    //         <span>{list.prediction ? '상승' : '하락'}</span>
-    //       </div>
-    //       <div>{list.date.format('YYYY-MM-DD')}</div>
-    //     </ListBody>
-    //   ))}
-    // </ListWrap>
     <HTMLTable interactive>
-      {test()}
       <thead>
         <tr>
           <th>No.</th>
           <th>제목</th>
           <th>예상</th>
+          <th>타겟</th>
           <th>날짜</th>
         </tr>
       </thead>
       <tbody>
-        {mockData.map((list) => (
-          <TR key={list.id} onClick={() => linkToDetail(list.id)}>
-            <td>{list.id}</td>
-            <td>{list.title}</td>
+        {contentInfo?.map((info, idx) => (
+          <TR key={info.id} onClick={() => linkToDetail(info.id)}>
+            <td>{idx + 1}</td>
+            <td>{info.title}</td>
             <td>
-              <span>{list.prediction ? '상승' : '하락'}</span>
+              <span>{info.predict}</span>
             </td>
-            <td>{list.date.format('YYYY-MM-DD')}</td>
+            <td>{info.target}</td>
+            <td>{info.createdAt.slice(0, 10)}</td>
           </TR>
         ))}
       </tbody>

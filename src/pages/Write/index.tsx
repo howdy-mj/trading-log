@@ -21,7 +21,7 @@ import {
   initContent,
 } from '~store/write/reducer';
 import {
-  selectContentValue,
+  selectDescriptionValue,
   selectMarketValue,
   selectPredictValue,
   selectTargetValue,
@@ -35,7 +35,7 @@ const WritePage = () => {
   const marketValue = useSelector(selectMarketValue);
   const predictValue = useSelector(selectPredictValue);
   const targetValue = useSelector(selectTargetValue);
-  const contentValue = useSelector(selectContentValue);
+  const descriptionValue = useSelector(selectDescriptionValue);
 
   const editorRef = useRef<Editor>(null);
 
@@ -50,7 +50,7 @@ const WritePage = () => {
       market: marketValue,
       predict: predictValue,
       target: targetValue,
-      content: contentValue,
+      content: descriptionValue,
       createdAt: dayjs().toISOString(),
     };
     createPost(data).then(() => {
@@ -83,6 +83,7 @@ const WritePage = () => {
           return false;
         });
     }
+
     return () => {};
   }, [editorRef]);
 
@@ -90,6 +91,7 @@ const WritePage = () => {
     <Form onSubmit={(e) => handleSubmit(e)}>
       <InputComponent
         title="제목"
+        validation={!!titleValue}
         onChange={(e) => dispatch(changeTitle(e.target.value))}
       />
       <InputComponent
@@ -108,12 +110,12 @@ const WritePage = () => {
       />
       <InputComponent
         title="타겟가"
+        validation={!!targetValue}
         onChange={(e) => dispatch(changeTarget(e.target.value))}
       />
       <EditorWrap>
-        <span>근거</span>
         <Editor
-          initialValue={contentValue}
+          initialValue={descriptionValue}
           initialEditType="wysiwyg"
           useCommandShortcut={true}
           usageStatistics={false}

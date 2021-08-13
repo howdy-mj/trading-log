@@ -7,6 +7,9 @@ interface InputProps {
   value?: string;
   onChange?: (e: any) => void;
   readonly?: boolean;
+  required?: boolean;
+  validation?: boolean;
+  validationText?: string;
   /** type="radio" */
   radioInfo?: {
     name: string;
@@ -20,17 +23,25 @@ const InputComponent = ({
   radioInfo,
   onChange,
   readonly = false,
+  required = false,
+  validation,
+  validationText = '필수 입력 값 입니다',
 }: InputProps) => {
   const inputResult = () => {
     switch (type) {
       case 'text':
         return (
-          <InputWrap
-            type={type}
-            value={value}
-            onChange={onChange}
-            readOnly={readonly}
-          />
+          <InputWrap>
+            <Input
+              type={type}
+              value={value}
+              onChange={onChange}
+              readOnly={readonly}
+              required={required}
+              validation={!!validation}
+            />
+            {validation === false && <p>{validationText}</p>}
+          </InputWrap>
         );
       case 'radio':
         return (
@@ -76,9 +87,17 @@ const LabelWrap = styled.label`
   }
 `;
 
-const InputWrap = styled.input<{ readOnly: boolean }>`
-  border-bottom: 1px solid gainsboro;
+const InputWrap = styled.div`
   width: calc(100% - 300px);
+
+  > p {
+    font-size: 12px;
+    color: ${(props) => props.theme.color.danger};
+  }
+`;
+
+const Input = styled.input<{ readOnly: boolean; validation: boolean }>`
+  border-bottom: 1px solid gainsboro;
 
   :focus {
     border-color: ${(props) => props.theme.color.active};
@@ -92,6 +111,12 @@ const InputWrap = styled.input<{ readOnly: boolean }>`
         border-width: 1px;
       }
     `}
+
+  /* ${(props) =>
+    !!props.validation &&
+    css`
+      border-color: ${props.theme.color.danger};
+    `} */
 
   ${(props) =>
     props.theme.mq.tablet &&

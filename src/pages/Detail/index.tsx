@@ -19,7 +19,7 @@ import {
   loadContent,
 } from '~store/write/reducer';
 import {
-  selectContentValue,
+  selectDescriptionValue,
   selectCreatedAt,
   selectId,
   selectMarketValue,
@@ -45,7 +45,7 @@ const DetailPage = () => {
   const marketValue = useSelector(selectMarketValue);
   const predictValue = useSelector(selectPredictValue);
   const targetValue = useSelector(selectTargetValue);
-  const contentValue = useSelector(selectContentValue);
+  const descriptionValue = useSelector(selectDescriptionValue);
   const createdAt = useSelector(selectCreatedAt);
 
   const editorRef = useRef<Editor>(null);
@@ -82,16 +82,22 @@ const DetailPage = () => {
         market: marketValue,
         predict: predictValue,
         target: targetValue,
-        content: contentValue,
+        content: descriptionValue,
         createdAt,
       };
-      putPost(data);
+      putPost(data).then(() => {
+        setAmend(false);
+      });
     }
     setAmend(true);
   };
 
   const cancelAmend = () => {
     setAmend(false);
+  };
+
+  const showDescriptionValue = () => {
+    return descriptionValue.replace(/\n/g, '<br/>');
   };
 
   return (
@@ -132,12 +138,15 @@ const DetailPage = () => {
           onChange={(e) => dispatch(changeTarget(e.target.value))}
         />
         <EditorWrap>
-          <span>근거</span>
           {!amend ? (
-            <div dangerouslySetInnerHTML={{ __html: contentValue }}></div>
+            <Description
+              dangerouslySetInnerHTML={{
+                __html: showDescriptionValue(),
+              }}
+            ></Description>
           ) : (
             <Editor
-              initialValue={contentValue}
+              initialValue={descriptionValue}
               initialEditType="wysiwyg"
               useCommandShortcut={true}
               usageStatistics={false}
@@ -170,6 +179,10 @@ const Form = styled.form`
   flex-direction: column;
 
   width: 100%;
+`;
+
+const Description = styled.div`
+  margin-left: 70px;
 `;
 
 const EditorWrap = styled.div`

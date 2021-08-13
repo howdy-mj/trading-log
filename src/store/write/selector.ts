@@ -23,7 +23,7 @@ export const selectTargetValue = createSelector(
   ({ target }) => target,
 );
 
-export const selectContentValue = createSelector(
+export const selectDescriptionValue = createSelector(
   selectWriteState,
   ({ description }) => description,
 );

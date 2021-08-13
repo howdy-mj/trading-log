@@ -51,7 +51,7 @@ const WritePage = () => {
       predict: predictValue,
       target: targetValue,
       content: contentValue,
-      createdAt: dayjs(),
+      createdAt: dayjs().toISOString(),
     };
     createPost(data).then(() => {
       history.push('/');

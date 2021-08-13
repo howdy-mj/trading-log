@@ -25,5 +25,12 @@ export const selectTargetValue = createSelector(
 
 export const selectContentValue = createSelector(
   selectWriteState,
-  ({ description: content }) => content,
+  ({ description }) => description,
 );
+
+export const selectCreatedAt = createSelector(
+  selectWriteState,
+  ({ createdAt }) => createdAt,
+);
+
+export const selectId = createSelector(selectWriteState, ({ id }) => id);

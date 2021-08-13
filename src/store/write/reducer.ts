@@ -2,19 +2,23 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { MarketInfo, Predict } from '~models/post.model';
 
 export interface WriteState {
+  id: string;
   title: string;
   market: MarketInfo;
   predict: Predict;
   target: number;
   description: string;
+  createdAt: string;
 }
 
 const initialState: WriteState = {
+  id: '',
   title: '',
   market: MarketInfo.KRW,
   predict: Predict.UP,
   target: 0,
   description: '',
+  createdAt: '',
 };
 
 const writeReducer = createSlice({
@@ -37,8 +41,18 @@ const writeReducer = createSlice({
       return { ...state, description: action.payload };
     },
     loadContent(state, action: PayloadAction<WriteState>) {
-      const { title, market, predict, target, description } = action.payload;
-      return { ...state, title, market, predict, target, description };
+      const { id, title, market, predict, target, description, createdAt } =
+        action.payload;
+      return {
+        ...state,
+        id,
+        title,
+        market,
+        predict,
+        target,
+        description,
+        createdAt,
+      };
     },
     initContent() {
       return initialState;

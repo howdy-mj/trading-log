@@ -20,6 +20,8 @@ import {
 } from '~store/write/reducer';
 import {
   selectContentValue,
+  selectCreatedAt,
+  selectId,
   selectMarketValue,
   selectPredictValue,
   selectTargetValue,
@@ -29,20 +31,22 @@ import {
 import InputComponent from '~components/Input';
 import ActionButtons from './ActionButtons';
 
-interface Params {
+export interface DetailParams {
   id: string;
 }
 
 const DetailPage = () => {
-  const params: Params = useParams();
+  const params: DetailParams = useParams();
   const dispatch = useDispatch();
   const postsInfo = useSelector(selectPostList);
 
+  const id = useSelector(selectId);
   const titleValue = useSelector(selectTitleValue);
   const marketValue = useSelector(selectMarketValue);
   const predictValue = useSelector(selectPredictValue);
   const targetValue = useSelector(selectTargetValue);
   const contentValue = useSelector(selectContentValue);
+  const createdAt = useSelector(selectCreatedAt);
 
   const editorRef = useRef<Editor>(null);
 
@@ -57,11 +61,13 @@ const DetailPage = () => {
     if (result) {
       dispatch(
         loadContent({
+          id: result.id,
           title: result.title,
           market: result.market,
           predict: result.predict,
           target: result.target,
           description: result.content,
+          createdAt: result.createdAt,
         }),
       );
     }
@@ -71,11 +77,13 @@ const DetailPage = () => {
     if (amend) {
       e.preventDefault();
       const data = {
+        id,
         title: titleValue,
         market: marketValue,
         predict: predictValue,
         target: targetValue,
         content: contentValue,
+        createdAt,
       };
       putPost(data);
     }

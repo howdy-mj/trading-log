@@ -1,5 +1,10 @@
 import styled from '@emotion/styled';
+import { useHistory, useParams } from 'react-router-dom';
+import { deletePost, getPost } from '~api/post';
+
 import ButtonComponent from '~components/Button';
+
+import { DetailParams } from './index';
 
 interface Props {
   amend: boolean;
@@ -8,9 +13,13 @@ interface Props {
 }
 
 const ActionButtons = ({ amend, clickAmendButton, cancelAmend }: Props) => {
-  const deletePost = () => {
-    // TODO: delete
-    console.log('delete');
+  const params: DetailParams = useParams();
+  const history = useHistory();
+
+  const removePost = () => {
+    deletePost(params.id).then((res) => {
+      history.push('/');
+    });
   };
 
   return (
@@ -30,7 +39,7 @@ const ActionButtons = ({ amend, clickAmendButton, cancelAmend }: Props) => {
         <ButtonComponent
           label="삭제"
           status="danger"
-          onClick={() => deletePost()}
+          onClick={() => removePost()}
         />
       )}
     </ButtonWrap>

@@ -50,6 +50,9 @@ const DetailPage = () => {
 
   useEffect(() => {
     dispatch(fetchPosts());
+  }, []);
+
+  useEffect(() => {
     const result = postsInfo.filter((info) => info.id === params.id)[0];
     if (result) {
       dispatch(
@@ -62,7 +65,7 @@ const DetailPage = () => {
         }),
       );
     }
-  }, []);
+  }, [postsInfo]);
 
   const clickAmendButton = (e: any) => {
     if (amend) {

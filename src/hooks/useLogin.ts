@@ -19,6 +19,8 @@ function useLogin() {
   useEffect(() => {
     const abortController = new AbortController();
 
+    console.log('useLogin');
+
     firebaseAuth.onAuthStateChanged((user: any) => {
       if (user) {
         // console.log('user', user);
@@ -42,7 +44,6 @@ function useLogin() {
         setIsLogin(false);
         history.push('/login');
       }
-      setIsLogin(false);
     });
 
     return () => {

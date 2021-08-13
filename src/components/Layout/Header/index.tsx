@@ -5,12 +5,13 @@ import { useHistory } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import styled from '@emotion/styled';
 
+import useLogin from '~hooks/useLogin';
 import { googleSignOut } from '~service/firebase';
 import { initUserData } from '~store/auth/reducer';
-import useLogin from '~hooks/useLogin';
+import { clearAllToken } from '~utils/storage';
+
 import { Title } from '~components/Title';
 import ButtonComponent from '~components/Button';
-import { removeItem } from '~utils/storage';
 
 const HeaderComponent = () => {
   const { isLogin } = useLogin();
@@ -36,8 +37,7 @@ const HeaderComponent = () => {
   const logOut = async () => {
     await googleSignOut().then(() => {
       dispatch(initUserData());
-      removeItem('access_token');
-      removeItem('refresh_token');
+      clearAllToken();
       history.push('/login');
     });
   };

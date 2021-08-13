@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { HTMLTable } from '@blueprintjs/core';
 
 import { selectPostList } from '~store/post/selector';
@@ -25,6 +26,11 @@ const ListComponent = () => {
         </tr>
       </thead>
       <tbody>
+        {postsInfo.length === 0 && (
+          <TR empty>
+            <td colSpan={5}>일지를 작성해주세요.</td>
+          </TR>
+        )}
         {postsInfo?.map((info, idx) => (
           <TR key={info.id} onClick={() => linkToDetail(info.id)}>
             <td>{idx + 1}</td>
@@ -49,18 +55,25 @@ const ListComponent = () => {
 
 export default ListComponent;
 
-const TR = styled.tr`
+const TR = styled.tr<{ empty?: boolean }>`
   > td {
     text-align: center;
   }
+  ${(props) =>
+    props.empty &&
+    css`
+      > td {
+        padding: 30px 0;
+      }
+    `}
 `;
 
-const TFoot = styled.tfoot`
-  tr {
-    td {
-      :first-child {
-        text-align: center;
-      }
-    }
-  }
-`;
+// const TFoot = styled.tfoot`
+//   tr {
+//     td {
+//       :first-child {
+//         text-align: center;
+//       }
+//     }
+//   }
+// `;

@@ -42,6 +42,7 @@ function useLogin() {
         setIsLogin(false);
         history.push('/login');
       }
+      setIsLogin(false);
     });
 
     return () => {

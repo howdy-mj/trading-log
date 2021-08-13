@@ -6,6 +6,7 @@ interface InputProps {
   title: string;
   value?: string;
   onChange?: (e: any) => void;
+  readonly?: boolean;
   /** type="radio" */
   radioInfo?: {
     name: string;
@@ -18,11 +19,19 @@ const InputComponent = ({
   value,
   radioInfo,
   onChange,
+  readonly = false,
 }: InputProps) => {
   const inputResult = () => {
     switch (type) {
       case 'text':
-        return <InputWrap type={type} value={value} onChange={onChange} />;
+        return (
+          <InputWrap
+            type={type}
+            value={value}
+            onChange={onChange}
+            readOnly={readonly}
+          />
+        );
       case 'radio':
         return (
           <RadioWrap onChange={onChange}>
@@ -67,13 +76,22 @@ const LabelWrap = styled.label`
   }
 `;
 
-const InputWrap = styled.input`
+const InputWrap = styled.input<{ readOnly: boolean }>`
   border-bottom: 1px solid gainsboro;
   width: calc(100% - 300px);
+
   :focus {
     border-color: ${(props) => props.theme.color.active};
     border-width: 2px;
   }
+  ${(props) =>
+    props.readOnly &&
+    css`
+      :focus {
+        border-color: gainsboro;
+        border-width: 1px;
+      }
+    `}
 
   ${(props) =>
     props.theme.mq.tablet &&

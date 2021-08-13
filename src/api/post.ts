@@ -8,10 +8,12 @@ export const createPost = (data: any) => {
   return api.post('/post.json', data);
 };
 
-export const amentPost = (data: any) => {
+export const putPost = (data: any) => {
+  // TODO: 수정
   return api.put('/post.json', data);
 };
 
 export const deletePost = (data: any) => {
+  // TODO: 수정
   return api.delete('/post.json', data);
 };

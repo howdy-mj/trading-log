@@ -25,5 +25,5 @@ export const selectTargetValue = createSelector(
 
 export const selectContentValue = createSelector(
   selectWriteState,
-  ({ content }) => content,
+  ({ description: content }) => content,
 );

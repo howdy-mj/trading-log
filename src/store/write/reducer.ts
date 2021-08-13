@@ -6,7 +6,7 @@ export interface WriteState {
   market: MarketInfo;
   predict: Predict;
   target: number;
-  content: string;
+  description: string;
 }
 
 const initialState: WriteState = {
@@ -14,7 +14,7 @@ const initialState: WriteState = {
   market: MarketInfo.KRW,
   predict: Predict.UP,
   target: 0,
-  content: '',
+  description: '',
 };
 
 const writeReducer = createSlice({
@@ -33,8 +33,15 @@ const writeReducer = createSlice({
     changeTarget(state, action: PayloadAction<number>) {
       return { ...state, target: action.payload };
     },
-    changeContent(state, action) {
-      return { ...state, content: action.payload };
+    changeDescription(state, action) {
+      return { ...state, description: action.payload };
+    },
+    loadContent(state, action: PayloadAction<WriteState>) {
+      const { title, market, predict, target, description } = action.payload;
+      return { ...state, title, market, predict, target, description };
+    },
+    initContent() {
+      return initialState;
     },
   },
 });
@@ -44,7 +51,9 @@ export const {
   changeMarket,
   changePredict,
   changeTarget,
-  changeContent,
+  changeDescription,
+  loadContent,
+  initContent,
 } = writeReducer.actions;
 
 export default writeReducer.reducer;

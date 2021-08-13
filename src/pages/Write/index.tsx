@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 import { Editor } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import dayjs from 'dayjs';
@@ -10,13 +11,14 @@ import { css } from '@emotion/react';
 import ButtonComponent from '~components/Button';
 import InputComponent from '~components/Input';
 import { createPost } from '~api/post';
-import { MarketInfo, Predict } from '~models/post.model';
+import { marketRadioInfo, predictRadioInfo } from '~models/post.model';
 import {
-  changeContent,
+  changeDescription,
   changeMarket,
   changePredict,
   changeTarget,
   changeTitle,
+  initContent,
 } from '~store/write/reducer';
 import {
   selectContentValue,
@@ -26,14 +28,8 @@ import {
   selectTitleValue,
 } from '~store/write/selector';
 
-const marketInfo = [
-  { name: MarketInfo.KRW },
-  { name: MarketInfo.BTC },
-  { name: MarketInfo.USDT },
-];
-const predictInfo = [{ name: Predict.UP }, { name: Predict.DOWN }];
-
 const WritePage = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const titleValue = useSelector(selectTitleValue);
   const marketValue = useSelector(selectMarketValue);
@@ -42,6 +38,10 @@ const WritePage = () => {
   const contentValue = useSelector(selectContentValue);
 
   const editorRef = useRef<Editor>(null);
+
+  useEffect(() => {
+    dispatch(initContent());
+  }, []);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -53,7 +53,9 @@ const WritePage = () => {
       content: contentValue,
       createdAt: dayjs(),
     };
-    createPost(data);
+    createPost(data).then(() => {
+      history.push('/');
+    });
   };
 
   useEffect(() => {
@@ -93,14 +95,14 @@ const WritePage = () => {
       <InputComponent
         title="마켓"
         type="radio"
-        radioInfo={marketInfo}
+        radioInfo={marketRadioInfo}
         value={marketValue}
         onChange={(e) => dispatch(changeMarket(e.target.id))}
       />
       <InputComponent
         title="예상"
         type="radio"
-        radioInfo={predictInfo}
+        radioInfo={predictRadioInfo}
         value={predictValue}
         onChange={(e) => dispatch(changePredict(e.target.id))}
       />
@@ -120,7 +122,7 @@ const WritePage = () => {
           height="500px"
           onChange={() => {
             const content = editorRef.current?.getInstance().getMarkdown();
-            dispatch(changeContent(content));
+            dispatch(changeDescription(content));
           }}
         />
       </EditorWrap>

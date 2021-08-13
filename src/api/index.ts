@@ -45,7 +45,7 @@ const responseValidate = (error: ResponseError) => {
     // TODO: refresh_token으로 재요청 방법 찾아보기
     googleSignOut();
     clearAllToken();
-    alert('토큰이 만료되었습니다. 다시 로그인을 해주세요.');
+    // alert('토큰이 만료되었습니다. 다시 로그인을 해주세요.');
     window.location.replace('/login');
     return;
   }

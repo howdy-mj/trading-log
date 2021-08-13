@@ -19,11 +19,8 @@ function useLogin() {
   useEffect(() => {
     const abortController = new AbortController();
 
-    console.log('useLogin');
-
     firebaseAuth.onAuthStateChanged((user: any) => {
       if (user) {
-        // console.log('user', user);
         const displayName = user.displayName;
         const email = user.email;
         const photoURL = user.photoURL;
@@ -31,7 +28,6 @@ function useLogin() {
         dispatch(updateUserInfo({ displayName, email, photoURL }));
 
         user.getIdToken().then((token: string) => {
-          // console.log('token', token);
           dispatch(updateFirebaseIdToken(token));
         });
 

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
@@ -37,10 +37,13 @@ const WritePage = () => {
   const targetValue = useSelector(selectTargetValue);
   const descriptionValue = useSelector(selectDescriptionValue);
 
+  const [init, setIsInit] = useState(true);
+
   const editorRef = useRef<Editor>(null);
 
   useEffect(() => {
     dispatch(initContent());
+    setIsInit(false);
   }, []);
 
   const handleSubmit = (e: any) => {
@@ -50,7 +53,7 @@ const WritePage = () => {
       market: marketValue,
       predict: predictValue,
       target: targetValue,
-      content: descriptionValue,
+      description: descriptionValue,
       createdAt: dayjs().toISOString(),
     };
     createPost(data).then(() => {
@@ -114,21 +117,22 @@ const WritePage = () => {
         onChange={(e) => dispatch(changeTarget(e.target.value))}
       />
       <EditorWrap>
-        <Editor
-          initialValue={descriptionValue}
-          initialEditType="wysiwyg"
-          useCommandShortcut={true}
-          usageStatistics={false}
-          ref={editorRef}
-          language="ko"
-          height="500px"
-          onChange={() => {
-            const content = editorRef.current?.getInstance().getMarkdown();
-            dispatch(changeDescription(content));
-          }}
-        />
+        {init === false && (
+          <Editor
+            initialValue={descriptionValue}
+            initialEditType="wysiwyg"
+            useCommandShortcut={true}
+            usageStatistics={false}
+            ref={editorRef}
+            language="ko"
+            height="500px"
+            onChange={() => {
+              const content = editorRef.current?.getInstance().getMarkdown();
+              dispatch(changeDescription(content));
+            }}
+          />
+        )}
       </EditorWrap>
-
       <ActionWrap>
         <ButtonComponent
           label="작성하기"

@@ -66,7 +66,7 @@ const DetailPage = () => {
           market: result.market,
           predict: result.predict,
           target: result.target,
-          description: result.content,
+          description: result.description,
           createdAt: result.createdAt,
         }),
       );
@@ -82,7 +82,7 @@ const DetailPage = () => {
         market: marketValue,
         predict: predictValue,
         target: targetValue,
-        content: descriptionValue,
+        description: descriptionValue,
         createdAt,
       };
       putPost(data).then(() => {

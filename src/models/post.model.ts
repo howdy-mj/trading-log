@@ -23,7 +23,7 @@ export interface Post {
   market: MarketInfo;
   predict: Predict;
   target: number;
-  content: string;
+  description: string;
   createdAt: string;
 }
 

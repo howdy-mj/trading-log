@@ -24,7 +24,7 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
       market: value.market,
       predict: value.predict,
       target: value.target,
-      content: value.content,
+      description: value.description,
       createdAt: value.createdAt,
     };
   });

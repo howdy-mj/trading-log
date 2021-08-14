@@ -38,7 +38,9 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start:next": "craco start --prod",
+    "build:next": "craco build vercel --prod"
   },
   "eslintConfig": {
     "extends": [

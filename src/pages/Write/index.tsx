@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { Editor } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
@@ -61,34 +60,32 @@ const WritePage = () => {
     });
   };
 
-  useEffect(() => {
-    if (editorRef.current) {
-      editorRef.current.getInstance().removeHook('addImageBlobHook');
-      editorRef.current
-        .getInstance()
-        .addHook('addImageBlobHook', (blob, callback) => {
-          console.log('blob', blob);
-          (async () => {
-            const formData = new FormData();
-            formData.append('file', blob);
-            console.log('formDat', formData);
-            axios.defaults.withCredentials = true;
-            // const { data: url } = await axios.post(
-            //   `${backUrl}image.do`,
-            //   formData,
-            //   {
-            //     header: { 'content-type': 'multipart/formdata' },
-            //   },
-            // );
-            // callback(url, 'alt text');
-          })();
-
-          return false;
-        });
-    }
-
-    return () => {};
-  }, [editorRef]);
+  // useEffect(() => {
+  //   if (editorRef.current) {
+  //     editorRef.current.getInstance().removeHook('addImageBlobHook');
+  //     editorRef.current
+  //       .getInstance()
+  //       .addHook('addImageBlobHook', (blob, callback) => {
+  //         console.log('blob', blob);
+  //         (async () => {
+  //           const formData = new FormData();
+  //           formData.append('file', blob);
+  //           console.log('formDat', formData);
+  //           axios.defaults.withCredentials = true;
+  //           // const { data: url } = await axios.post(
+  //           //   `${backUrl}image.do`,
+  //           //   formData,
+  //           //   {
+  //           //     header: { 'content-type': 'multipart/formdata' },
+  //           //   },
+  //           // );
+  //           // callback(url, 'alt text');
+  //         })();
+  //         return false;
+  //       });
+  //   }
+  //   return () => {};
+  // }, [editorRef]);
 
   return (
     <Form onSubmit={(e) => handleSubmit(e)}>

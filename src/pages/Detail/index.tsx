@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { Editor } from '@toast-ui/react-editor';
+import { Editor, Viewer } from '@toast-ui/react-editor';
 
 import { putPost } from '~api/post';
 import { fetchPosts } from '~store/post/reducer';
@@ -50,10 +50,12 @@ const DetailPage = () => {
 
   const editorRef = useRef<Editor>(null);
 
+  const [init, setIsInit] = useState(true);
   const [amend, setAmend] = useState<boolean>(false);
 
   useEffect(() => {
     dispatch(fetchPosts());
+    setIsInit(false);
   }, []);
 
   useEffect(() => {
@@ -96,10 +98,6 @@ const DetailPage = () => {
     setAmend(false);
   };
 
-  const showDescriptionValue = () => {
-    return descriptionValue.replace(/\n/g, '<br/>');
-  };
-
   return (
     <MainWrap>
       <ActionButtons
@@ -138,27 +136,28 @@ const DetailPage = () => {
           onChange={(e) => dispatch(changeTarget(e.target.value))}
         />
         <EditorWrap>
-          {!amend ? (
-            <Description
-              dangerouslySetInnerHTML={{
-                __html: showDescriptionValue(),
-              }}
-            ></Description>
-          ) : (
-            <Editor
-              initialValue={descriptionValue}
-              initialEditType="wysiwyg"
-              useCommandShortcut={true}
-              usageStatistics={false}
-              ref={editorRef}
-              language="ko"
-              height="500px"
-              onChange={() => {
-                const content = editorRef.current?.getInstance().getMarkdown();
-                dispatch(changeDescription(content));
-              }}
-            />
-          )}
+          {init === false &&
+            (!amend ? (
+              <Description>
+                <Viewer initialValue={descriptionValue} />
+              </Description>
+            ) : (
+              <Editor
+                initialValue={descriptionValue}
+                initialEditType="wysiwyg"
+                useCommandShortcut={true}
+                usageStatistics={false}
+                ref={editorRef}
+                language="ko"
+                height="500px"
+                onChange={() => {
+                  const content = editorRef.current
+                    ?.getInstance()
+                    .getMarkdown();
+                  dispatch(changeDescription(content));
+                }}
+              />
+            ))}
         </EditorWrap>
       </Form>
     </MainWrap>

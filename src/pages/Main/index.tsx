@@ -17,8 +17,10 @@ const Main = () => {
   const uid = useSelector(selectUid);
 
   useEffect(() => {
-    dispatch(fetchPosts({ uid, idToken }));
-  }, []);
+    if (uid && idToken) {
+      dispatch(fetchPosts({ uid, idToken }));
+    }
+  }, [uid, idToken]);
 
   return (
     <MainWrap>

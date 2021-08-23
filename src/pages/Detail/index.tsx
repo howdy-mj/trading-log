@@ -57,9 +57,11 @@ const DetailPage = () => {
   const [amend, setAmend] = useState<boolean>(false);
 
   useEffect(() => {
-    dispatch(fetchPosts({ uid, idToken }));
-    setIsInit(false);
-  }, []);
+    if (uid && idToken) {
+      dispatch(fetchPosts({ uid, idToken }));
+      setIsInit(false);
+    }
+  }, [uid, idToken]);
 
   useEffect(() => {
     const result = postsInfo.filter((info) => info.id === params.id)[0];

@@ -17,9 +17,9 @@ export const api = axios.create({
 api.interceptors.request.use(
   (config) => {
     const token = getItem('access_token');
-    if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`;
-    }
+    // if (token) {
+    //   config.headers['Authorization'] = `Bearer ${token}`;
+    // }
     return config;
   },
   (error) => {
@@ -39,14 +39,15 @@ api.interceptors.response.use(
 const responseValidate = (error: ResponseError) => {
   if (!error) {
     alert('네트워크 오류가 존재합니다.\n재접속 해주세요.');
+    return;
   }
 
   if (error.status === 401) {
     // TODO: refresh_token으로 재요청 방법 찾아보기
     googleSignOut();
     clearAllToken();
-    // alert('토큰이 만료되었습니다. 다시 로그인을 해주세요.');
     window.location.replace('/login');
+    alert('토큰이 만료되었습니다. 다시 로그인을 해주세요.');
     return;
   }
 

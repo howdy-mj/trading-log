@@ -31,7 +31,7 @@ function useLogin() {
           dispatch(updateFirebaseIdToken(token));
         });
 
-        dispatch(updateUid(user.id));
+        dispatch(updateUid(user.uid));
         dispatch(updateRefreshToken(user.refreshToken));
         setItem('refresh_token', user.refreshToken);
 

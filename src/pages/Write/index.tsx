@@ -26,10 +26,15 @@ import {
   selectTargetValue,
   selectTitleValue,
 } from '~store/write/selector';
+import { selectFirebaseToken, selectUid } from '~store/auth/selector';
 
 const WritePage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+
+  const idToken = useSelector(selectFirebaseToken);
+  const uid = useSelector(selectUid);
+
   const titleValue = useSelector(selectTitleValue);
   const marketValue = useSelector(selectMarketValue);
   const predictValue = useSelector(selectPredictValue);
@@ -55,7 +60,7 @@ const WritePage = () => {
       description: descriptionValue,
       createdAt: dayjs().toISOString(),
     };
-    createPost(data).then(() => {
+    createPost(data, uid, idToken).then(() => {
       history.push('/');
     });
   };

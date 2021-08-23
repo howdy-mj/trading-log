@@ -1,7 +1,9 @@
 import styled from '@emotion/styled';
+import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { deletePost, getPost } from '~api/post';
+import { deletePost } from '~api/post';
 
+import { selectFirebaseToken, selectUid } from '~store/auth/selector';
 import ButtonComponent from '~components/Button';
 
 import { DetailParams } from './index';
@@ -15,9 +17,11 @@ interface Props {
 const ActionButtons = ({ amend, clickAmendButton, cancelAmend }: Props) => {
   const params: DetailParams = useParams();
   const history = useHistory();
+  const idToken = useSelector(selectFirebaseToken);
+  const uid = useSelector(selectUid);
 
   const removePost = () => {
-    deletePost(params.id).then((res) => {
+    deletePost(params.id, uid, idToken).then((res) => {
       history.push('/');
     });
   };

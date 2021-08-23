@@ -27,6 +27,7 @@ import {
   selectTargetValue,
   selectTitleValue,
 } from '~store/write/selector';
+import { selectFirebaseToken, selectUid } from '~store/auth/selector';
 
 import InputComponent from '~components/Input';
 import ActionButtons from './ActionButtons';
@@ -39,6 +40,8 @@ const DetailPage = () => {
   const params: DetailParams = useParams();
   const dispatch = useDispatch();
   const postsInfo = useSelector(selectPostList);
+  const idToken = useSelector(selectFirebaseToken);
+  const uid = useSelector(selectUid);
 
   const id = useSelector(selectId);
   const titleValue = useSelector(selectTitleValue);
@@ -54,7 +57,7 @@ const DetailPage = () => {
   const [amend, setAmend] = useState<boolean>(false);
 
   useEffect(() => {
-    dispatch(fetchPosts());
+    dispatch(fetchPosts({ uid, idToken }));
     setIsInit(false);
   }, []);
 
@@ -87,7 +90,7 @@ const DetailPage = () => {
         description: descriptionValue,
         createdAt,
       };
-      putPost(data).then(() => {
+      putPost(data, uid, idToken).then(() => {
         setAmend(false);
       });
     }

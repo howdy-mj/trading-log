@@ -16,10 +16,10 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-// const firebaseStore = () => {
-//   firebase.analytics();
-// };
-// export default firebaseStore;
+const firebaseStore = () => {
+  firebase.analytics();
+};
+export default firebaseStore;
 
 /** database */
 export const firebaseDatabase = firebase.database;

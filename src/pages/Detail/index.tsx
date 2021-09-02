@@ -6,6 +6,8 @@ import { css } from '@emotion/react';
 import { Editor, Viewer } from '@toast-ui/react-editor';
 
 import { putPost } from '~api/post';
+import useWidth from '~hooks/useWidth';
+import useHeight from '~hooks/useHeight';
 import { fetchPosts } from '~store/post/reducer';
 import { marketRadioInfo, predictRadioInfo } from '~models/post.model';
 
@@ -31,7 +33,6 @@ import { selectFirebaseToken, selectUid } from '~store/auth/selector';
 
 import InputComponent from '~components/Input';
 import ActionButtons from './ActionButtons';
-import useWidth from '~hooks/useWidth';
 
 export interface DetailParams {
   id: string;
@@ -40,7 +41,8 @@ export interface DetailParams {
 const DetailPage = () => {
   const params: DetailParams = useParams();
   const dispatch = useDispatch();
-  const currentWidth = useWidth();
+  const width = useWidth();
+  const height = useHeight();
 
   const postsInfo = useSelector(selectPostList);
   const idToken = useSelector(selectFirebaseToken);
@@ -157,7 +159,7 @@ const DetailPage = () => {
                 usageStatistics={false}
                 ref={editorRef}
                 language="ko"
-                height={currentWidth < 500 ? '200px' : '500px'}
+                height={width < 500 ? `${height - 350}px` : '500px'}
                 onChange={() => {
                   const content = editorRef.current
                     ?.getInstance()

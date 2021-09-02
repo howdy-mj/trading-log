@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import Header from './Header';
-import Footer from './Footer';
+// import Footer from './Footer';
 
 interface LayoutProps {
   children: React.ReactChild;
@@ -27,7 +27,7 @@ const Layout = ({ children }: LayoutProps) => {
     <LayoutWrap>
       {!isLoginPage && <Header />}
       <Body height={height}>{children}</Body>
-      {!isLoginPage && <Footer />}
+      {/* {!isLoginPage && <Footer />} */}
     </LayoutWrap>
   );
 };

@@ -7,10 +7,14 @@ import dayjs from 'dayjs';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
+import { createPost } from '~api/post';
+import useWidth from '~hooks/useWidth';
+import useHeight from '~hooks/useHeight';
+
+import { marketRadioInfo, predictRadioInfo } from '~models/post.model';
 import ButtonComponent from '~components/Button';
 import InputComponent from '~components/Input';
-import { createPost } from '~api/post';
-import { marketRadioInfo, predictRadioInfo } from '~models/post.model';
+
 import {
   changeDescription,
   changeMarket,
@@ -31,6 +35,8 @@ import { selectFirebaseToken, selectUid } from '~store/auth/selector';
 const WritePage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const width = useWidth();
+  const height = useHeight();
 
   const idToken = useSelector(selectFirebaseToken);
   const uid = useSelector(selectUid);
@@ -127,7 +133,7 @@ const WritePage = () => {
             usageStatistics={false}
             ref={editorRef}
             language="ko"
-            height="500px"
+            height={width < 500 ? `${height - 350}px` : '500px'}
             onChange={() => {
               const content = editorRef.current?.getInstance().getMarkdown();
               dispatch(changeDescription(content));
@@ -183,5 +189,5 @@ const ActionWrap = styled.div`
   display: flex;
   /* justify-content: flex-end; */
 
-  margin-top: 20px;
+  margin: 20px 0;
 `;

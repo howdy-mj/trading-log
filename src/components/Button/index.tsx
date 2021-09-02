@@ -32,7 +32,7 @@ const Button = styled.button<ButtonStyleProps>`
   font-weight: bold;
 
   @media ${(props) => props.theme.mq.mobile} {
-    width: 8rem;
+    width: 9rem;
   }
 
   ${(props) =>

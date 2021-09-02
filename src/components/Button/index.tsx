@@ -23,13 +23,18 @@ interface ButtonStyleProps {
 
 const Button = styled.button<ButtonStyleProps>`
   cursor: pointer;
-  width: 100px;
-  height: 30px;
+  width: 10rem;
+  height: 3rem;
   border-radius: 5px;
 
   color: white;
   background-color: #adb5bd;
   font-weight: bold;
+
+  @media ${(props) => props.theme.mq.mobile} {
+    width: 8rem;
+  }
+
   ${(props) =>
     props.status === 'danger' &&
     css`

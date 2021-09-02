@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import styled from '@emotion/styled';
+import { FiLogOut } from 'react-icons/fi';
 
 import useLogin from '~hooks/useLogin';
 import { googleSignOut } from '~service/firebase';
@@ -11,7 +12,6 @@ import { initUserData } from '~store/auth/reducer';
 import { clearAllToken } from '~utils/storage';
 
 import { Title } from '~components/Title';
-import ButtonComponent from '~components/Button';
 
 const HeaderComponent = () => {
   const { isLogin } = useLogin();
@@ -51,13 +51,9 @@ const HeaderComponent = () => {
         </GoBackArrow>
       )}
       {isLogin && (
-        <LoginButton>
-          <ButtonComponent
-            label="로그아웃"
-            status="info"
-            onClick={() => logOut()}
-          />
-        </LoginButton>
+        <LogoutButton>
+          <LogoutSVG onClick={() => logOut()} />
+        </LogoutButton>
       )}
     </HeaderWrap>
   );
@@ -80,14 +76,14 @@ const GoBackArrow = styled.div`
   cursor: pointer;
 `;
 
-const LoginButton = styled.div`
+const LogoutButton = styled.div`
   position: absolute;
   top: 50%;
   right: 0;
   transform: translateY(-50%);
   cursor: pointer;
+`;
 
-  > svg {
-    font-size: 25px;
-  }
+const LogoutSVG = styled(FiLogOut)`
+  font-size: 2.5rem;
 `;

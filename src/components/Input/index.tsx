@@ -77,22 +77,26 @@ export default InputComponent;
 const LabelWrap = styled.label`
   display: flex;
   width: 100%;
-  margin: 10px 0;
+  margin: 1rem 0;
 
   > span {
     display: inline-block;
-    width: 70px;
+    width: 7rem;
     text-align: center;
     font-weight: bold;
   }
 `;
 
 const InputWrap = styled.div`
-  width: calc(100% - 300px);
+  width: calc(100% - 30rem);
 
   > p {
     font-size: 12px;
     color: ${(props) => props.theme.color.danger};
+  }
+
+  @media ${(props) => props.theme.mq.mobile} {
+    width: calc(100% - 7rem);
   }
 `;
 
@@ -129,14 +133,14 @@ const RadioWrap = styled.div`
   display: flex;
   > div {
     :not(:last-child) {
-      margin-right: 10px;
+      margin-right: 1rem;
     }
   }
 `;
 
 const TextAreaWrap = styled.textarea`
-  min-height: 150px;
-  width: calc(100% - 300px);
+  min-height: 15rem;
+  width: calc(100% - 30rem);
   resize: none;
 
   :focus {

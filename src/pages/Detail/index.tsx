@@ -31,6 +31,7 @@ import { selectFirebaseToken, selectUid } from '~store/auth/selector';
 
 import InputComponent from '~components/Input';
 import ActionButtons from './ActionButtons';
+import useWidth from '~hooks/useWidth';
 
 export interface DetailParams {
   id: string;
@@ -39,6 +40,8 @@ export interface DetailParams {
 const DetailPage = () => {
   const params: DetailParams = useParams();
   const dispatch = useDispatch();
+  const currentWidth = useWidth();
+
   const postsInfo = useSelector(selectPostList);
   const idToken = useSelector(selectFirebaseToken);
   const uid = useSelector(selectUid);
@@ -154,7 +157,7 @@ const DetailPage = () => {
                 usageStatistics={false}
                 ref={editorRef}
                 language="ko"
-                height="500px"
+                height={currentWidth < 500 ? '200px' : '500px'}
                 onChange={() => {
                   const content = editorRef.current
                     ?.getInstance()
@@ -186,22 +189,26 @@ const Form = styled.form`
 `;
 
 const Description = styled.div`
-  margin-left: 70px;
+  margin-left: 7rem;
+
+  @media ${(props) => props.theme.mq.mobile} {
+    margin-left: 1.5rem;
+  }
 `;
 
 const EditorWrap = styled.div`
   display: flex;
   width: 100%;
-  margin: 10px 0;
+  margin: 1rem 0;
   > span {
     display: inline-block;
-    width: 70px;
+    width: 7rem;
     text-align: center;
     font-weight: bold;
   }
 
   > div {
-    width: calc(100% - 300px);
+    width: calc(100% - 30rem);
   }
 
   ${(props) =>

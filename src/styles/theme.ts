@@ -8,13 +8,13 @@ export const size = {
   smallest: '25em', // 400px
 };
 
-const color = {
-  one: '#1E2735',
-  two: '#162E3B',
-  three: '#054C5A',
-  four: '#005F60',
-  five: '#FE8C03',
-};
+// const color = {
+//   one: '#1E2735',
+//   two: '#162E3B',
+//   three: '#054C5A',
+//   four: '#005F60',
+//   five: '#FE8C03',
+// };
 
 const theme: Theme = {
   color: {
@@ -22,9 +22,9 @@ const theme: Theme = {
     active: '#0ca678',
   },
   mq: {
-    laptop: `@media only screen and (max-width: ${size.largest})`,
-    tablet: `@media only screen and (max-width: ${size.large})`,
-    mobile: `@media only screen and (max-width: ${size.small})`,
+    laptop: `only screen and (min-width: ${size.largest})`,
+    tablet: `only screen and (max-width: ${size.large})`,
+    mobile: `only screen and (max-width: ${size.small})`,
   },
 };
 

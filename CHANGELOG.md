@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/howdy-mj/trading-log/compare/v0.1.1...v0.1.2) (2021-09-02)
+
+
+### Bug Fixes
+
+* 글쓰기 반응형 수정 ([e1b7964](https://github.com/howdy-mj/trading-log/commit/e1b79646eb23b2c183e9b7c28b4474f391ad0846))
+
 ### 0.1.1 (2021-09-02)
 
 

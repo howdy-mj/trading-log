@@ -56,12 +56,14 @@ const ListComponent = () => {
 export default ListComponent;
 
 const TR = styled.tr<{ empty?: boolean }>`
+  cursor: pointer;
   > td {
     text-align: center;
   }
   ${(props) =>
     props.empty &&
     css`
+      cursor: auto;
       > td {
         padding: 30px 0;
       }

@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { Editor, Viewer } from '@toast-ui/react-editor';
+import { isNumber } from 'is-validated';
 
 import { putPost } from '~api/post';
 import useWidth from '~hooks/useWidth';
@@ -105,6 +106,8 @@ const DetailPage = () => {
   };
 
   const cancelAmend = () => {
+    // TODO: 원복 로직 수정
+    dispatch(fetchPosts({ uid, idToken }));
     setAmend(false);
   };
 
@@ -121,6 +124,7 @@ const DetailPage = () => {
           title="제목"
           value={titleValue}
           readonly={!amend}
+          // validation={amend && !!titleValue}
           onChange={(e) => dispatch(changeTitle(e.target.value))}
         />
         <InputComponent
@@ -143,7 +147,14 @@ const DetailPage = () => {
           title="타겟가"
           value={targetValue.toString()}
           readonly={!amend}
-          onChange={(e) => dispatch(changeTarget(e.target.value))}
+          // validation={!amend && !!targetValue}
+          onChange={(e) => {
+            const { value } = e.target;
+            if (!isNumber(value) || value === '') {
+              return;
+            }
+            dispatch(changeTarget(e.target.value));
+          }}
         />
         <EditorWrap>
           {init === false &&

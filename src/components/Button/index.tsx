@@ -5,11 +5,17 @@ interface ButtonProps {
   label: string;
   status?: 'info' | 'active' | 'danger';
   onClick?: (e?: any) => void;
+  disabled?: boolean;
 }
 
-const ButtonComponent = ({ label, status = 'info', onClick }: ButtonProps) => {
+const ButtonComponent = ({
+  label,
+  status = 'info',
+  onClick,
+  disabled,
+}: ButtonProps) => {
   return (
-    <Button onClick={onClick} status={status}>
+    <Button onClick={onClick} status={status} disabled={disabled}>
       {label}
     </Button>
   );
@@ -46,4 +52,8 @@ const Button = styled.button<ButtonStyleProps>`
     css`
       background-color: ${props.theme.color.active};
     `}
+
+    &:disabled {
+    background-color: gray !important;
+  }
 `;

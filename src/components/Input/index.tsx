@@ -10,6 +10,7 @@ interface InputProps {
   required?: boolean;
   validation?: boolean;
   validationText?: string;
+  pattern?: string;
   /** type="radio" */
   radioInfo?: {
     name: string;
@@ -26,6 +27,7 @@ const InputComponent = ({
   required = false,
   validation,
   validationText = '필수 입력 값 입니다',
+  pattern = '',
 }: InputProps) => {
   const inputResult = () => {
     switch (type) {
@@ -39,6 +41,7 @@ const InputComponent = ({
               readOnly={readonly}
               required={required}
               validation={!!validation}
+              pattern={pattern}
             />
             {validation === false && <p>{validationText}</p>}
           </InputWrap>

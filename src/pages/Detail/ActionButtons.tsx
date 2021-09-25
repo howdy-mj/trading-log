@@ -7,6 +7,7 @@ import { selectFirebaseToken, selectUid } from '~store/auth/selector';
 import ButtonComponent from '~components/Button';
 
 import { DetailParams } from './index';
+import { selectTargetValue, selectTitleValue } from '~store/write/selector';
 
 interface Props {
   amend: boolean;
@@ -20,6 +21,9 @@ const ActionButtons = ({ amend, clickAmendButton, cancelAmend }: Props) => {
   const idToken = useSelector(selectFirebaseToken);
   const uid = useSelector(selectUid);
 
+  const titleValue = useSelector(selectTitleValue);
+  const targetValue = useSelector(selectTargetValue);
+
   const removePost = () => {
     deletePost(params.id, uid, idToken).then((res) => {
       history.push('/');
@@ -32,6 +36,7 @@ const ActionButtons = ({ amend, clickAmendButton, cancelAmend }: Props) => {
         label={amend ? '수정완료' : '수정'}
         status="active"
         onClick={(e) => clickAmendButton(e)}
+        disabled={amend && (!titleValue || !targetValue)}
       />
       {amend ? (
         <ButtonComponent

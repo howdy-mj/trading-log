@@ -6,6 +6,7 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import dayjs from 'dayjs';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
+import { isNumber } from 'is-validated';
 
 import { createPost } from '~api/post';
 import useWidth from '~hooks/useWidth';
@@ -121,8 +122,15 @@ const WritePage = () => {
       />
       <InputComponent
         title="타겟가"
+        value={targetValue === 0 ? '' : targetValue.toString()}
         validation={!!targetValue}
-        onChange={(e) => dispatch(changeTarget(e.target.value))}
+        onChange={(e) => {
+          const { value } = e.target;
+          if (!isNumber(value) || value === '') {
+            return;
+          }
+          dispatch(changeTarget(e.target.value));
+        }}
       />
       <EditorWrap>
         {init === false && (
@@ -146,6 +154,7 @@ const WritePage = () => {
           label="작성하기"
           status="active"
           onClick={(e) => handleSubmit(e)}
+          disabled={!titleValue || !targetValue}
         />
       </ActionWrap>
     </Form>

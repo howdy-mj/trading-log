@@ -4,7 +4,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { deletePost } from '~api/post';
 
 import { selectFirebaseToken, selectUid } from '~store/auth/selector';
-import ButtonComponent from '~components/Button';
+import Button from '~components/Button';
 
 import { DetailParams } from './index';
 import { selectTargetValue, selectTitleValue } from '~store/write/selector';
@@ -32,24 +32,16 @@ const ActionButtons = ({ amend, clickAmendButton, cancelAmend }: Props) => {
 
   return (
     <ButtonWrap>
-      <ButtonComponent
+      <Button
         label={amend ? '수정완료' : '수정'}
         status="active"
         onClick={(e) => clickAmendButton(e)}
         disabled={amend && (!titleValue || !targetValue)}
       />
       {amend ? (
-        <ButtonComponent
-          label="취소"
-          status="info"
-          onClick={() => cancelAmend()}
-        />
+        <Button label="취소" status="info" onClick={() => cancelAmend()} />
       ) : (
-        <ButtonComponent
-          label="삭제"
-          status="danger"
-          onClick={() => removePost()}
-        />
+        <Button label="삭제" status="danger" onClick={() => removePost()} />
       )}
     </ButtonWrap>
   );

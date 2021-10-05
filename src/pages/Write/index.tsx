@@ -13,7 +13,7 @@ import useWidth from '~hooks/useWidth';
 import useHeight from '~hooks/useHeight';
 
 import { marketRadioInfo, predictRadioInfo } from '~models/post.model';
-import ButtonComponent from '~components/Button';
+import Button from '~components/Button';
 import InputComponent from '~components/Input';
 
 import {
@@ -150,7 +150,7 @@ const WritePage = () => {
         )}
       </EditorWrap>
       <ActionWrap>
-        <ButtonComponent
+        <Button
           label="작성하기"
           status="active"
           onClick={(e) => handleSubmit(e)}

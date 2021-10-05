@@ -1,4 +1,4 @@
-import { Alert } from '@blueprintjs/core';
+import styled from '@emotion/styled';
 
 interface AlertProps {
   errorMessage: string;
@@ -12,14 +12,12 @@ const AlertComponent = ({
   cancelText,
 }: AlertProps) => {
   return (
-    <Alert
-      canOutsideClickCancel={true}
-      confirmButtonText={confirmText}
-      cancelButtonText={cancelText}
-    >
+    <AlertWrap>
       <p>{errorMessage}</p>
-    </Alert>
+    </AlertWrap>
   );
 };
 
 export default AlertComponent;
+
+const AlertWrap = styled.div``;

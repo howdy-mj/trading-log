@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { HTMLTable } from '@blueprintjs/core';
 
 import { selectPostList } from '~store/post/selector';
 
@@ -15,7 +14,7 @@ const ListComponent = () => {
   };
 
   return (
-    <HTMLTable interactive>
+    <table>
       <thead>
         <tr>
           <th>No.</th>
@@ -49,7 +48,7 @@ const ListComponent = () => {
           <td>{mockData.length}</td>
         </tr>
       </TFoot> */}
-    </HTMLTable>
+    </table>
   );
 };
 

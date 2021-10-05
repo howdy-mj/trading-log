@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 import { fetchPosts } from '~store/post/reducer';
 import { selectFirebaseToken, selectUid } from '~store/auth/selector';
 
-import ButtonComponent from '~components/Button';
+import Button from '~components/Button';
 import List from './List';
 
 const Main = () => {
@@ -25,7 +25,7 @@ const Main = () => {
   return (
     <MainWrap>
       <ButtonWrap>
-        <ButtonComponent
+        <Button
           label="글쓰기"
           status="active"
           onClick={() => history.push('/write')}

@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](https://github.com/howdy-mj/trading-log/compare/v0.1.2...v0.1.3) (2021-10-05)
+
+
+### Features
+
+* 글 생성/수정 validation 추가 ([21175ab](https://github.com/howdy-mj/trading-log/commit/21175ab17bd8cc0512d44154c2124424e821af7b))
+* Storybook 설정 ([fa4956a](https://github.com/howdy-mj/trading-log/commit/fa4956a33e8154fd845209cf1e9b159ef5f21e8a))
+
 ### [0.1.2](https://github.com/howdy-mj/trading-log/compare/v0.1.1...v0.1.2) (2021-09-02)
 
 ### Bug Fixes

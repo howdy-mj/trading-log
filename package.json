@@ -1,6 +1,6 @@
 {
   "name": "trading-log",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.1.2",

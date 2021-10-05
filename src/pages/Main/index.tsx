@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from '@emotion/styled';
@@ -16,9 +16,12 @@ const Main = () => {
   const idToken = useSelector(selectFirebaseToken);
   const uid = useSelector(selectUid);
 
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     if (uid && idToken) {
       dispatch(fetchPosts({ uid, idToken }));
+      setIsLoading(false);
     }
   }, [uid, idToken]);
 
@@ -31,7 +34,7 @@ const Main = () => {
           onClick={() => history.push('/write')}
         />
       </ButtonWrap>
-      <List />
+      <List isLoading={isLoading} />
     </MainWrap>
   );
 };

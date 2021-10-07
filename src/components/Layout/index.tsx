@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import Header from './Header';
+import { css } from '@emotion/react';
 // import Footer from './Footer';
 
 interface LayoutProps {
@@ -40,7 +41,7 @@ const LayoutWrap = styled.div`
 
   > header {
     text-align: center;
-    margin-top: 3rem;
+    padding-top: 3rem;
   }
 
   ${(props) => props.theme.mq.tablet} {
@@ -55,7 +56,12 @@ const Body = styled.div<{ height: number }>`
   display: flex;
   justify-content: center;
   padding-top: 7rem;
-  min-height: ${(props) => props.height - 250}px;
+
+  ${(props) =>
+    props.height &&
+    css`
+      min-height: calc(${props.height}px - 14rem);
+    `}
 `;
 
 export default Layout;

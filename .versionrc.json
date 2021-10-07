@@ -1,0 +1,43 @@
+{
+  "types": [
+    {
+      "type": "feat",
+      "section": ":rocket: Features"
+    },
+    {
+      "type": "fix",
+      "section": ":bug: Bug Fixes"
+    },
+    {
+      "type": "docs",
+      "section": ":memo: Documentation"
+    },
+    {
+      "type": "style",
+      "section": ":sparkles: Styling"
+    },
+    {
+      "type": "refactor",
+      "section": ":house: Refactoring"
+    },
+    {
+      "type": "test",
+      "section": "Tests",
+      "hidden": true
+    },
+    {
+      "type": "build",
+      "section": "Build System",
+      "hidden": true
+    },
+    {
+      "type": "ci",
+      "hidden": true
+    },
+    {
+      "type": "chore",
+      "section": "Chore",
+      "hidden": true
+    }
+  ]
+}

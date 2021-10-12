@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.4](https://github.com/howdy-mj/trading-log/compare/v0.1.2...v0.1.4) (2021-10-12)
+
+
+### :memo: Documentation
+
+* README.md 수정 ([2d78b1f](https://github.com/howdy-mj/trading-log/commit/2d78b1f0cd4338feb856dd291511897a42b7ec2d))
+
+
+### :sparkles: Styling
+
+* Loading 추가 및 스타일 변경 ([be4ccd6](https://github.com/howdy-mj/trading-log/commit/be4ccd64d9e3a0ef183740371c3837aee0ff4797))
+
+
+### :rocket: Features
+
+* 글 생성/수정 validation 추가 ([21175ab](https://github.com/howdy-mj/trading-log/commit/21175ab17bd8cc0512d44154c2124424e821af7b))
+* Alert 컴포넌트 생성 ([e4ebf99](https://github.com/howdy-mj/trading-log/commit/e4ebf9948155002b0c4534c77db92346f5254ebc))
+* Button, Input, Loading stories 추가 ([f880e7a](https://github.com/howdy-mj/trading-log/commit/f880e7a33a167f1b81930d5c8816b9c62e23c288))
+* Storybook 설정 ([fa4956a](https://github.com/howdy-mj/trading-log/commit/fa4956a33e8154fd845209cf1e9b159ef5f21e8a))
+
+
+### :house: Refactoring
+
+* detail 페이지 store 분리 및 favicon 변경 ([9500168](https://github.com/howdy-mj/trading-log/commit/95001682cc98506e1320230e07163aaa581dd1df))
+* Layout, Header 컴포넌트 ([319b2e3](https://github.com/howdy-mj/trading-log/commit/319b2e3d3134cb2206d6ff3fb8b0d0307fdd3879))
+
 ### [0.1.3](https://github.com/howdy-mj/trading-log/compare/v0.1.2...v0.1.3) (2021-10-05)
 
 

@@ -44,17 +44,19 @@ const HeaderComponent = () => {
 
   return (
     <HeaderWrap>
-      <Title />
-      {hasGoBack && (
-        <GoBackArrow onClick={() => history.goBack()}>
-          <FaArrowLeft />
-        </GoBackArrow>
-      )}
-      {isLogin && (
-        <LogoutButton>
-          <LogoutSVG onClick={() => logOut()} />
-        </LogoutButton>
-      )}
+      <HeaderContainer>
+        <Title />
+        {hasGoBack && (
+          <GoBackArrow onClick={() => history.goBack()}>
+            <FaArrowLeft />
+          </GoBackArrow>
+        )}
+        {isLogin && (
+          <LogoutButton>
+            <LogoutSVG onClick={() => logOut()} />
+          </LogoutButton>
+        )}
+      </HeaderContainer>
     </HeaderWrap>
   );
 };
@@ -64,7 +66,13 @@ export default HeaderComponent;
 const HeaderWrap = styled.header`
   display: flex;
   justify-content: center;
+
+  height: 4rem;
+`;
+
+const HeaderContainer = styled.div`
   position: relative;
+  width: 100%;
 `;
 
 const GoBackArrow = styled.div`

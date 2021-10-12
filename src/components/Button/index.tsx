@@ -5,23 +5,24 @@ interface ButtonProps {
   label: string;
   status?: 'info' | 'active' | 'danger';
   onClick?: (e?: any) => void;
+  disabled?: boolean;
 }
 
-const ButtonComponent = ({ label, status = 'info', onClick }: ButtonProps) => {
+const Button = ({ label, status = 'info', onClick, disabled }: ButtonProps) => {
   return (
-    <Button onClick={onClick} status={status}>
+    <ButtonWrap onClick={onClick} status={status} disabled={disabled}>
       {label}
-    </Button>
+    </ButtonWrap>
   );
 };
 
-export default ButtonComponent;
+export default Button;
 
 interface ButtonStyleProps {
   status?: 'info' | 'active' | 'danger';
 }
 
-const Button = styled.button<ButtonStyleProps>`
+const ButtonWrap = styled.button<ButtonStyleProps>`
   cursor: pointer;
   width: 10rem;
   height: 3rem;
@@ -46,4 +47,8 @@ const Button = styled.button<ButtonStyleProps>`
     css`
       background-color: ${props.theme.color.active};
     `}
+
+    &:disabled {
+    background-color: gray !important;
+  }
 `;

@@ -4,9 +4,13 @@ import { useHistory, useParams } from 'react-router-dom';
 import { deletePost } from '~api/post';
 
 import { selectFirebaseToken, selectUid } from '~store/auth/selector';
-import ButtonComponent from '~components/Button';
+import Button from '~components/Button';
 
 import { DetailParams } from './index';
+import {
+  selectAmendTargetValue,
+  selectAmendTitleValue,
+} from '~store/detail/selector';
 
 interface Props {
   amend: boolean;
@@ -20,6 +24,9 @@ const ActionButtons = ({ amend, clickAmendButton, cancelAmend }: Props) => {
   const idToken = useSelector(selectFirebaseToken);
   const uid = useSelector(selectUid);
 
+  const titleValue = useSelector(selectAmendTitleValue);
+  const targetValue = useSelector(selectAmendTargetValue);
+
   const removePost = () => {
     deletePost(params.id, uid, idToken).then((res) => {
       history.push('/');
@@ -28,23 +35,16 @@ const ActionButtons = ({ amend, clickAmendButton, cancelAmend }: Props) => {
 
   return (
     <ButtonWrap>
-      <ButtonComponent
+      <Button
         label={amend ? '수정완료' : '수정'}
         status="active"
         onClick={(e) => clickAmendButton(e)}
+        disabled={amend && (!titleValue || !targetValue)}
       />
       {amend ? (
-        <ButtonComponent
-          label="취소"
-          status="info"
-          onClick={() => cancelAmend()}
-        />
+        <Button label="취소" status="info" onClick={() => cancelAmend()} />
       ) : (
-        <ButtonComponent
-          label="삭제"
-          status="danger"
-          onClick={() => removePost()}
-        />
+        <Button label="삭제" status="danger" onClick={() => removePost()} />
       )}
     </ButtonWrap>
   );

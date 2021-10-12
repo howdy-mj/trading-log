@@ -9,27 +9,26 @@ import { isNumber } from 'is-validated';
 import { putPost } from '~api/post';
 import useWidth from '~hooks/useWidth';
 import useHeight from '~hooks/useHeight';
-import { fetchPosts } from '~store/post/reducer';
 import { marketRadioInfo, predictRadioInfo } from '~models/post.model';
 
+import { fetchPosts } from '~store/post/reducer';
 import { selectPostList } from '~store/post/selector';
 import {
-  changeDescription,
-  changeMarket,
-  changePredict,
-  changeTarget,
-  changeTitle,
-  loadContent,
-} from '~store/write/reducer';
+  amendDescription,
+  amendMarket,
+  amendPredict,
+  amendTarget,
+  amendTitle,
+  loadAmendContent,
+} from '~store/detail/reducer';
 import {
-  selectDescriptionValue,
-  selectCreatedAt,
-  selectId,
-  selectMarketValue,
-  selectPredictValue,
-  selectTargetValue,
-  selectTitleValue,
-} from '~store/write/selector';
+  selectAmendDescriptionValue,
+  selectAmendId,
+  selectAmendMarketValue,
+  selectAmendPredictValue,
+  selectAmendTargetValue,
+  selectAmendTitleValue,
+} from '~store/detail/selector';
 import { selectFirebaseToken, selectUid } from '~store/auth/selector';
 
 import InputComponent from '~components/Input';
@@ -49,13 +48,12 @@ const DetailPage = () => {
   const idToken = useSelector(selectFirebaseToken);
   const uid = useSelector(selectUid);
 
-  const id = useSelector(selectId);
-  const titleValue = useSelector(selectTitleValue);
-  const marketValue = useSelector(selectMarketValue);
-  const predictValue = useSelector(selectPredictValue);
-  const targetValue = useSelector(selectTargetValue);
-  const descriptionValue = useSelector(selectDescriptionValue);
-  const createdAt = useSelector(selectCreatedAt);
+  const id = useSelector(selectAmendId);
+  const titleValue = useSelector(selectAmendTitleValue);
+  const marketValue = useSelector(selectAmendMarketValue);
+  const predictValue = useSelector(selectAmendPredictValue);
+  const targetValue = useSelector(selectAmendTargetValue);
+  const descriptionValue = useSelector(selectAmendDescriptionValue);
 
   const editorRef = useRef<Editor>(null);
 
@@ -73,14 +71,13 @@ const DetailPage = () => {
     const result = postsInfo.filter((info) => info.id === params.id)[0];
     if (result) {
       dispatch(
-        loadContent({
+        loadAmendContent({
           id: result.id,
           title: result.title,
           market: result.market,
           predict: result.predict,
           target: result.target,
           description: result.description,
-          createdAt: result.createdAt,
         }),
       );
     }
@@ -96,7 +93,6 @@ const DetailPage = () => {
         predict: predictValue,
         target: targetValue,
         description: descriptionValue,
-        createdAt,
       };
       putPost(data, uid, idToken).then(() => {
         setAmend(false);
@@ -106,7 +102,6 @@ const DetailPage = () => {
   };
 
   const cancelAmend = () => {
-    // TODO: 원복 로직 수정
     dispatch(fetchPosts({ uid, idToken }));
     setAmend(false);
   };
@@ -125,7 +120,7 @@ const DetailPage = () => {
           value={titleValue}
           readonly={!amend}
           // validation={amend && !!titleValue}
-          onChange={(e) => dispatch(changeTitle(e.target.value))}
+          onChange={(e) => dispatch(amendTitle(e.target.value))}
         />
         <InputComponent
           title="마켓"
@@ -133,7 +128,7 @@ const DetailPage = () => {
           radioInfo={marketRadioInfo}
           value={marketValue}
           readonly={!amend}
-          onChange={(e) => dispatch(changeMarket(e.target.id))}
+          onChange={(e) => dispatch(amendMarket(e.target.id))}
         />
         <InputComponent
           title="예상"
@@ -141,7 +136,7 @@ const DetailPage = () => {
           radioInfo={predictRadioInfo}
           value={predictValue}
           readonly={!amend}
-          onChange={(e) => dispatch(changePredict(e.target.id))}
+          onChange={(e) => dispatch(amendPredict(e.target.id))}
         />
         <InputComponent
           title="타겟가"
@@ -153,7 +148,7 @@ const DetailPage = () => {
             if (!isNumber(value) || value === '') {
               return;
             }
-            dispatch(changeTarget(e.target.value));
+            dispatch(amendTarget(e.target.value));
           }}
         />
         <EditorWrap>
@@ -163,6 +158,7 @@ const DetailPage = () => {
                 <Viewer initialValue={descriptionValue} />
               </Description>
             ) : (
+              // TODO: 바로 업데이트 안되는 문제
               <Editor
                 initialValue={descriptionValue}
                 initialEditType="wysiwyg"
@@ -175,7 +171,7 @@ const DetailPage = () => {
                   const content = editorRef.current
                     ?.getInstance()
                     .getMarkdown();
-                  dispatch(changeDescription(content));
+                  dispatch(amendDescription(content));
                 }}
               />
             ))}

@@ -7,7 +7,10 @@ import { selectFirebaseToken, selectUid } from '~store/auth/selector';
 import Button from '~components/Button';
 
 import { DetailParams } from './index';
-import { selectTargetValue, selectTitleValue } from '~store/write/selector';
+import {
+  selectAmendTargetValue,
+  selectAmendTitleValue,
+} from '~store/detail/selector';
 
 interface Props {
   amend: boolean;
@@ -21,8 +24,8 @@ const ActionButtons = ({ amend, clickAmendButton, cancelAmend }: Props) => {
   const idToken = useSelector(selectFirebaseToken);
   const uid = useSelector(selectUid);
 
-  const titleValue = useSelector(selectTitleValue);
-  const targetValue = useSelector(selectTargetValue);
+  const titleValue = useSelector(selectAmendTitleValue);
+  const targetValue = useSelector(selectAmendTargetValue);
 
   const removePost = () => {
     deletePost(params.id, uid, idToken).then((res) => {

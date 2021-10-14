@@ -1,14 +1,11 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { Editor, Viewer } from '@toast-ui/react-editor';
 import { isNumber } from 'is-validated';
 
 import { putPost } from '~api/post';
-import useWidth from '~hooks/useWidth';
-import useHeight from '~hooks/useHeight';
 import { marketRadioInfo, predictRadioInfo } from '~models/post.model';
 
 import { fetchPosts } from '~store/post/reducer';
@@ -33,6 +30,7 @@ import { selectFirebaseToken, selectUid } from '~store/auth/selector';
 
 import InputComponent from '~components/Input';
 import ActionButtons from './ActionButtons';
+import Editor from '~components/Editor';
 
 export interface DetailParams {
   id: string;
@@ -41,8 +39,6 @@ export interface DetailParams {
 const DetailPage = () => {
   const params: DetailParams = useParams();
   const dispatch = useDispatch();
-  const width = useWidth();
-  const height = useHeight();
 
   const postsInfo = useSelector(selectPostList);
   const idToken = useSelector(selectFirebaseToken);
@@ -55,15 +51,11 @@ const DetailPage = () => {
   const targetValue = useSelector(selectAmendTargetValue);
   const descriptionValue = useSelector(selectAmendDescriptionValue);
 
-  const editorRef = useRef<Editor>(null);
-
-  const [init, setIsInit] = useState(true);
   const [amend, setAmend] = useState<boolean>(false);
 
   useEffect(() => {
     if (uid && idToken) {
       dispatch(fetchPosts({ uid, idToken }));
-      setIsInit(false);
     }
   }, [uid, idToken]);
 
@@ -151,30 +143,12 @@ const DetailPage = () => {
             dispatch(amendTarget(e.target.value));
           }}
         />
-        <EditorWrap>
-          {init === false &&
-            (!amend ? (
-              <Description>
-                <Viewer initialValue={descriptionValue} />
-              </Description>
-            ) : (
-              // TODO: 바로 업데이트 안되는 문제
-              <Editor
-                initialValue={descriptionValue}
-                initialEditType="wysiwyg"
-                useCommandShortcut={true}
-                usageStatistics={false}
-                ref={editorRef}
-                language="ko"
-                height={width < 500 ? `${height - 350}px` : '500px'}
-                onChange={() => {
-                  const content = editorRef.current
-                    ?.getInstance()
-                    .getMarkdown();
-                  dispatch(amendDescription(content));
-                }}
-              />
-            ))}
+        <EditorWrap isAmend={amend}>
+          <Editor
+            value={descriptionValue}
+            onChange={(content) => dispatch(amendDescription(content))}
+            readOnly={!amend}
+          />
         </EditorWrap>
       </Form>
     </MainWrap>
@@ -197,18 +171,12 @@ const Form = styled.form`
   width: 100%;
 `;
 
-const Description = styled.div`
-  margin-left: 7rem;
-
-  @media ${(props) => props.theme.mq.mobile} {
-    margin-left: 1.5rem;
-  }
-`;
-
-const EditorWrap = styled.div`
+const EditorWrap = styled.div<{ isAmend: boolean }>`
   display: flex;
   width: 100%;
   margin: 1rem 0;
+  margin-left: ${({ isAmend }) => !isAmend && '7rem'};
+
   > span {
     display: inline-block;
     width: 7rem;
@@ -226,5 +194,12 @@ const EditorWrap = styled.div`
       > div {
         width: 100%;
       }
+    `}
+
+  ${(props) =>
+    props.theme.mq.mobile &&
+    !props.isAmend &&
+    css`
+      margin-left: 0rem;
     `}
 `;

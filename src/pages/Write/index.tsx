@@ -1,21 +1,13 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Editor } from '@toast-ui/react-editor';
-import '@toast-ui/editor/dist/toastui-editor.css';
 import dayjs from 'dayjs';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { isNumber } from 'is-validated';
 
 import { createPost } from '~api/post';
-import useWidth from '~hooks/useWidth';
-import useHeight from '~hooks/useHeight';
-
 import { marketRadioInfo, predictRadioInfo } from '~models/post.model';
-import Button from '~components/Button';
-import InputComponent from '~components/Input';
-
 import {
   changeDescription,
   changeMarket,
@@ -33,11 +25,13 @@ import {
 } from '~store/write/selector';
 import { selectFirebaseToken, selectUid } from '~store/auth/selector';
 
+import Button from '~components/Button';
+import InputComponent from '~components/Input';
+import Editor from '~components/Editor';
+
 const WritePage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const width = useWidth();
-  const height = useHeight();
 
   const idToken = useSelector(selectFirebaseToken);
   const uid = useSelector(selectUid);
@@ -48,13 +42,8 @@ const WritePage = () => {
   const targetValue = useSelector(selectTargetValue);
   const descriptionValue = useSelector(selectDescriptionValue);
 
-  const [init, setIsInit] = useState(true);
-
-  const editorRef = useRef<Editor>(null);
-
   useEffect(() => {
     dispatch(initContent());
-    setIsInit(false);
   }, []);
 
   const handleSubmit = (e: any) => {
@@ -71,33 +60,6 @@ const WritePage = () => {
       history.push('/');
     });
   };
-
-  // useEffect(() => {
-  //   if (editorRef.current) {
-  //     editorRef.current.getInstance().removeHook('addImageBlobHook');
-  //     editorRef.current
-  //       .getInstance()
-  //       .addHook('addImageBlobHook', (blob, callback) => {
-  //         console.log('blob', blob);
-  //         (async () => {
-  //           const formData = new FormData();
-  //           formData.append('file', blob);
-  //           console.log('formDat', formData);
-  //           axios.defaults.withCredentials = true;
-  //           // const { data: url } = await axios.post(
-  //           //   `${backUrl}image.do`,
-  //           //   formData,
-  //           //   {
-  //           //     header: { 'content-type': 'multipart/formdata' },
-  //           //   },
-  //           // );
-  //           // callback(url, 'alt text');
-  //         })();
-  //         return false;
-  //       });
-  //   }
-  //   return () => {};
-  // }, [editorRef]);
 
   return (
     <Form onSubmit={(e) => handleSubmit(e)}>
@@ -133,21 +95,10 @@ const WritePage = () => {
         }}
       />
       <EditorWrap>
-        {init === false && (
-          <Editor
-            initialValue={descriptionValue}
-            initialEditType="wysiwyg"
-            useCommandShortcut={true}
-            usageStatistics={false}
-            ref={editorRef}
-            language="ko"
-            height={width < 500 ? `${height - 350}px` : '500px'}
-            onChange={() => {
-              const content = editorRef.current?.getInstance().getMarkdown();
-              dispatch(changeDescription(content));
-            }}
-          />
-        )}
+        <Editor
+          value={descriptionValue}
+          onChange={(text) => dispatch(changeDescription(text))}
+        />
       </EditorWrap>
       <ActionWrap>
         <Button

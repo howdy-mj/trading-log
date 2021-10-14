@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 interface ButtonProps {
@@ -10,7 +9,12 @@ interface ButtonProps {
 
 const Button = ({ label, status = 'info', onClick, disabled }: ButtonProps) => {
   return (
-    <ButtonWrap onClick={onClick} status={status} disabled={disabled}>
+    <ButtonWrap
+      onClick={onClick}
+      status={status}
+      disabled={disabled}
+      className={status}
+    >
       {label}
     </ButtonWrap>
   );
@@ -36,19 +40,17 @@ const ButtonWrap = styled.button<ButtonStyleProps>`
     width: 9rem;
   }
 
-  ${(props) =>
-    props.status === 'danger' &&
-    css`
-      background-color: ${props.theme.color.danger};
-    `}
+  &.active {
+    background-color: ${(props) => props.theme.color.active};
+  }
+  &.danger {
+    background-color: ${(props) => props.theme.color.danger};
+  }
 
-  ${(props) =>
-    props.status === 'active' &&
-    css`
-      background-color: ${props.theme.color.active};
-    `}
-
-    &:disabled {
+  &:disabled {
     background-color: gray !important;
+  }
+  &:hover {
+    opacity: 0.9;
   }
 `;

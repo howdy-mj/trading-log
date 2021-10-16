@@ -4,7 +4,7 @@
 
 ### 기술 스택
 
-**Frontend**: React, Redux, redux-thunk, redux-toolkit, @emotion/styled, [is-validated](https://github.com/howdy-mj/is-validated), Storybook
+**Frontend**: React, Redux, redux-thunk, redux-toolkit, @emotion/styled, react-quill, [is-validated](https://github.com/howdy-mj/is-validated), Storybook
 
 **Backend**: Firebase(Auth, Realtime Database)
 

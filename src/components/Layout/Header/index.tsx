@@ -7,7 +7,7 @@ import styled from '@emotion/styled';
 import { FiLogOut } from 'react-icons/fi';
 
 import useLogin from '~hooks/useLogin';
-import { googleSignOut } from '~service/firebase';
+import { googleSignOut } from '~service/fb_auth';
 import { initUserData } from '~store/auth/reducer';
 import { clearAllToken } from '~utils/storage';
 

@@ -60,11 +60,11 @@ const ListComponent = ({ isLoading }: ListProps) => {
             ))}
           </tbody>
           {/* <TFoot>
-        <tr>
-          <td colSpan={3}>Total</td>
-          <td>{mockData.length}</td>
-        </tr>
-      </TFoot> */}
+            <tr>
+              <td colSpan={4}>Total</td>
+              <td>{postsInfo.length}</td>
+            </tr>
+          </TFoot> */}
         </table>
       )}
     </>

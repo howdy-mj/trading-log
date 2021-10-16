@@ -5,6 +5,8 @@ interface AlertProps {
   errorMessage: string;
   confirmText?: string;
   cancelText?: string;
+  onConfirm?: () => void;
+  onCancel?: () => void;
 }
 
 const Alert = ({
@@ -12,6 +14,8 @@ const Alert = ({
   errorMessage,
   confirmText = '확인',
   cancelText = '취소',
+  onConfirm,
+  onCancel,
 }: AlertProps) => {
   return (
     <AlertWrap>
@@ -19,8 +23,8 @@ const Alert = ({
         <h3>{title}</h3>
         <p>{errorMessage}</p>
         <ActionButtons>
-          <button>{confirmText}</button>
-          <button>{cancelText}</button>
+          <button onClick={onConfirm}>{confirmText}</button>
+          <button onClick={onCancel}>{cancelText}</button>
         </ActionButtons>
       </AlertContainer>
     </AlertWrap>

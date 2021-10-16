@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { googleSignOut } from '~service/firebase';
+import { googleSignOut } from '~service/fb_auth';
 
 import { clearAllToken, getItem } from '~utils/storage';
 import { ResponseError } from './api.model';

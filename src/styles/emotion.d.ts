@@ -5,6 +5,8 @@ declare module '@emotion/react' {
     color: {
       danger: string;
       active: string;
+      up: string;
+      down: string;
     };
     mq: {
       laptop: string;

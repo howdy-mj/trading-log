@@ -22,6 +22,8 @@ const theme: Theme = {
     // active: '#64b4b0',
     danger: '#e84549',
     active: '#0ca678',
+    up: '#03a66d',
+    down: '#cf304a',
   },
   mq: {
     laptop: `only screen and (min-width: ${size.largest})`,

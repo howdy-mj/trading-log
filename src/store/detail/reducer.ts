@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { MarketInfo, Predict } from '~models/post.model';
+import { MARKET, PREDICT } from '~models/post.model';
 
 export interface PostDetailState {
   id: string;
   title: string;
-  market: MarketInfo;
-  predict: Predict;
+  market: MARKET;
+  predict: PREDICT;
   target: number;
   description: string;
 }
@@ -13,8 +13,8 @@ export interface PostDetailState {
 const initialState: PostDetailState = {
   id: '',
   title: '',
-  market: MarketInfo.KRW,
-  predict: Predict.UP,
+  market: MARKET.KRW,
+  predict: PREDICT.UP,
   target: 0,
   description: '',
 };
@@ -26,16 +26,16 @@ const postDetailReducer = createSlice({
     amendTitle(state, action: PayloadAction<string>) {
       return { ...state, title: action.payload };
     },
-    amendMarket(state, action: PayloadAction<MarketInfo>) {
+    amendMarket(state, action: PayloadAction<MARKET>) {
       return { ...state, market: action.payload };
     },
-    amendPredict(state, action: PayloadAction<Predict>) {
+    amendPredict(state, action: PayloadAction<PREDICT>) {
       return { ...state, predict: action.payload };
     },
     amendTarget(state, action: PayloadAction<number>) {
       return { ...state, target: action.payload };
     },
-    amendDescription(state, action) {
+    amendDescription(state, action: PayloadAction<string>) {
       return { ...state, description: action.payload };
     },
     loadAmendContent(state, action: PayloadAction<PostDetailState>) {

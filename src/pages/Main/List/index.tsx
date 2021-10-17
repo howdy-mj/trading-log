@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
+import { PREDICT } from '~models/post.model';
 import { selectPostList } from '~store/post/selector';
 
 import Loading from '~components/Loading';
@@ -13,7 +14,7 @@ interface ListProps {
 
 const ListComponent = ({ isLoading }: ListProps) => {
   const history = useHistory();
-  const postsInfo = useSelector(selectPostList);
+  const postList = useSelector(selectPostList);
 
   const linkToDetail = (id: string) => {
     history.push(`/detail/${id}`);
@@ -42,27 +43,29 @@ const ListComponent = ({ isLoading }: ListProps) => {
             </tr>
           </thead>
           <tbody>
-            {postsInfo.length === 0 && (
+            {postList.length === 0 && (
               <TR empty>
                 <td colSpan={5}>일지를 작성해주세요.</td>
               </TR>
             )}
-            {postsInfo?.map((info, idx) => (
-              <TR key={info.id} onClick={() => linkToDetail(info.id)}>
+            {postList?.map((post, idx) => (
+              <TR key={post.id} onClick={() => linkToDetail(post.id)}>
                 <td>{idx + 1}</td>
-                <td>{info.title}</td>
+                <td>{post.title}</td>
                 <td>
-                  <span>{info.predict}</span>
+                  <Predict isUp={post.predict === PREDICT.UP}>
+                    {post.predict}
+                  </Predict>
                 </td>
-                <td>{info.target}</td>
-                <td>{info.createdAt.slice(0, 10)}</td>
+                <td>{post.target}</td>
+                <td>{post.createdAt.slice(0, 10)}</td>
               </TR>
             ))}
           </tbody>
           {/* <TFoot>
             <tr>
               <td colSpan={4}>Total</td>
-              <td>{postsInfo.length}</td>
+              <td>{postList.length}</td>
             </tr>
           </TFoot> */}
         </table>
@@ -77,6 +80,7 @@ const TR = styled.tr<{ empty?: boolean }>`
   cursor: pointer;
   > td {
     text-align: center;
+    height: 3rem;
   }
   ${(props) =>
     props.empty &&
@@ -86,6 +90,15 @@ const TR = styled.tr<{ empty?: boolean }>`
         padding: 30px 0;
       }
     `}
+`;
+
+const Predict = styled.span<{ isUp: boolean }>`
+  color: ${(props) =>
+    props.isUp ? props.theme.color.up : props.theme.color.down};
+  border: 1px solid
+    ${(props) => (props.isUp ? props.theme.color.up : props.theme.color.down)};
+  border-radius: 1.5rem;
+  padding: 0 0.8rem;
 `;
 
 // const TFoot = styled.tfoot`

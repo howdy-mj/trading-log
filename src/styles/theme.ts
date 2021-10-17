@@ -18,6 +18,8 @@ export const size = {
 
 const theme: Theme = {
   color: {
+    // danger: '#b46e64',
+    // active: '#64b4b0',
     danger: '#e84549',
     active: '#0ca678',
   },

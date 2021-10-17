@@ -1,5 +1,5 @@
-import { createSelector } from 'reselect';
 import { RootState } from '../rootReducer';
+import { createSelector } from '@reduxjs/toolkit';
 
 const selectPostDetail = (state: RootState) => state.postDetail;
 

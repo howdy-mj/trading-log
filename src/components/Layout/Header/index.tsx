@@ -1,15 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
-import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { FaArrowLeft } from 'react-icons/fa';
 import styled from '@emotion/styled';
-import { FiLogOut } from 'react-icons/fi';
+import { FaArrowLeft, FaRegUserCircle } from 'react-icons/fa';
 
 import useLogin from '~hooks/useLogin';
-import { googleSignOut } from '~service/firebase';
-import { initUserData } from '~store/auth/reducer';
-import { clearAllToken } from '~utils/storage';
+import { selectUserPhotoUrl } from '~store/user/selector';
 
 import { Title } from '~components/Title';
 
@@ -17,7 +14,8 @@ const HeaderComponent = () => {
   const { isLogin } = useLogin();
   const { pathname } = useLocation();
   const history = useHistory();
-  const dispatch = useDispatch();
+
+  const userPhoto = useSelector(selectUserPhotoUrl);
 
   const [hasGoBack, setHasGoBack] = useState(false);
 
@@ -34,14 +32,6 @@ const HeaderComponent = () => {
     };
   }, [pathname]);
 
-  const logOut = async () => {
-    await googleSignOut().then(() => {
-      dispatch(initUserData());
-      clearAllToken();
-      history.push('/login');
-    });
-  };
-
   return (
     <HeaderWrap>
       <HeaderContainer>
@@ -52,8 +42,12 @@ const HeaderComponent = () => {
           </GoBackArrow>
         )}
         {isLogin && (
-          <LogoutButton>
-            <LogoutSVG onClick={() => logOut()} />
+          <LogoutButton onClick={() => history.push('/my-page')}>
+            {userPhoto ? (
+              <UserThumbnail src={userPhoto} alt="user profile" />
+            ) : (
+              <FaRegUserCircle />
+            )}
           </LogoutButton>
         )}
       </HeaderContainer>
@@ -90,8 +84,16 @@ const LogoutButton = styled.div`
   right: 0;
   transform: translateY(-50%);
   cursor: pointer;
+
+  > svg {
+    width: 4rem;
+    height: 4rem;
+  }
 `;
 
-const LogoutSVG = styled(FiLogOut)`
-  font-size: 2.5rem;
+const UserThumbnail = styled.img`
+  width: 4rem;
+  height: 4rem;
+  border: 1px solid ${(props) => props.theme.color.active};
+  border-radius: 50%;
 `;

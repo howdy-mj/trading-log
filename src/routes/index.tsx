@@ -4,7 +4,7 @@ import { createBrowserHistory } from 'history';
 import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
 
-import { Main, Login, Detail, Write } from '~pages/index';
+import { Main, Login, Detail, Write, MyPage } from '~pages/index';
 
 const history = createBrowserHistory();
 
@@ -23,10 +23,11 @@ interface PathItem {
 }
 
 const routesPath: PathItem[] = [
-  { path: '/', component: <Main />, exact: true },
-  { path: '/login', component: <Login />, exact: true },
-  { path: '/write', component: <Write />, exact: true },
-  { path: '/detail/:id', component: <Detail /> },
+  { path: '/', component: <Main /> },
+  { path: '/login', component: <Login /> },
+  { path: '/write', component: <Write /> },
+  { path: '/detail/:id', component: <Detail />, exact: false },
+  { path: '/my-page', component: <MyPage /> },
 ];
 
 export const Router = () => {
@@ -38,7 +39,7 @@ export const Router = () => {
 
   return (
     <Switch>
-      {routesPath.map(({ path, component, exact = false }) => (
+      {routesPath.map(({ path, component, exact = true }) => (
         <Route key={path} path={path} exact={exact}>
           {component}
         </Route>

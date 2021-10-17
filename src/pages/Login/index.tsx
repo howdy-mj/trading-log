@@ -5,7 +5,7 @@ import { css } from '@emotion/react';
 import { FcGoogle } from 'react-icons/fc';
 
 import useLogin from '~hooks/useLogin';
-import { googleSignIn } from '~service/firebase';
+import { googleSignIn } from '~service/fb_auth';
 
 import { Title } from '~components/Title';
 

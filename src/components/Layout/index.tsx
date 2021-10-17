@@ -57,10 +57,10 @@ const Body = styled.div<{ height: number }>`
   justify-content: center;
   padding-top: 7rem;
 
-  ${(props) =>
-    props.height &&
+  ${({ height }) =>
+    height &&
     css`
-      min-height: calc(${props.height}px - 14rem);
+      min-height: calc(${height}px - 14rem);
     `}
 `;
 

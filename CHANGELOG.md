@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.5](https://github.com/howdy-mj/trading-log/compare/v0.1.4...v0.1.5) (2021-10-17)
+
+
+### :house: Refactoring
+
+* firebase 구조 리팩토링 ([9261b35](https://github.com/howdy-mj/trading-log/commit/9261b353ad8c52c5e087247a95897e4da5bd9c33))
+* toast-ui/react-editor => react-quill 변경, usePathname 로직 추가 ([1f866e6](https://github.com/howdy-mj/trading-log/commit/1f866e6f5a75d46423562789e1ed599be7f705c2))
+
+
+### :rocket: Features
+
+* myPage 생성 및 header 수정 ([087aa20](https://github.com/howdy-mj/trading-log/commit/087aa2000b84d88902a502e5bbf652cab1995910))
+
 ### [0.1.4](https://github.com/howdy-mj/trading-log/compare/v0.1.2...v0.1.4) (2021-10-12)
 
 

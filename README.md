@@ -14,7 +14,5 @@
 
 ### 수정 및 추가 예정 (2021.10.14)
 
-- validation 고도화
-- pagination
 - 예상 적중 y/n
 - 리스트 sorting

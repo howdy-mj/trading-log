@@ -48,16 +48,17 @@ const InputComponent = ({
         );
       case 'radio':
         return (
-          <RadioWrap onChange={onChange}>
+          <RadioWrap>
+            {/* TODO: 범위 외 클릭시 에러 */}
             {radioInfo?.map((radio) => (
-              <div key={radio.name}>
+              <div key={radio.name} onChange={onChange} className="radio">
                 <input
                   type={type}
                   id={radio.name}
                   checked={value === radio.name}
                   readOnly
                 />
-                <label form={radio.name}>{radio.name}</label>
+                <label htmlFor={radio.name}>{radio.name}</label>
               </div>
             ))}
           </RadioWrap>
@@ -134,9 +135,14 @@ const Input = styled.input<{ readOnly: boolean; validation: boolean }>`
 
 const RadioWrap = styled.div`
   display: flex;
-  > div {
+
+  .radio {
     :not(:last-child) {
       margin-right: 1rem;
+    }
+
+    input {
+      margin-right: 0.5rem;
     }
   }
 `;

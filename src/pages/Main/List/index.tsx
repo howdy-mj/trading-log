@@ -9,6 +9,7 @@ import { selectPostList } from '~store/post/selector';
 
 import Loading from '~components/Loading';
 import Pagination from '~components/Pagination';
+import { commaNumber } from '~utils/numbers';
 
 const POST_PER_PAGE = 10;
 
@@ -54,50 +55,52 @@ const ListComponent = ({ isLoading }: ListProps) => {
         <Loading />
       ) : (
         <>
-          <table>
-            <colgroup>
-              <col />
-              <col style={{ width: '30%' }} />
-              <col />
-              <col />
-              <col />
-            </colgroup>
-            <thead>
-              <tr>
-                <th>No.</th>
-                <th>제목</th>
-                <th>예상</th>
-                <th>타겟</th>
-                <th>날짜</th>
-              </tr>
-            </thead>
-            <tbody>
-              {postList.length === 0 && (
-                <TR empty>
-                  <td colSpan={5}>일지를 작성해주세요.</td>
-                </TR>
-              )}
-              {currentPostList?.map((post, idx) => (
-                <TR key={post.id} onClick={() => linkToDetail(post.id)}>
-                  <td>{idx + 1}</td>
-                  <td>{post.title}</td>
-                  <td>
-                    <Predict isUp={post.predict === PREDICT.UP}>
-                      {post.predict}
-                    </Predict>
-                  </td>
-                  <td>{post.target}</td>
-                  <td>{post.createdAt.slice(0, 10)}</td>
-                </TR>
-              ))}
-            </tbody>
-            {/* <TFoot>
+          <Section>
+            <table>
+              <colgroup>
+                <col />
+                <col style={{ width: '30%' }} />
+                <col />
+                <col />
+                <col />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>제목</th>
+                  <th>예상</th>
+                  <th>타겟</th>
+                  <th>작성일자</th>
+                </tr>
+              </thead>
+              <tbody>
+                {postList.length === 0 && (
+                  <TR empty>
+                    <td colSpan={5}>일지를 작성해주세요.</td>
+                  </TR>
+                )}
+                {currentPostList?.map((post, idx) => (
+                  <TR key={post.id} onClick={() => linkToDetail(post.id)}>
+                    <td>{idx + 1}</td>
+                    <td>{post.title}</td>
+                    <td>
+                      <Predict isUp={post.predict === PREDICT.UP}>
+                        {post.predict}
+                      </Predict>
+                    </td>
+                    <td>{commaNumber(post.target)}</td>
+                    <td>{post.createdAt.slice(0, 10)}</td>
+                  </TR>
+                ))}
+              </tbody>
+              {/* <TFoot>
             <tr>
               <td colSpan={4}>Total</td>
               <td>{postList.length}</td>
             </tr>
           </TFoot> */}
-          </table>
+            </table>
+          </Section>
           {postList.length > 10 && (
             <Pagination
               totalPageNum={totalPageNum}
@@ -112,6 +115,18 @@ const ListComponent = ({ isLoading }: ListProps) => {
 };
 
 export default ListComponent;
+
+const Section = styled.section`
+  > table {
+    width: 100%;
+  }
+  @media ${(props) => props.theme.mq.mobile} {
+    overflow-x: scroll;
+    > table {
+      min-width: 660px;
+    }
+  }
+`;
 
 const TR = styled.tr<{ empty?: boolean }>`
   cursor: pointer;

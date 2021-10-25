@@ -19,7 +19,7 @@ const alertReducer = createSlice({
       }>,
     ) {
       const { visible } = action.payload;
-      return { ...state, visible };
+      state.visible = visible;
     },
   },
 });

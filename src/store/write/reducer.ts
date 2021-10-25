@@ -26,19 +26,19 @@ const writeReducer = createSlice({
   initialState,
   reducers: {
     changeTitle(state, action: PayloadAction<string>) {
-      return { ...state, title: action.payload };
+      state.title = action.payload;
     },
     changeMarket(state, action: PayloadAction<MARKET>) {
-      return { ...state, market: action.payload };
+      state.market = action.payload;
     },
     changePredict(state, action: PayloadAction<PREDICT>) {
-      return { ...state, predict: action.payload };
+      state.predict = action.payload;
     },
     changeTarget(state, action: PayloadAction<number>) {
-      return { ...state, target: action.payload };
+      state.target = action.payload;
     },
     changeDescription(state, action: PayloadAction<string>) {
-      return { ...state, description: action.payload };
+      state.description = action.payload;
     },
     loadContent(state, action: PayloadAction<WriteState>) {
       const { id, title, market, predict, target, description, createdAt } =

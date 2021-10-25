@@ -24,19 +24,19 @@ const postDetailReducer = createSlice({
   initialState,
   reducers: {
     amendTitle(state, action: PayloadAction<string>) {
-      return { ...state, title: action.payload };
+      state.title = action.payload;
     },
     amendMarket(state, action: PayloadAction<MARKET>) {
-      return { ...state, market: action.payload };
+      state.market = action.payload;
     },
     amendPredict(state, action: PayloadAction<PREDICT>) {
-      return { ...state, predict: action.payload };
+      state.predict = action.payload;
     },
     amendTarget(state, action: PayloadAction<number>) {
-      return { ...state, target: action.payload };
+      state.target = action.payload;
     },
     amendDescription(state, action: PayloadAction<string>) {
-      return { ...state, description: action.payload };
+      state.description = action.payload;
     },
     loadAmendContent(state, action: PayloadAction<PostDetailState>) {
       const { id, title, market, predict, target, description } =

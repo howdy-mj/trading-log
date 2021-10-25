@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { getPost } from '~api/post';
 import { Post, PostWithId } from '~models/post.model';
@@ -41,9 +41,12 @@ const postReducer = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchPosts.fulfilled, (state, action) => {
-      return { ...state, postList: action.payload };
-    });
+    builder.addCase(
+      fetchPosts.fulfilled,
+      (state, action: PayloadAction<PostWithId[]>) => {
+        state.postList = action.payload;
+      },
+    );
   },
 });
 

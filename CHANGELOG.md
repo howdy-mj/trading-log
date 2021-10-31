@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.7](https://github.com/howdy-mj/trading-log/compare/v0.1.5...v0.1.7) (2021-10-31)
+
+
+### :sparkles: Styling
+
+* 메인 List 스타일 수정 ([d6d4532](https://github.com/howdy-mj/trading-log/commit/d6d453214d0e0176d4709a4966a99ea42634aa36))
+* header 스타일 수정 ([0aac5d4](https://github.com/howdy-mj/trading-log/commit/0aac5d4a8a295eab4776088b2418bf5940a1a308))
+* input radio 스타일 수정 ([ca76524](https://github.com/howdy-mj/trading-log/commit/ca765247e01efbb261608cbb1576764e47706924))
+
+
+### :house: Refactoring
+
+* store 타입 및 간소화 ([5bb84f2](https://github.com/howdy-mj/trading-log/commit/5bb84f22acaf97adf7c8d34ee3add8f3b2261a13))
+
+
+### :memo: Documentation
+
+* README.md 업데이트 ([a001526](https://github.com/howdy-mj/trading-log/commit/a00152681b711976fb1c26c5034b4bac1304f89d))
+
+
+### :rocket: Features
+
+* 메인 반응형 및 타겟콤마 추가 ([a67a643](https://github.com/howdy-mj/trading-log/commit/a67a643aea1716ceef89ef6c8c936e9b15dc0a48))
+* Pagination 컴포넌트 ([a531c9b](https://github.com/howdy-mj/trading-log/commit/a531c9ba4b0f4eb6d13f00da7fc13f4d32f97d66))
+* Radio 컴포넌트 분리 ([5dd875d](https://github.com/howdy-mj/trading-log/commit/5dd875de4b57ad7871ab62674f199eed13e2d165))
+
 ### [0.1.6](https://github.com/howdy-mj/trading-log/compare/v0.1.5...v0.1.6) (2021-10-31)
 
 ### :sparkles: Styling

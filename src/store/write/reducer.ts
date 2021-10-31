@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { MarketInfo, Predict } from '~models/post.model';
+import { MARKET, PREDICT } from '~models/post.model';
 
 export interface WriteState {
   id: string;
   title: string;
-  market: MarketInfo;
-  predict: Predict;
+  market: MARKET;
+  predict: PREDICT;
   target: number;
   description: string;
   createdAt: string;
@@ -14,8 +14,8 @@ export interface WriteState {
 const initialState: WriteState = {
   id: '',
   title: '',
-  market: MarketInfo.KRW,
-  predict: Predict.UP,
+  market: MARKET.KRW,
+  predict: PREDICT.UP,
   target: 0,
   description: '',
   createdAt: '',
@@ -26,19 +26,19 @@ const writeReducer = createSlice({
   initialState,
   reducers: {
     changeTitle(state, action: PayloadAction<string>) {
-      return { ...state, title: action.payload };
+      state.title = action.payload;
     },
-    changeMarket(state, action: PayloadAction<MarketInfo>) {
-      return { ...state, market: action.payload };
+    changeMarket(state, action: PayloadAction<MARKET>) {
+      state.market = action.payload;
     },
-    changePredict(state, action: PayloadAction<Predict>) {
-      return { ...state, predict: action.payload };
+    changePredict(state, action: PayloadAction<PREDICT>) {
+      state.predict = action.payload;
     },
     changeTarget(state, action: PayloadAction<number>) {
-      return { ...state, target: action.payload };
+      state.target = action.payload;
     },
-    changeDescription(state, action) {
-      return { ...state, description: action.payload };
+    changeDescription(state, action: PayloadAction<string>) {
+      state.description = action.payload;
     },
     loadContent(state, action: PayloadAction<WriteState>) {
       const { id, title, market, predict, target, description, createdAt } =

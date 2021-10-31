@@ -1,14 +1,16 @@
-/** @jsxImportSource @emotion/react */
 import { useHistory } from 'react-router-dom';
-
-import { TitleStyle } from '~components/Typography';
+import styled from '@emotion/styled';
 
 export const Title = () => {
   const history = useHistory();
 
-  return (
-    <h1 css={TitleStyle} onClick={() => history.push('/')}>
-      매매일지 티록
-    </h1>
-  );
+  return <TitleText onClick={() => history.push('/')}>매매일지 티록</TitleText>;
 };
+
+const TitleText = styled.h1`
+  width: max-content;
+  margin: 0 auto;
+
+  font-family: 'Jua';
+  cursor: pointer;
+`;

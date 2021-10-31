@@ -16,14 +16,14 @@ const authReducer = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    updateUid(state, action) {
-      return { ...state, uid: action.payload };
+    updateUid(state, action: PayloadAction<string>) {
+      state.uid = action.payload;
     },
     updateRefreshToken(state, action: PayloadAction<string>) {
-      return { ...state, refreshToken: action.payload };
+      state.refreshToken = action.payload;
     },
-    updateFirebaseIdToken(state, action) {
-      return { ...state, fbIdToken: action.payload };
+    updateFirebaseIdToken(state, action: PayloadAction<string>) {
+      state.fbIdToken = action.payload;
     },
     initUserData() {
       return initialState;

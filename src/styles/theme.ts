@@ -18,10 +18,12 @@ export const size = {
 
 const theme: Theme = {
   color: {
-    // danger: '#b46e64',
-    // active: '#64b4b0',
+    // danger: '#e17d6d',
+    // active: '#68bbb7',
     danger: '#e84549',
     active: '#0ca678',
+    up: '#03a66d',
+    down: '#cf304a',
   },
   mq: {
     laptop: `only screen and (min-width: ${size.largest})`,

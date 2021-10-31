@@ -2,52 +2,67 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [0.1.5](https://github.com/howdy-mj/trading-log/compare/v0.1.4...v0.1.5) (2021-10-17)
-
-
-### :house: Refactoring
-
-* firebase 구조 리팩토링 ([9261b35](https://github.com/howdy-mj/trading-log/commit/9261b353ad8c52c5e087247a95897e4da5bd9c33))
-* toast-ui/react-editor => react-quill 변경, usePathname 로직 추가 ([1f866e6](https://github.com/howdy-mj/trading-log/commit/1f866e6f5a75d46423562789e1ed599be7f705c2))
-
-
-### :rocket: Features
-
-* myPage 생성 및 header 수정 ([087aa20](https://github.com/howdy-mj/trading-log/commit/087aa2000b84d88902a502e5bbf652cab1995910))
-
-### [0.1.4](https://github.com/howdy-mj/trading-log/compare/v0.1.2...v0.1.4) (2021-10-12)
-
-
-### :memo: Documentation
-
-* README.md 수정 ([2d78b1f](https://github.com/howdy-mj/trading-log/commit/2d78b1f0cd4338feb856dd291511897a42b7ec2d))
-
+### [0.1.6](https://github.com/howdy-mj/trading-log/compare/v0.1.5...v0.1.6) (2021-10-31)
 
 ### :sparkles: Styling
 
-* Loading 추가 및 스타일 변경 ([be4ccd6](https://github.com/howdy-mj/trading-log/commit/be4ccd64d9e3a0ef183740371c3837aee0ff4797))
-
-
-### :rocket: Features
-
-* 글 생성/수정 validation 추가 ([21175ab](https://github.com/howdy-mj/trading-log/commit/21175ab17bd8cc0512d44154c2124424e821af7b))
-* Alert 컴포넌트 생성 ([e4ebf99](https://github.com/howdy-mj/trading-log/commit/e4ebf9948155002b0c4534c77db92346f5254ebc))
-* Button, Input, Loading stories 추가 ([f880e7a](https://github.com/howdy-mj/trading-log/commit/f880e7a33a167f1b81930d5c8816b9c62e23c288))
-* Storybook 설정 ([fa4956a](https://github.com/howdy-mj/trading-log/commit/fa4956a33e8154fd845209cf1e9b159ef5f21e8a))
-
+- 메인 List 스타일 수정 ([d6d4532](https://github.com/howdy-mj/trading-log/commit/d6d453214d0e0176d4709a4966a99ea42634aa36))
+- header 스타일 수정 ([0aac5d4](https://github.com/howdy-mj/trading-log/commit/0aac5d4a8a295eab4776088b2418bf5940a1a308))
+- input radio 스타일 수정 ([ca76524](https://github.com/howdy-mj/trading-log/commit/ca765247e01efbb261608cbb1576764e47706924))
 
 ### :house: Refactoring
 
-* detail 페이지 store 분리 및 favicon 변경 ([9500168](https://github.com/howdy-mj/trading-log/commit/95001682cc98506e1320230e07163aaa581dd1df))
-* Layout, Header 컴포넌트 ([319b2e3](https://github.com/howdy-mj/trading-log/commit/319b2e3d3134cb2206d6ff3fb8b0d0307fdd3879))
+- store 타입 및 간소화 ([5bb84f2](https://github.com/howdy-mj/trading-log/commit/5bb84f22acaf97adf7c8d34ee3add8f3b2261a13))
+
+### :memo: Documentation
+
+- README.md 업데이트 ([a001526](https://github.com/howdy-mj/trading-log/commit/a00152681b711976fb1c26c5034b4bac1304f89d))
+
+### :rocket: Features
+
+- 메인 반응형 및 타겟콤마 추가 ([a67a643](https://github.com/howdy-mj/trading-log/commit/a67a643aea1716ceef89ef6c8c936e9b15dc0a48))
+- Pagination 컴포넌트 ([a531c9b](https://github.com/howdy-mj/trading-log/commit/a531c9ba4b0f4eb6d13f00da7fc13f4d32f97d66))
+- Radio 컴포넌트 분리 ([5dd875d](https://github.com/howdy-mj/trading-log/commit/5dd875de4b57ad7871ab62674f199eed13e2d165))
+
+### [0.1.5](https://github.com/howdy-mj/trading-log/compare/v0.1.4...v0.1.5) (2021-10-17)
+
+### :house: Refactoring
+
+- firebase 구조 리팩토링 ([9261b35](https://github.com/howdy-mj/trading-log/commit/9261b353ad8c52c5e087247a95897e4da5bd9c33))
+- toast-ui/react-editor => react-quill 변경, usePathname 로직 추가 ([1f866e6](https://github.com/howdy-mj/trading-log/commit/1f866e6f5a75d46423562789e1ed599be7f705c2))
+
+### :rocket: Features
+
+- myPage 생성 및 header 수정 ([087aa20](https://github.com/howdy-mj/trading-log/commit/087aa2000b84d88902a502e5bbf652cab1995910))
+
+### [0.1.4](https://github.com/howdy-mj/trading-log/compare/v0.1.2...v0.1.4) (2021-10-12)
+
+### :memo: Documentation
+
+- README.md 수정 ([2d78b1f](https://github.com/howdy-mj/trading-log/commit/2d78b1f0cd4338feb856dd291511897a42b7ec2d))
+
+### :sparkles: Styling
+
+- Loading 추가 및 스타일 변경 ([be4ccd6](https://github.com/howdy-mj/trading-log/commit/be4ccd64d9e3a0ef183740371c3837aee0ff4797))
+
+### :rocket: Features
+
+- 글 생성/수정 validation 추가 ([21175ab](https://github.com/howdy-mj/trading-log/commit/21175ab17bd8cc0512d44154c2124424e821af7b))
+- Alert 컴포넌트 생성 ([e4ebf99](https://github.com/howdy-mj/trading-log/commit/e4ebf9948155002b0c4534c77db92346f5254ebc))
+- Button, Input, Loading stories 추가 ([f880e7a](https://github.com/howdy-mj/trading-log/commit/f880e7a33a167f1b81930d5c8816b9c62e23c288))
+- Storybook 설정 ([fa4956a](https://github.com/howdy-mj/trading-log/commit/fa4956a33e8154fd845209cf1e9b159ef5f21e8a))
+
+### :house: Refactoring
+
+- detail 페이지 store 분리 및 favicon 변경 ([9500168](https://github.com/howdy-mj/trading-log/commit/95001682cc98506e1320230e07163aaa581dd1df))
+- Layout, Header 컴포넌트 ([319b2e3](https://github.com/howdy-mj/trading-log/commit/319b2e3d3134cb2206d6ff3fb8b0d0307fdd3879))
 
 ### [0.1.3](https://github.com/howdy-mj/trading-log/compare/v0.1.2...v0.1.3) (2021-10-05)
 
-
 ### Features
 
-* 글 생성/수정 validation 추가 ([21175ab](https://github.com/howdy-mj/trading-log/commit/21175ab17bd8cc0512d44154c2124424e821af7b))
-* Storybook 설정 ([fa4956a](https://github.com/howdy-mj/trading-log/commit/fa4956a33e8154fd845209cf1e9b159ef5f21e8a))
+- 글 생성/수정 validation 추가 ([21175ab](https://github.com/howdy-mj/trading-log/commit/21175ab17bd8cc0512d44154c2124424e821af7b))
+- Storybook 설정 ([fa4956a](https://github.com/howdy-mj/trading-log/commit/fa4956a33e8154fd845209cf1e9b159ef5f21e8a))
 
 ### [0.1.2](https://github.com/howdy-mj/trading-log/compare/v0.1.1...v0.1.2) (2021-09-02)
 

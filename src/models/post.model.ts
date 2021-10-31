@@ -9,12 +9,8 @@ export enum PREDICT {
   DOWN = '하락',
 }
 
-export const marketRadioInfo = [
-  { name: MARKET.KRW },
-  { name: MARKET.BTC },
-  { name: MARKET.USDT },
-];
-export const predictRadioInfo = [{ name: PREDICT.UP }, { name: PREDICT.DOWN }];
+export const marketRadioInfo = [MARKET.KRW, MARKET.BTC, MARKET.USDT];
+export const predictRadioInfo = [PREDICT.UP, PREDICT.DOWN];
 
 export interface Post {
   title: string;

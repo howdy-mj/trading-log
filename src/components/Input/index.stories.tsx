@@ -26,10 +26,3 @@ TextArea.args = {
   title: '입력창',
   type: 'textarea',
 };
-
-export const Radio = Template.bind({});
-Radio.args = {
-  title: '예측',
-  type: 'radio',
-  radioInfo: [{ name: '상승' }],
-};

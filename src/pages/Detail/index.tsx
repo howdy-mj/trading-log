@@ -31,6 +31,7 @@ import { selectFirebaseToken, selectUid } from '~store/auth/selector';
 import InputComponent from '~components/Input';
 import ActionButtons from './ActionButtons';
 import Editor from '~components/Editor';
+import Radio from '~components/Radio';
 
 export interface DetailParams {
   id: string;
@@ -114,21 +115,19 @@ const DetailPage = () => {
           // validation={amend && !!titleValue}
           onChange={(e) => dispatch(amendTitle(e.target.value))}
         />
-        <InputComponent
+        <Radio
           title="마켓"
-          type="radio"
-          radioInfo={marketRadioInfo}
+          selectInfo={marketRadioInfo}
           value={marketValue}
-          readonly={!amend}
           onChange={(e) => dispatch(amendMarket(e.target.id))}
-        />
-        <InputComponent
-          title="예상"
-          type="radio"
-          radioInfo={predictRadioInfo}
-          value={predictValue}
           readonly={!amend}
+        />
+        <Radio
+          title="예상"
+          selectInfo={predictRadioInfo}
+          value={predictValue}
           onChange={(e) => dispatch(amendPredict(e.target.id))}
+          readonly={!amend}
         />
         <InputComponent
           title="타겟가"

@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 interface InputProps {
-  type?: 'text' | 'textarea' | 'radio';
+  type?: 'text' | 'textarea';
   title: string;
   value?: string;
   onChange?: (e: any) => void;
@@ -11,17 +11,12 @@ interface InputProps {
   validation?: boolean;
   validationText?: string;
   pattern?: string;
-  /** type="radio" */
-  radioInfo?: {
-    name: string;
-  }[];
 }
 
 const InputComponent = ({
   type = 'text',
   title,
   value,
-  radioInfo,
   onChange,
   readonly = false,
   required = false,
@@ -45,23 +40,6 @@ const InputComponent = ({
             />
             {validation === false && <p>{validationText}</p>}
           </InputWrap>
-        );
-      case 'radio':
-        return (
-          <RadioWrap>
-            {/* TODO: 범위 외 클릭시 에러 */}
-            {radioInfo?.map((radio) => (
-              <div key={radio.name} onChange={onChange} className="radio">
-                <input
-                  type={type}
-                  id={radio.name}
-                  checked={value === radio.name}
-                  readOnly
-                />
-                <label htmlFor={radio.name}>{radio.name}</label>
-              </div>
-            ))}
-          </RadioWrap>
         );
       case 'textarea':
         return <TextAreaWrap />;
@@ -131,20 +109,6 @@ const Input = styled.input<{ readOnly: boolean; validation: boolean }>`
     css`
       width: 100%;
     `}
-`;
-
-const RadioWrap = styled.div`
-  display: flex;
-
-  .radio {
-    :not(:last-child) {
-      margin-right: 1rem;
-    }
-
-    input {
-      margin-right: 0.5rem;
-    }
-  }
 `;
 
 const TextAreaWrap = styled.textarea`

@@ -28,6 +28,7 @@ import { selectFirebaseToken, selectUid } from '~store/auth/selector';
 import Button from '~components/Button';
 import InputComponent from '~components/Input';
 import Editor from '~components/Editor';
+import Radio from '~components/Radio';
 
 const WritePage = () => {
   const history = useHistory();
@@ -68,17 +69,15 @@ const WritePage = () => {
         validation={!!titleValue}
         onChange={(e) => dispatch(changeTitle(e.target.value))}
       />
-      <InputComponent
+      <Radio
         title="마켓"
-        type="radio"
-        radioInfo={marketRadioInfo}
+        selectInfo={marketRadioInfo}
         value={marketValue}
         onChange={(e) => dispatch(changeMarket(e.target.id))}
       />
-      <InputComponent
+      <Radio
         title="예상"
-        type="radio"
-        radioInfo={predictRadioInfo}
+        selectInfo={predictRadioInfo}
         value={predictValue}
         onChange={(e) => dispatch(changePredict(e.target.id))}
       />

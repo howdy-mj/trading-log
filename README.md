@@ -8,7 +8,7 @@
 
 **Backend**: Firebase(Auth, Realtime Database)
 
-**Deploy**: Vercel
+**Deploy**: AWS Amplify
 
 ---
 

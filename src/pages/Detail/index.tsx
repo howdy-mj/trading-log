@@ -25,6 +25,7 @@ import {
   selectAmendPredictValue,
   selectAmendTargetValue,
   selectAmendTitleValue,
+  selectCreatedAt,
 } from '~store/detail/selector';
 import { selectFirebaseToken, selectUid } from '~store/auth/selector';
 
@@ -51,12 +52,15 @@ const DetailPage = () => {
   const predictValue = useSelector(selectAmendPredictValue);
   const targetValue = useSelector(selectAmendTargetValue);
   const descriptionValue = useSelector(selectAmendDescriptionValue);
+  const createdAtValue = useSelector(selectCreatedAt);
 
   const [amend, setAmend] = useState<boolean>(false);
 
   useEffect(() => {
     if (uid && idToken) {
-      dispatch(fetchPosts({ uid, idToken }));
+      if (postsInfo.length === 0) {
+        dispatch(fetchPosts({ uid, idToken }));
+      }
     }
   }, [uid, idToken]);
 
@@ -71,6 +75,7 @@ const DetailPage = () => {
           predict: result.predict,
           target: result.target,
           description: result.description,
+          createdAt: result.createdAt,
         }),
       );
     }
@@ -86,6 +91,7 @@ const DetailPage = () => {
         predict: predictValue,
         target: targetValue,
         description: descriptionValue,
+        createdAt: createdAtValue,
       };
       putPost(data, uid, idToken).then(() => {
         setAmend(false);

@@ -8,6 +8,7 @@ export interface PostDetailState {
   predict: PREDICT;
   target: number;
   description: string;
+  createdAt: string;
 }
 
 const initialState: PostDetailState = {
@@ -17,6 +18,7 @@ const initialState: PostDetailState = {
   predict: PREDICT.UP,
   target: 0,
   description: '',
+  createdAt: '',
 };
 
 const postDetailReducer = createSlice({
@@ -39,7 +41,7 @@ const postDetailReducer = createSlice({
       state.description = action.payload;
     },
     loadAmendContent(state, action: PayloadAction<PostDetailState>) {
-      const { id, title, market, predict, target, description } =
+      const { id, title, market, predict, target, description, createdAt } =
         action.payload;
       return {
         ...state,
@@ -49,6 +51,7 @@ const postDetailReducer = createSlice({
         predict,
         target,
         description,
+        createdAt,
       };
     },
     initContent() {

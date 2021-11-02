@@ -10,11 +10,7 @@ export const createPost = (data: Post, uid: string, idToken: string) => {
   return api.post(`/post/${uid}.json?auth=${idToken}`, data);
 };
 
-export const putPost = (
-  data: Omit<PostWithId, 'createdAt'>,
-  uid: string,
-  idToken: string,
-) => {
+export const putPost = (data: PostWithId, uid: string, idToken: string) => {
   const id = data.id;
   return api.put(`/post/${uid}/${id}.json?auth=${idToken}`, data);
 };

@@ -2,8 +2,6 @@ import { firebaseAuth, googleProvider } from './firebase';
 
 import { setItem } from '~utils/storage';
 
-import Alert from '~components/Alert';
-
 /**
  * @reference
  * https://github.com/firebase/firebaseui-web
@@ -27,8 +25,7 @@ export const googleSignIn = async () => {
       return user;
     })
     .catch((error) => {
-      // TODO: 실패 alert 문구
-      return <Alert />;
+      // TODO: 실패 alert 모달
       // const errorCode = error.code;
       // const errorMessage = error.message;
       // const email = error.email;

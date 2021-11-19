@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.8](https://github.com/howdy-mj/trading-log/compare/v0.1.7...v0.1.8) (2021-11-19)
+
+
+### :bug: Bug Fixes
+
+* 파이어베이스 put 로직 변경 ([9c7988d](https://github.com/howdy-mj/trading-log/commit/9c7988d516015b53d98a6da9ad7358277c0b77b3))
+
+
+### :rocket: Features
+
+* Modal 컴포넌트 ([05c1d69](https://github.com/howdy-mj/trading-log/commit/05c1d69a311dcd4c8eb4a83f834440500b664492))
+
 ### [0.1.7](https://github.com/howdy-mj/trading-log/compare/v0.1.5...v0.1.7) (2021-10-31)
 
 

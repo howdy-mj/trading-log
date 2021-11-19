@@ -29,3 +29,8 @@ export const selectAmendDescriptionValue = createSelector(
 );
 
 export const selectAmendId = createSelector(selectPostDetail, ({ id }) => id);
+
+export const selectCreatedAt = createSelector(
+  selectPostDetail,
+  ({ createdAt }) => createdAt,
+);

@@ -1,10 +1,12 @@
-import styled from '@emotion/styled';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { deletePost } from '~api/post';
+import styled from '@emotion/styled';
 
+import { deletePost } from '~api/post';
 import { selectFirebaseToken, selectUid } from '~store/auth/selector';
 import Button from '~components/Button';
+import Modal from '~components/Modal';
 
 import { DetailParams } from './index';
 import {
@@ -27,8 +29,10 @@ const ActionButtons = ({ amend, clickAmendButton, cancelAmend }: Props) => {
   const titleValue = useSelector(selectAmendTitleValue);
   const targetValue = useSelector(selectAmendTargetValue);
 
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+
   const removePost = () => {
-    deletePost(params.id, uid, idToken).then((res) => {
+    deletePost(params.id, uid, idToken).then(() => {
       history.push('/');
     });
   };
@@ -44,7 +48,19 @@ const ActionButtons = ({ amend, clickAmendButton, cancelAmend }: Props) => {
       {amend ? (
         <Button label="취소" status="info" onClick={() => cancelAmend()} />
       ) : (
-        <Button label="삭제" status="danger" onClick={() => removePost()} />
+        <>
+          <Button
+            label="삭제"
+            status="danger"
+            onClick={() => setIsDeleteModalOpen(true)}
+          />
+          <Modal
+            description="해당 글을 삭제하시겠습니까?"
+            isShow={isDeleteModalOpen}
+            onClose={() => setIsDeleteModalOpen(false)}
+            onConfirm={() => removePost()}
+          />
+        </>
       )}
     </ButtonWrap>
   );

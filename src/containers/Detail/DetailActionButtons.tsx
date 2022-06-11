@@ -8,19 +8,23 @@ import { selectFirebaseToken, selectUid } from '~store/auth/selector';
 import Button from '~components/common/Button';
 import Modal from '~components/Modal';
 
-import { DetailParams } from './index';
+import { DetailParams } from '~pages/Detail';
 import {
   selectAmendTargetValue,
   selectAmendTitleValue,
 } from '~store/detail/selector';
 
-interface Props {
+interface DetailActionButtonsProps {
   amend: boolean;
   clickAmendButton: () => void;
   cancelAmend: () => void;
 }
 
-const ActionButtons = ({ amend, clickAmendButton, cancelAmend }: Props) => {
+const DetailActionButtons = ({
+  amend,
+  clickAmendButton,
+  cancelAmend,
+}: DetailActionButtonsProps) => {
   const params: DetailParams = useParams();
   const history = useHistory();
   const idToken = useSelector(selectFirebaseToken);
@@ -66,7 +70,7 @@ const ActionButtons = ({ amend, clickAmendButton, cancelAmend }: Props) => {
   );
 };
 
-export default ActionButtons;
+export default DetailActionButtons;
 
 const ButtonWrap = styled.div`
   display: flex;

@@ -33,13 +33,60 @@ import {
 } from '~store/detail/selector';
 import { selectFirebaseToken, selectUid } from '~store/auth/selector';
 
-import ActionButtons from './ActionButtons';
+import DetailActionButtons from '~containers/Detail/DetailActionButtons';
 import Editor from '~components/Editor';
 import RadioGroup from '~components/common/RadioGroup';
 import InputWithTitle from '~components/common/InputWithTitle';
 import InputWithValidation from '~components/common/InputWithValidation';
 import InputText from '~components/common/Input/InputText';
 import InputNumber from '~components/common/Input/InputNumber';
+
+const MainWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+`;
+
+const EditorWrap = styled.div<{ isAmend: boolean }>`
+  display: flex;
+  width: 100%;
+  margin: 1rem 0;
+  margin-left: ${({ isAmend }) => !isAmend && '7rem'};
+
+  > span {
+    display: inline-block;
+    width: 7rem;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  > div {
+    width: calc(100% - 30rem);
+  }
+
+  ${(props) =>
+    props.theme.mq.tablet &&
+    css`
+      > div {
+        width: 100%;
+      }
+    `}
+
+  ${(props) =>
+    props.theme.mq.mobile &&
+    !props.isAmend &&
+    css`
+      margin-left: 0;
+    `}
+`;
 
 export interface DetailParams {
   id: string;
@@ -114,7 +161,7 @@ const DetailPage = () => {
 
   return (
     <MainWrap>
-      <ActionButtons
+      <DetailActionButtons
         amend={amend}
         clickAmendButton={clickAmendButton}
         cancelAmend={cancelAmend}
@@ -139,9 +186,7 @@ const DetailPage = () => {
             <RadioGroup
               selection={marketRadioSelection}
               value={marketValue}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                dispatch(amendMarket(e.target.id as MARKET))
-              }
+              onChange={(e) => dispatch(amendMarket(e.target.id as MARKET))}
               readOnly={!amend}
             />
           }
@@ -152,9 +197,7 @@ const DetailPage = () => {
             <RadioGroup
               selection={predictRadioSelection}
               value={predictValue}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                dispatch(amendPredict(e.target.id as PREDICT))
-              }
+              onChange={(e) => dispatch(amendPredict(e.target.id as PREDICT))}
               readOnly={!amend}
             />
           }
@@ -185,50 +228,3 @@ const DetailPage = () => {
 };
 
 export default DetailPage;
-
-const MainWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  width: 100%;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-
-  width: 100%;
-`;
-
-const EditorWrap = styled.div<{ isAmend: boolean }>`
-  display: flex;
-  width: 100%;
-  margin: 1rem 0;
-  margin-left: ${({ isAmend }) => !isAmend && '7rem'};
-
-  > span {
-    display: inline-block;
-    width: 7rem;
-    text-align: center;
-    font-weight: bold;
-  }
-
-  > div {
-    width: calc(100% - 30rem);
-  }
-
-  ${(props) =>
-    props.theme.mq.tablet &&
-    css`
-      > div {
-        width: 100%;
-      }
-    `}
-
-  ${(props) =>
-    props.theme.mq.mobile &&
-    !props.isAmend &&
-    css`
-      margin-left: 0rem;
-    `}
-`;

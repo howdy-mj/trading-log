@@ -34,6 +34,7 @@ import Button from '~components/Button';
 import InputComponent from '~components/Input';
 import Editor from '~components/Editor';
 import RadioGroup from '~components/common/RadioGroup';
+import InputWithTitle from '~components/common/InputWithTitle';
 
 const WritePage = () => {
   const history = useHistory();
@@ -74,17 +75,25 @@ const WritePage = () => {
         validation={!!titleValue}
         onChange={(e) => dispatch(changeTitle(e.target.value))}
       />
-      <RadioGroup
+      <InputWithTitle
         title="마켓"
-        selection={marketRadioInfo}
-        value={marketValue}
-        onChange={(e) => dispatch(changeMarket(e.target.id as MARKET))}
+        child={
+          <RadioGroup
+            selection={marketRadioInfo}
+            value={marketValue}
+            onChange={(e) => dispatch(changeMarket(e.target.id as MARKET))}
+          />
+        }
       />
-      <RadioGroup
+      <InputWithTitle
         title="예상"
-        selection={predictRadioInfo}
-        value={predictValue}
-        onChange={(e) => dispatch(changePredict(e.target.id as PREDICT))}
+        child={
+          <RadioGroup
+            selection={predictRadioInfo}
+            value={predictValue}
+            onChange={(e) => dispatch(changePredict(e.target.id as PREDICT))}
+          />
+        }
       />
       <InputComponent
         title="타겟가"

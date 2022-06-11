@@ -1,32 +1,7 @@
+import { ComponentPropsWithoutRef } from 'react';
 import styled from '@emotion/styled';
 
-interface ButtonProps {
-  label: string;
-  status?: 'info' | 'active' | 'danger';
-  onClick?: (e?: any) => void;
-  disabled?: boolean;
-}
-
-const Button = ({ label, status = 'info', onClick, disabled }: ButtonProps) => {
-  return (
-    <ButtonWrap
-      onClick={onClick}
-      status={status}
-      disabled={disabled}
-      className={status}
-    >
-      {label}
-    </ButtonWrap>
-  );
-};
-
-export default Button;
-
-interface ButtonStyleProps {
-  status?: 'info' | 'active' | 'danger';
-}
-
-const ButtonWrap = styled.button<ButtonStyleProps>`
+const ButtonWrap = styled.button`
   cursor: pointer;
   width: 10rem;
   height: 3rem;
@@ -54,3 +29,33 @@ const ButtonWrap = styled.button<ButtonStyleProps>`
     opacity: 0.9;
   }
 `;
+
+type ButtonStatusProps = 'info' | 'active' | 'danger';
+
+type ButtonProps = {
+  label: string;
+  status?: ButtonStatusProps;
+  onClick?: (e?: any) => void;
+  disabled?: boolean;
+} & Omit<ComponentPropsWithoutRef<'button'>, 'onClick' | 'disabled'>;
+
+const Button = ({
+  label,
+  status = 'info',
+  onClick,
+  disabled,
+  ...restProps
+}: ButtonProps) => {
+  return (
+    <ButtonWrap
+      className={status}
+      onClick={onClick}
+      disabled={disabled}
+      {...restProps}
+    >
+      {label}
+    </ButtonWrap>
+  );
+};
+
+export default Button;

@@ -16,10 +16,7 @@ const Radio = ({ value, checked, onChange, ...restProps }: RadioProps) => {
       id={value}
       name={value}
       checked={checked}
-      onChange={(e) => {
-        console.log('here', e);
-        onChange(e);
-      }}
+      onChange={onChange}
       {...restProps}
     />
   );

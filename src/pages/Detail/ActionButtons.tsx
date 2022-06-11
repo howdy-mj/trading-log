@@ -16,7 +16,7 @@ import {
 
 interface Props {
   amend: boolean;
-  clickAmendButton: (e?: any) => void;
+  clickAmendButton: () => void;
   cancelAmend: () => void;
 }
 
@@ -42,7 +42,7 @@ const ActionButtons = ({ amend, clickAmendButton, cancelAmend }: Props) => {
       <Button
         label={amend ? '수정완료' : '수정'}
         status="active"
-        onClick={(e) => clickAmendButton(e)}
+        onClick={clickAmendButton}
         disabled={amend && (!titleValue || !targetValue)}
       />
       {amend ? (

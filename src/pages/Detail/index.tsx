@@ -88,9 +88,8 @@ const DetailPage = () => {
     }
   }, [postsInfo]);
 
-  const clickAmendButton = (e: any) => {
+  const clickAmendButton = () => {
     if (amend) {
-      e.preventDefault();
       const data = {
         id,
         title: titleValue,
@@ -103,6 +102,7 @@ const DetailPage = () => {
       putPost(data, uid, idToken).then(() => {
         setAmend(false);
       });
+      return;
     }
     setAmend(true);
   };

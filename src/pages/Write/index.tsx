@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 import dayjs from 'dayjs';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { isNumber } from 'is-validated';
 
 import { createPost } from '~api/post';
 import {

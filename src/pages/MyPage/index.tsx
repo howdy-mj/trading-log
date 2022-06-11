@@ -6,7 +6,7 @@ import { clearAllToken } from '~utils/storage';
 import { initUserData } from '~store/auth/reducer';
 import { selectUserEmail } from '~store/user/selector';
 
-import Button from '~components/Button';
+import Button from '~components/common/Button';
 import styled from '@emotion/styled';
 
 const MyPage = () => {

@@ -38,8 +38,8 @@ import Editor from '~components/Editor';
 import RadioGroup from '~components/common/RadioGroup';
 import InputWithTitle from '~components/common/InputWithTitle';
 import InputWithValidation from '~components/common/InputWithValidation';
-import InputText from '~components/Input/InputText';
-import InputNumber from '~components/Input/InputNumber';
+import InputText from '~components/common/Input/InputText';
+import InputNumber from '~components/common/Input/InputNumber';
 
 export interface DetailParams {
   id: string;

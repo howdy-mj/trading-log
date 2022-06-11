@@ -7,8 +7,7 @@ import { FaArrowLeft, FaRegUserCircle } from 'react-icons/fa';
 
 import useLogin from '~hooks/useLogin';
 import { selectUserPhotoUrl } from '~store/user/selector';
-
-import { Title } from '~components/Title';
+import SiteTitle from '~components/SiteTitle/index';
 
 const HeaderComponent = () => {
   const { isLogin } = useLogin();
@@ -35,7 +34,7 @@ const HeaderComponent = () => {
   return (
     <HeaderWrap>
       <HeaderContainer>
-        <Title />
+        <SiteTitle />
         {hasGoBack && (
           <GoBackArrow onClick={() => history.goBack()}>
             <FaArrowLeft />

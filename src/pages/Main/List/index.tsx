@@ -7,7 +7,7 @@ import { css } from '@emotion/react';
 import { PREDICT, PostWithId } from '~models/post.model';
 import { selectPostList } from '~store/post/selector';
 
-import Loading from '~components/Loading';
+import Loading from '~components/common/Loading';
 import Pagination from '~components/Pagination';
 import { commaNumber } from '~utils/numbers';
 

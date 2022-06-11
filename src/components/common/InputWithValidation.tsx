@@ -1,5 +1,5 @@
 import React, { ComponentPropsWithoutRef, PropsWithChildren } from 'react';
-import InputText from '~components/Input/InputText';
+import InputText from '~components/common/Input/InputText';
 import styled from '@emotion/styled';
 
 const Container = styled.div`

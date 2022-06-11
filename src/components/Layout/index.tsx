@@ -1,10 +1,10 @@
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import useHeight from '~hooks/useHeight';
-import { useEffect, useState } from 'react';
+import { css } from '@emotion/react';
 import { useLocation } from 'react-router-dom';
 
+import useHeight from '~hooks/useHeight';
 import Header from './Header';
-import { css } from '@emotion/react';
 // import Footer from './Footer';
 
 interface LayoutProps {
@@ -28,7 +28,7 @@ const Layout = ({ children }: LayoutProps) => {
     <LayoutWrap>
       {!isLoginPage && <Header />}
       <Body height={height}>{children}</Body>
-      {/* {!isLoginPage && <Footer />} */}
+      {/*{!isLoginPage && <Footer />}*/}
     </LayoutWrap>
   );
 };

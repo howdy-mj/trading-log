@@ -30,13 +30,13 @@ import {
 } from '~store/write/selector';
 import { selectFirebaseToken, selectUid } from '~store/auth/selector';
 
-import Button from '~components/Button';
+import Button from '~components/common/Button';
 import Editor from '~components/Editor';
 import RadioGroup from '~components/common/RadioGroup';
 import InputWithTitle from '~components/common/InputWithTitle';
-import InputText from '~components/Input/InputText';
+import InputText from '~components/common/Input/InputText';
 import InputWithValidation from '~components/common/InputWithValidation';
-import InputNumber from '~components/Input/InputNumber';
+import InputNumber from '~components/common/Input/InputNumber';
 
 const WritePage = () => {
   const history = useHistory();

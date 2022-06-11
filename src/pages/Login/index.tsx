@@ -7,7 +7,7 @@ import { FcGoogle } from 'react-icons/fc';
 import useLogin from '~hooks/useLogin';
 import { googleSignIn } from '~service/fb_auth';
 
-import { Title } from '~components/Title';
+import SiteTitle from '~components/SiteTitle/index';
 
 const LoginPage = () => {
   const history = useHistory();
@@ -31,7 +31,7 @@ const LoginPage = () => {
 
   return (
     <Wrap>
-      <Title />
+      <SiteTitle />
       <Container>
         <GoogleLogin onClick={() => googleLogin()}>
           <FcGoogle />

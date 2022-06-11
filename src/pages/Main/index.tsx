@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 import { fetchPosts } from '~store/post/reducer';
 import { selectFirebaseToken, selectUid } from '~store/auth/selector';
 
-import Button from '~components/Button';
+import Button from '~components/common/Button';
 import List from './List';
 
 const Main = () => {

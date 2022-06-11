@@ -1,6 +1,6 @@
 import React, { ComponentPropsWithoutRef } from 'react';
 import styled from '@emotion/styled';
-import Radio from '~components/Input/Radio';
+import Radio from '~components/common/Input/Radio';
 
 const RadioWrapper = styled.div`
   input {

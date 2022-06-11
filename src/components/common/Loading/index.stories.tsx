@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import Loading from './index';
+import Loading from 'components/common/Loading/index';
 
 export default {
   title: 'Components/Loading',

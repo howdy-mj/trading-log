@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 
 import { deletePost } from '~api/post';
 import { selectFirebaseToken, selectUid } from '~store/auth/selector';
-import Button from '~components/Button';
+import Button from '~components/common/Button';
 import Modal from '~components/Modal';
 
 import { DetailParams } from './index';

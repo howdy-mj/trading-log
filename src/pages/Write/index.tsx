@@ -9,9 +9,9 @@ import { isNumber } from 'is-validated';
 import { createPost } from '~api/post';
 import {
   MARKET,
-  marketRadioInfo,
+  marketRadioSelection,
   PREDICT,
-  predictRadioInfo,
+  predictRadioSelection,
 } from '~models/post.model';
 import {
   changeDescription,
@@ -86,7 +86,7 @@ const WritePage = () => {
         title="마켓"
         child={
           <RadioGroup
-            selection={marketRadioInfo}
+            selection={marketRadioSelection}
             value={marketValue}
             onChange={(e) => dispatch(changeMarket(e.target.id as MARKET))}
           />
@@ -96,7 +96,7 @@ const WritePage = () => {
         title="예상"
         child={
           <RadioGroup
-            selection={predictRadioInfo}
+            selection={predictRadioSelection}
             value={predictValue}
             onChange={(e) => dispatch(changePredict(e.target.id as PREDICT))}
           />

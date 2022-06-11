@@ -7,9 +7,9 @@ import { css } from '@emotion/react';
 import { putPost } from '~api/post';
 import {
   MARKET,
-  marketRadioInfo,
+  marketRadioSelection,
   PREDICT,
-  predictRadioInfo,
+  predictRadioSelection,
 } from '~models/post.model';
 
 import { fetchPosts } from '~store/post/reducer';
@@ -137,7 +137,7 @@ const DetailPage = () => {
           title="마켓"
           child={
             <RadioGroup
-              selection={marketRadioInfo}
+              selection={marketRadioSelection}
               value={marketValue}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 dispatch(amendMarket(e.target.id as MARKET))
@@ -150,7 +150,7 @@ const DetailPage = () => {
           title="예상"
           child={
             <RadioGroup
-              selection={predictRadioInfo}
+              selection={predictRadioSelection}
               value={predictValue}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 dispatch(amendPredict(e.target.id as PREDICT))

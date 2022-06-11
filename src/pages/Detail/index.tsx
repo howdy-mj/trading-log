@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { isNumber } from 'is-validated';
 
 import { putPost } from '~api/post';
 import {
@@ -34,11 +33,13 @@ import {
 } from '~store/detail/selector';
 import { selectFirebaseToken, selectUid } from '~store/auth/selector';
 
-import InputComponent from '~components/Input';
 import ActionButtons from './ActionButtons';
 import Editor from '~components/Editor';
 import RadioGroup from '~components/common/RadioGroup';
 import InputWithTitle from '~components/common/InputWithTitle';
+import InputWithValidation from '~components/common/InputWithValidation';
+import InputText from '~components/Input/InputText';
+import InputNumber from '~components/Input/InputNumber';
 
 export interface DetailParams {
   id: string;
@@ -120,12 +121,17 @@ const DetailPage = () => {
       />
 
       <Form>
-        <InputComponent
+        <InputWithTitle
           title="제목"
-          value={titleValue}
-          readonly={!amend}
-          // validation={amend && !!titleValue}
-          onChange={(e) => dispatch(amendTitle(e.target.value))}
+          child={
+            <InputWithValidation validate={!!titleValue}>
+              <InputText
+                value={titleValue}
+                onChange={(e) => dispatch(amendTitle(e.target.value))}
+                readOnly={!amend}
+              />
+            </InputWithValidation>
+          }
         />
         <InputWithTitle
           title="마켓"
@@ -153,18 +159,18 @@ const DetailPage = () => {
             />
           }
         />
-        <InputComponent
+        <InputWithTitle
           title="타겟가"
-          value={targetValue.toString()}
-          readonly={!amend}
-          // validation={!amend && !!targetValue}
-          onChange={(e) => {
-            const { value } = e.target;
-            if (!isNumber(value) || value === '') {
-              return;
-            }
-            dispatch(amendTarget(e.target.value));
-          }}
+          child={
+            <InputWithValidation validate={!!targetValue}>
+              <InputNumber
+                value={targetValue}
+                onChange={(value) => dispatch(amendTarget(value))}
+                min={0}
+                readOnly={!amend}
+              />
+            </InputWithValidation>
+          }
         />
         <EditorWrap isAmend={amend}>
           <Editor

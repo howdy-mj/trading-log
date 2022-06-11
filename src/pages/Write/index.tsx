@@ -31,10 +31,12 @@ import {
 import { selectFirebaseToken, selectUid } from '~store/auth/selector';
 
 import Button from '~components/Button';
-import InputComponent from '~components/Input';
 import Editor from '~components/Editor';
 import RadioGroup from '~components/common/RadioGroup';
 import InputWithTitle from '~components/common/InputWithTitle';
+import InputText from '~components/Input/InputText';
+import InputWithValidation from '~components/common/InputWithValidation';
+import InputNumber from '~components/Input/InputNumber';
 
 const WritePage = () => {
   const history = useHistory();
@@ -70,10 +72,15 @@ const WritePage = () => {
 
   return (
     <Form onSubmit={(e) => handleSubmit(e)}>
-      <InputComponent
+      <InputWithTitle
         title="제목"
-        validation={!!titleValue}
-        onChange={(e) => dispatch(changeTitle(e.target.value))}
+        child={
+          <InputWithValidation validate={!!titleValue}>
+            <InputText
+              onChange={(e) => dispatch(changeTitle(e.target.value))}
+            />
+          </InputWithValidation>
+        }
       />
       <InputWithTitle
         title="마켓"
@@ -95,17 +102,17 @@ const WritePage = () => {
           />
         }
       />
-      <InputComponent
+      <InputWithTitle
         title="타겟가"
-        value={targetValue === 0 ? '' : targetValue.toString()}
-        validation={!!targetValue}
-        onChange={(e) => {
-          const { value } = e.target;
-          if (!isNumber(value) || value === '') {
-            return;
-          }
-          dispatch(changeTarget(e.target.value));
-        }}
+        child={
+          <InputWithValidation validate={!!targetValue}>
+            <InputNumber
+              value={targetValue}
+              onChange={(value) => dispatch(changeTarget(value))}
+              min={0}
+            />
+          </InputWithValidation>
+        }
       />
       <EditorWrap>
         <Editor

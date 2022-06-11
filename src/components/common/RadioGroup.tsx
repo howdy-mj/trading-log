@@ -2,19 +2,6 @@ import React, { ComponentPropsWithoutRef } from 'react';
 import styled from '@emotion/styled';
 import Radio from '~components/Input/Radio';
 
-const Container = styled.div`
-  display: flex;
-  width: 100%;
-  margin: 1rem 0;
-`;
-
-const RadioTitle = styled.span`
-  display: inline-block;
-  width: 7rem;
-  text-align: center;
-  font-weight: bold;
-`;
-
 const RadioWrapper = styled.div`
   input {
     display: none;
@@ -51,7 +38,6 @@ const LabelText = styled.span`
 `;
 
 type RadioGroupProps = {
-  title: string;
   selection: string[];
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -59,7 +45,6 @@ type RadioGroupProps = {
 } & Omit<ComponentPropsWithoutRef<'input'>, 'onChange'>;
 
 const RadioGroup = ({
-  title,
   selection,
   value,
   onChange,
@@ -73,8 +58,7 @@ const RadioGroup = ({
   };
 
   return (
-    <Container>
-      <RadioTitle>{title}</RadioTitle>
+    <>
       {selection.map((data) => (
         <RadioWrapper key={data} onClick={preventClickIfIsReadOnly}>
           <label htmlFor={data}>
@@ -88,7 +72,7 @@ const RadioGroup = ({
           </label>
         </RadioWrapper>
       ))}
-    </Container>
+    </>
   );
 };
 

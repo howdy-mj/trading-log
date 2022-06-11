@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import styled from '@emotion/styled';
@@ -38,6 +38,7 @@ import InputComponent from '~components/Input';
 import ActionButtons from './ActionButtons';
 import Editor from '~components/Editor';
 import RadioGroup from '~components/common/RadioGroup';
+import InputWithTitle from '~components/common/InputWithTitle';
 
 export interface DetailParams {
   id: string;
@@ -126,19 +127,31 @@ const DetailPage = () => {
           // validation={amend && !!titleValue}
           onChange={(e) => dispatch(amendTitle(e.target.value))}
         />
-        <RadioGroup
+        <InputWithTitle
           title="마켓"
-          selection={marketRadioInfo}
-          value={marketValue}
-          onChange={(e) => dispatch(amendMarket(e.target.id as MARKET))}
-          readOnly={!amend}
+          child={
+            <RadioGroup
+              selection={marketRadioInfo}
+              value={marketValue}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                dispatch(amendMarket(e.target.id as MARKET))
+              }
+              readOnly={!amend}
+            />
+          }
         />
-        <RadioGroup
+        <InputWithTitle
           title="예상"
-          selection={predictRadioInfo}
-          value={predictValue}
-          onChange={(e) => dispatch(amendPredict(e.target.id as PREDICT))}
-          readOnly={!amend}
+          child={
+            <RadioGroup
+              selection={predictRadioInfo}
+              value={predictValue}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                dispatch(amendPredict(e.target.id as PREDICT))
+              }
+              readOnly={!amend}
+            />
+          }
         />
         <InputComponent
           title="타겟가"

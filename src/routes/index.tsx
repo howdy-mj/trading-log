@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import * as Sentry from '@sentry/react';
@@ -30,7 +30,7 @@ const routesPath: PathItem[] = [
   { path: '/my-page', component: <MyPage /> },
 ];
 
-export const Router = () => {
+const Router = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -48,3 +48,5 @@ export const Router = () => {
     </Switch>
   );
 };
+
+export default Router;

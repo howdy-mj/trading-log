@@ -3,9 +3,10 @@ export function setCookie(
   cookieValue: string,
   expireDays: number = 7,
 ) {
-  const d = new Date();
-  d.setTime(d.getTime() + expireDays * 24 * 60 * 60 * 1000);
-  let expires = 'expires=' + d.toUTCString();
+  const today = new Date();
+  const EXPIRE_DAYS_MILLISECONDS = expireDays * 24 * 60 * 60 * 1000;
+  today.setTime(today.getTime() + EXPIRE_DAYS_MILLISECONDS);
+  let expires = 'expires=' + today.toUTCString();
   document.cookie = cookieName + '=' + cookieValue + ';' + expires + ';path=/';
 }
 

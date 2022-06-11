@@ -3,7 +3,7 @@ import theme from '~styles/theme';
 import GlobalStyle from '~styles/global';
 
 import Layout from '~components/Layout';
-import { Router } from './routes';
+import Router from './routes';
 
 function App() {
   return (

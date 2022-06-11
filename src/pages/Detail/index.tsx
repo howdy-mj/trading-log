@@ -6,7 +6,12 @@ import { css } from '@emotion/react';
 import { isNumber } from 'is-validated';
 
 import { putPost } from '~api/post';
-import { marketRadioInfo, predictRadioInfo } from '~models/post.model';
+import {
+  MARKET,
+  marketRadioInfo,
+  PREDICT,
+  predictRadioInfo,
+} from '~models/post.model';
 
 import { fetchPosts } from '~store/post/reducer';
 import { selectPostList } from '~store/post/selector';
@@ -32,7 +37,7 @@ import { selectFirebaseToken, selectUid } from '~store/auth/selector';
 import InputComponent from '~components/Input';
 import ActionButtons from './ActionButtons';
 import Editor from '~components/Editor';
-import Radio from '~components/Radio';
+import RadioGroup from '~components/common/RadioGroup';
 
 export interface DetailParams {
   id: string;
@@ -121,19 +126,19 @@ const DetailPage = () => {
           // validation={amend && !!titleValue}
           onChange={(e) => dispatch(amendTitle(e.target.value))}
         />
-        <Radio
+        <RadioGroup
           title="마켓"
-          selectInfo={marketRadioInfo}
+          selection={marketRadioInfo}
           value={marketValue}
-          onChange={(e) => dispatch(amendMarket(e.target.id))}
-          readonly={!amend}
+          onChange={(e) => dispatch(amendMarket(e.target.id as MARKET))}
+          readOnly={!amend}
         />
-        <Radio
+        <RadioGroup
           title="예상"
-          selectInfo={predictRadioInfo}
+          selection={predictRadioInfo}
           value={predictValue}
-          onChange={(e) => dispatch(amendPredict(e.target.id))}
-          readonly={!amend}
+          onChange={(e) => dispatch(amendPredict(e.target.id as PREDICT))}
+          readOnly={!amend}
         />
         <InputComponent
           title="타겟가"

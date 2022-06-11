@@ -7,7 +7,12 @@ import { css } from '@emotion/react';
 import { isNumber } from 'is-validated';
 
 import { createPost } from '~api/post';
-import { marketRadioInfo, predictRadioInfo } from '~models/post.model';
+import {
+  MARKET,
+  marketRadioInfo,
+  PREDICT,
+  predictRadioInfo,
+} from '~models/post.model';
 import {
   changeDescription,
   changeMarket,
@@ -28,7 +33,7 @@ import { selectFirebaseToken, selectUid } from '~store/auth/selector';
 import Button from '~components/Button';
 import InputComponent from '~components/Input';
 import Editor from '~components/Editor';
-import Radio from '~components/Radio';
+import RadioGroup from '~components/common/RadioGroup';
 
 const WritePage = () => {
   const history = useHistory();
@@ -69,17 +74,17 @@ const WritePage = () => {
         validation={!!titleValue}
         onChange={(e) => dispatch(changeTitle(e.target.value))}
       />
-      <Radio
+      <RadioGroup
         title="마켓"
-        selectInfo={marketRadioInfo}
+        selection={marketRadioInfo}
         value={marketValue}
-        onChange={(e) => dispatch(changeMarket(e.target.id))}
+        onChange={(e) => dispatch(changeMarket(e.target.id as MARKET))}
       />
-      <Radio
+      <RadioGroup
         title="예상"
-        selectInfo={predictRadioInfo}
+        selection={predictRadioInfo}
         value={predictValue}
-        onChange={(e) => dispatch(changePredict(e.target.id))}
+        onChange={(e) => dispatch(changePredict(e.target.id as PREDICT))}
       />
       <InputComponent
         title="타겟가"

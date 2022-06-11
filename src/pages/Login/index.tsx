@@ -30,21 +30,21 @@ const LoginPage = () => {
   };
 
   return (
-    <Wrap>
+    <Container>
       <SiteTitle />
-      <Container>
+      <LoginWrapper>
         <GoogleLogin onClick={() => googleLogin()}>
           <FcGoogle />
           구글로 로그인
         </GoogleLogin>
-      </Container>
-    </Wrap>
+      </LoginWrapper>
+    </Container>
   );
 };
 
 export default LoginPage;
 
-const Wrap = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -69,7 +69,7 @@ const Wrap = styled.div`
     `}
 `;
 
-const Container = styled.div`
+const LoginWrapper = styled.div`
   display: flex;
   align-items: center;
   /* height: 100%; */
